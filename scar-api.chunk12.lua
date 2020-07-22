@@ -1,999 +1,996 @@
+---@undocumented
 ---@vararg any
-function Obj_HighlightPosition (...) end
+function _Prox_GetEntityPopulationScore (...) end
 
+---@undocumented
 ---@vararg any
-function Obj_HighlightSquad (...) end
+function _Prox_GetSquadCostScore (...) end
 
+---@undocumented
 ---@vararg any
-function Obj_SetRadioShown (...) end
+function _Prox_GetSquadHealthScore (...) end
 
+---@undocumented
 ---@vararg any
-function Obj_ShowProgressEx (...) end
+function _Prox_GetSquadPopulationScore (...) end
 
+---@undocumented
 ---@vararg any
-function OnGameRestore (...) end
+function _ProxChecker (...) end
 
+---@undocumented
 ---@vararg any
-function OnGameSetup (...) end
+function _RearEchelonAttritionInit (...) end
 
+---@undocumented
 ---@vararg any
-function OnInit (...) end
+function _RemoveEventAnnounce (...) end
 
+---@undocumented
 ---@vararg any
-function OnInitID (...) end
+function _removeUnitFlash (...) end
 
+---@undocumented
 ---@vararg any
-function Order227_EndSpeech (...) end
+function _rescueSquads_killUnit (...) end
 
+---@undocumented
 ---@vararg any
-function Order227_Start (...) end
+function _ScarEventsDebugger (...) end
 
+---@undocumented
 ---@vararg any
-function Order227_StartSpeech (...) end
+function _SetSpawnMarkers (...) end
 
+---@undocumented
 ---@vararg any
-function Order227_Update (...) end
+function _ShowDebugMenu (...) end
 
+---@undocumented
 ---@vararg any
-function OutputEnumsToXML (...) end
+function _sitRepEvent_Internal (...) end
 
+---@undocumented
 ---@vararg any
-function Player_GetFatalityAbility (...) end
+function _SpawnStartingUnits (...) end
 
+---@undocumented
 ---@vararg any
-function Player_GetMapEntryPosition (...) end
+function _StartMission (...) end
 
+---@undocumented
 ---@vararg any
-function Player_SetAbilityAvailabilityInternal (...) end
+function _startNislet_fadeIn (...) end
 
+---@undocumented
 ---@vararg any
-function Player_SetAllCommandAvailability (...) end
+function _startNislet_setCam (...) end
 
+---@undocumented
 ---@vararg any
-function Player_SetCommandAvailabilityInternal (...) end
+function _StartObjective (...) end
 
+---@undocumented
 ---@vararg any
-function Player_SetConstructionMenuAvailabilityInternal (...) end
+function _SurrenderInternal (...) end
 
+---@undocumented
 ---@vararg any
-function Player_SetEntityProductionAvailabilityInternal (...) end
+function _TeamWeapon_Manager (...) end
 
+---@undocumented
 ---@vararg any
-function Player_SetSquadProductionAvailabilityInternal (...) end
+function _ToWDebugClear (...) end
 
+---@undocumented
 ---@vararg any
-function Player_SetUpgradeAvailabilityInternal (...) end
+function _ToWDebugDisplay (...) end
 
+---@undocumented
 ---@vararg any
-function PlayerCanSeeVIP (...) end
+function _UID_MAKETABLE (...) end
 
+---@undocumented
 ---@vararg any
-function PlayerColour_Disable (...) end
+function _waveDefense_FinishWave (...) end
 
+---@undocumented
 ---@vararg any
-function PlayerColour_Enable (...) end
+function _waveManager_assignCompleteConditions (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_ApplyDefaults (...) end
+function _waveManager_AssignGoal (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_ApplySchemaToDataTable (...) end
+function _waveManager_checkForComponent (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_DoAction (...) end
+function _waveManager_CheckManagerForEntries (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_GenerateUniqueInstanceName (...) end
+function _waveManager_ClearEventsTable (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_GetInstance (...) end
+function _waveManager_ClearWaveEncountersTable (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_Init (...) end
+function _waveManager_DEBUG_Init (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_InitAll (...) end
+function _waveManager_DelayedSpawnWave (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_Load (...) end
+function _waveManager_getHighlevelComponentData (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_ReloadAll (...) end
+function _waveManager_HordeSpawn (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_ReplaceDataWithProperType (...) end
+function _waveManager_initDirectionWeights (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_Reset (...) end
+function _waveManager_pickWaveSpawnsData (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_ResetFromWorldBuilder (...) end
+function _waveManager_resetDirectionWeights (...) end
 
+---@undocumented
 ---@vararg any
-function Prefab_Stop (...) end
+function _waveManager_selectSpawns_Internal (...) end
 
+---@undocumented
 ---@vararg any
-function PrefabHelper_StandardTriggerSystem (...) end
+function _WM_MarkHintPoint (...) end
 
+---@undocumented
 ---@vararg any
-function PrefabHelper_StandardTriggerSystem_Trigger (...) end
+function _WM_RallyPointSuccess (...) end
 
+---@undocumented
 ---@vararg any
-function PreInit (...) end
+function _WM_setSustainedAttack (...) end
 
+---@undocumented
 ---@vararg any
-function PrintObject (...) end
+function _WM_SetupRallyPointData (...) end
 
+---@undocumented
 ---@vararg any
-function PrintOnScreen_GetString (...) end
+function _WM_sustainedAttack_respawn (...) end
 
+---@undocumented
 ---@vararg any
-function Produce120mmMortar (...) end
+function Actor_PlaySpeechInternal (...) end
 
+---@undocumented
 ---@vararg any
-function Produce80mmMortar (...) end
+function AE_AbandonTeamWeapon (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceCombatEngineer (...) end
+function AE_AEFBaseGroup (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceCommandSquad (...) end
+function AE_AEFBaseSpawn (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceFieldATGun (...) end
+function AE_AEFBaseSpawn_v2 (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceHMG (...) end
+function AE_AEFHQReplace_v2 (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceIS2 (...) end
+function AE_AirstrikeEvent (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceISU122 (...) end
+function AE_AmbushAtk (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceMotorcycle (...) end
+function AE_ArmorBlitzAddUnit (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceRocketTruck (...) end
+function AE_ArmorBlitzManager (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceRussianArmouredCar (...) end
+function AE_ArtilleryEvent (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceSniper (...) end
+function AE_BarrageEvent (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceStructure (...) end
+function AE_BarrageWarning (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceSU85 (...) end
+function AE_BritDefaultRally (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceT34 (...) end
+function AE_BritDefaultRally_Front (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceT70m (...) end
+function AE_ConstructHeavyArmorSupport (...) end
 
+---@undocumented
 ---@vararg any
-function ProduceVeteranInfantry (...) end
+function AE_ConstructHelper (...) end
 
+---@undocumented
 ---@vararg any
-function RainSplashes_ReLoadConfig (...) end
+function AE_ConstructInfantryBarracks (...) end
 
+---@undocumented
 ---@vararg any
-function RegisterObjectiveUpdate (...) end
+function AE_ConstructLightArmorSupport (...) end
 
+---@undocumented
 ---@vararg any
-function RemoveTargettingArtilleryHint (...) end
+function AE_CrewRepair (...) end
 
+---@undocumented
 ---@vararg any
-function Request_Construction (...) end
+function AE_DamageIce_atHighExplosive (...) end
 
+---@undocumented
 ---@vararg any
-function Request_ConstructionWithSquad (...) end
+function AE_DamageIce_grenade (...) end
 
+---@undocumented
 ---@vararg any
-function Request_FinishIncompleteStructure (...) end
+function AE_DamageIce_mine (...) end
 
+---@undocumented
 ---@vararg any
-function Request_PlayerAbility (...) end
+function AE_DamageIce_Stug (...) end
 
+---@undocumented
 ---@vararg any
-function Request_PlayerAbilitySingleTarget (...) end
+function AE_DefMoveAddUnit (...) end
 
+---@undocumented
 ---@vararg any
-function Request_Production (...) end
+function AE_DefMoveManager (...) end
 
+---@undocumented
 ---@vararg any
-function RescueSquads_IntroEvent (...) end
+function AE_DisableCrateSelection (...) end
 
+---@undocumented
 ---@vararg any
-function RescueSquads_OutroEvent (...) end
+function AE_DisableFiring (...) end
 
+---@undocumented
 ---@vararg any
-function RescueSquads_ShowReward (...) end
+function AE_DisableLoading (...) end
 
+---@undocumented
 ---@vararg any
-function RescueSquads_Start (...) end
+function AE_DisableSelfRepair (...) end
 
+---@undocumented
 ---@vararg any
-function ResourceCheat (...) end
+function AE_DispatchLieutenant (...) end
 
+---@undocumented
 ---@vararg any
-function Rule_SquadMarkerProxDeleter (...) end
+function AE_DoOrder227_RegisterExecuter (...) end
 
+---@undocumented
 ---@vararg any
-function Scar_PlayNISEx (...) end
+function AE_DoOrder227_Target (...) end
 
+---@undocumented
 ---@vararg any
-function Scar_ReloadScripts (...) end
+function AE_FuelTransfer (...) end
 
+---@undocumented
 ---@vararg any
-function Scar_SetSimRate (...) end
+function AE_GarrisonTarget (...) end
 
+---@undocumented
 ---@vararg any
-function SetGlobals (...) end
+function AE_HalftrackDispatchSetup (...) end
 
+---@undocumented
 ---@vararg any
-function SetHeatRateForAllPlayers (...) end
+function AE_InfAssaultMove (...) end
 
+---@undocumented
 ---@vararg any
-function Setup_GetWinConditionOption (...) end
+function AE_InfDefMove (...) end
 
+---@undocumented
 ---@vararg any
-function Setup_SetPlayerStartingPosition (...) end
+function AE_InfFortifyPos (...) end
 
+---@undocumented
 ---@vararg any
-function SetVisionRadiusForAllPlayers (...) end
+function AE_InfSuppressiveFire (...) end
 
+---@undocumented
 ---@vararg any
-function ShootTheSky_Manager (...) end
+function AE_KingTigerArmorBlitz (...) end
 
+---@undocumented
 ---@vararg any
-function SimpleDefendEncounter_GetEncounterID (...) end
+function AE_KingTigerSpearhead (...) end
 
+---@undocumented
 ---@vararg any
-function Sound_SetMusicCombatFactor (...) end
+function AE_KingTigerTigerProwl (...) end
 
+---@undocumented
 ---@vararg any
-function Sound_SetMusicCombatMaxDistance (...) end
+function AE_MedicHeal (...) end
 
+---@undocumented
 ---@vararg any
-function Sound_SetMusicCombatMinDistance (...) end
+function AE_MunitionsTransfer (...) end
 
+---@undocumented
 ---@vararg any
-function Sound_SetMusicFilterFactor (...) end
+function AE_NotEnoughCrew (...) end
 
+---@undocumented
 ---@vararg any
-function Sound_SetMusicFoWFilterFactor (...) end
+function AE_OfficerGarrisonBarracks (...) end
 
+---@undocumented
 ---@vararg any
-function Sound_ToggleMusicDebug (...) end
+function AE_OfficerGarrisonRecon (...) end
 
+---@undocumented
 ---@vararg any
-function Sound_ToggleRainSurfaceDebug (...) end
+function AE_OfficerGarrisonTankDepot (...) end
 
+---@undocumented
 ---@vararg any
-function Squad_ExtensionEnabled (...) end
+function AE_OfficerGarrisonWeaponPool (...) end
 
+---@undocumented
 ---@vararg any
-function Squad_ExtensionName (...) end
+function AE_OfficerOnMe (...) end
 
+---@undocumented
 ---@vararg any
-function Squad_HasAbility (...) end
+function AE_OfficerSmokeSupport (...) end
 
+---@undocumented
 ---@vararg any
-function Squad_HasBuilding (...) end
+function AE_OutOfFuelCrit (...) end
 
+---@undocumented
 ---@vararg any
-function Squad_HasWeaponHardpoint (...) end
+function AE_OutOfFuelNoRecrew (...) end
 
+---@undocumented
 ---@vararg any
-function Squad_IsPopCapPreventingInstantReinforce (...) end
+function AE_OutOfFuelWarning (...) end
 
+---@undocumented
 ---@vararg any
-function StartNIS (...) end
+function AE_ParaLandingMove (...) end
 
+---@undocumented
 ---@vararg any
-function Stats_BalancePrint (...) end
+function AE_PassiveAbility120mmMortar (...) end
 
+---@undocumented
 ---@vararg any
-function Stats_BeginBalanceStatsDump (...) end
+function AE_PassiveAbilityElefant (...) end
 
+---@undocumented
 ---@vararg any
-function Stats_DumpFramesToDisk (...) end
+function AE_PassiveAbilityGuard (...) end
 
+---@undocumented
 ---@vararg any
-function Stats_EndBalanceStatsDump (...) end
+function AE_PassiveAbilityIS2 (...) end
 
+---@undocumented
 ---@vararg any
-function Stats_GetScenarioName (...) end
+function AE_PassiveAbilityISU152 (...) end
 
+---@undocumented
 ---@vararg any
-function Stats_ReportGameStats (...) end
+function AE_PassiveAbilityKatyusha (...) end
 
+---@undocumented
 ---@vararg any
-function StopBlizAudio (...) end
+function AE_PassiveAbilityKV8 (...) end
 
+---@undocumented
 ---@vararg any
-function TableCount (...) end
+function AE_PassiveAbilityMortarHalftrack (...) end
 
+---@undocumented
 ---@vararg any
-function Team_ForEachAllOrAny_LEGACY (...) end
+function AE_PassiveAbilityPanzerCommand (...) end
 
+---@undocumented
 ---@vararg any
-function Team_GetPlayers (...) end
+function AE_PassiveAbilityShock (...) end
 
+---@undocumented
 ---@vararg any
-function ThreatGroup_AddEntity (...) end
+function AE_PassiveAbilityT3485 (...) end
 
+---@undocumented
 ---@vararg any
-function ThreatGroup_AddPosition (...) end
+function AE_PassiveAbilityTiger (...) end
 
+---@undocumented
 ---@vararg any
-function ThreatGroup_AddSquad (...) end
+function AE_PinpointWarningText_1 (...) end
 
+---@undocumented
 ---@vararg any
-function ThreatGroup_Create (...) end
+function AE_PinpointWarningText_2 (...) end
 
+---@undocumented
 ---@vararg any
-function ThreatGroup_Destroy (...) end
+function AE_RangerReconPlane (...) end
 
+---@undocumented
 ---@vararg any
-function ThreatGroup_DestroyAll (...) end
+function AE_RearEchAddDeadInf (...) end
 
+---@undocumented
 ---@vararg any
-function ThreatGroup_RemoveEntity (...) end
+function AE_RearEchAddDeadVeh (...) end
 
+---@undocumented
 ---@vararg any
-function ThreatGroup_RemovePosition (...) end
+function AE_RearEchelonAttritionInit (...) end
 
+---@undocumented
 ---@vararg any
-function ThreatGroup_RemoveSquad (...) end
+function AE_RearEchelonSpawn (...) end
 
+---@undocumented
 ---@vararg any
-function Timer_Init (...) end
+function AE_RearEchelonSpawnEnable (...) end
 
+---@undocumented
 ---@vararg any
-function Timer_Validate (...) end
+function AE_RecrewVehicle (...) end
 
+---@undocumented
 ---@vararg any
-function TimeRule_Refresh (...) end
+function AE_RefaceEvent (...) end
 
+---@undocumented
 ---@vararg any
-function UI_ClearCompany (...) end
+function AE_RepairCriticals (...) end
 
+---@undocumented
 ---@vararg any
-function UI_CreateEventCueClickable (...) end
+function AE_ReplaceCrushableConstructionEntity (...) end
 
+---@undocumented
 ---@vararg any
-function UI_CreateMinimapBlipOnEGroup (...) end
+function AE_ReturnGroundPos (...) end
 
+---@undocumented
 ---@vararg any
-function UI_CreateMinimapBlipOnEntity (...) end
+function AE_ReverseMoveArcher (...) end
 
+---@undocumented
 ---@vararg any
-function UI_CreateMinimapBlipOnMarker (...) end
+function AE_ShermanBarrierDeform (...) end
 
+---@undocumented
 ---@vararg any
-function UI_CreateMinimapBlipOnPos (...) end
+function AE_ShermanSpawnBarrier (...) end
 
+---@undocumented
 ---@vararg any
-function UI_CreateMinimapBlipOnSGroup (...) end
+function AE_ShockApproachTarget (...) end
 
+---@undocumented
 ---@vararg any
-function UI_CreateMinimapBlipOnSquad (...) end
+function AE_SpawnActiveLight (...) end
 
+---@undocumented
 ---@vararg any
-function UI_DeleteMinimapBlipInternal (...) end
+function AE_SpawnBaseFlak (...) end
 
+---@undocumented
 ---@vararg any
-function UI_FlashMinimap (...) end
+function AE_SpawnInHold (...) end
 
+---@undocumented
 ---@vararg any
-function UI_FlashResourceItem (...) end
+function AE_SpawnPak43Defenses (...) end
 
+---@undocumented
 ---@vararg any
-function UI_ForceHudArrowOnObjective (...) end
+function AE_SpawnSupplyTruckAccessory_1 (...) end
 
+---@undocumented
 ---@vararg any
-function UI_GetAllowLoadAndSave (...) end
+function AE_SpawnSupplyTruckAccessory_2 (...) end
 
+---@undocumented
 ---@vararg any
-function UI_MessageBoxReset (...) end
+function AE_SpawnSupplyTruckAccessory_3 (...) end
 
+---@undocumented
 ---@vararg any
-function UI_MessageBoxShow (...) end
+function AE_SpawnSupplyTruckAccessory_4 (...) end
 
+---@undocumented
 ---@vararg any
-function UI_SetCompany (...) end
+function AE_SpawnSupplyTruckSandbags (...) end
 
+---@undocumented
 ---@vararg any
-function UnsavedEventRule_AddPlayerEvent (...) end
+function AE_SpawnTrenchMines (...) end
 
+---@undocumented
 ---@vararg any
-function UnsavedEventRule_AddRuleIDEvent (...) end
+function AE_SpawnTrenchWire (...) end
 
+---@undocumented
 ---@vararg any
-function UnsavedTimeRule_AddIntervalEx (...) end
+function AE_StalkState (...) end
 
+---@undocumented
 ---@vararg any
-function UnsavedTimeRule_AddOneShot (...) end
+function AE_SuggestKneel (...) end
 
+---@undocumented
 ---@vararg any
-function WaveDefense_GetWave (...) end
+function AE_SuggestKneelExtended (...) end
 
+---@undocumented
 ---@vararg any
-function WaveDefense_Init (...) end
+function AI_ClearCaptureImportance (...) end
 
+---@undocumented
 ---@vararg any
-function WaveDefense_NextWave (...) end
+function AI_ClearMilitaryPointImportance (...) end
 
+---@undocumented
 ---@vararg any
-function WaveDefense_PreviousWave (...) end
+function AI_ClearSquadImportance (...) end
 
+---@undocumented
 ---@vararg any
-function WaveDefense_SelectSpawns (...) end
+function AI_ConvertToSimSquad (...) end
 
+---@undocumented
 ---@vararg any
-function WaveDefense_SetCommandSGroup (...) end
+function AI_DebugSkirmishForwardDeployEnable (...) end
 
+---@undocumented
 ---@vararg any
-function WaveDefense_SetObjectives (...) end
+function AI_DebugSkirmishForwardDeployIsEnabled (...) end
 
+---@undocumented
 ---@vararg any
-function WaveDefense_SetWave (...) end
+function AI_Initialize (...) end
 
+---@undocumented
 ---@vararg any
-function WaveDefense_SpawnWave (...) end
+function AI_IsAITargetable (...) end
 
+---@undocumented
 ---@vararg any
-function WaveManager_DisableWaveManager (...) end
+function AI_IsDebugDisplay (...) end
 
+---@undocumented
 ---@vararg any
-function WaveManager_InitilizeData (...) end
+function AI_IsRTM (...) end
 
+---@undocumented
 ---@vararg any
-function WCNone_CheckSurrender (...) end
+function AI_IsSquadValid (...) end
 
+---@undocumented
 ---@vararg any
-function WCNone_DelayedWin (...) end
+function AI_Loop (...) end
 
+---@undocumented
 ---@vararg any
-function WCNone_GameOver (...) end
+function AI_OnAIMigrated (...) end
 
+---@undocumented
 ---@vararg any
-function Vector_Normalize (...) end
+function AI_RestartEncounters (...) end
 
+---@undocumented
 ---@vararg any
-function View_DownArrow (...) end
+function AI_RestartSCAR (...) end
 
+---@undocumented
 ---@vararg any
-function View_DrawItem (...) end
+function AI_SetAITargetable (...) end
 
+---@undocumented
 ---@vararg any
-function View_Focus (...) end
+function AI_SetCaptureImportance (...) end
 
+---@undocumented
 ---@vararg any
-function View_Init (...) end
+function AI_SetDebugDisplay (...) end
 
+---@undocumented
 ---@vararg any
-function View_LeftArrow (...) end
+function AI_SetDefaultEnemyPlayer (...) end
 
+---@undocumented
 ---@vararg any
-function View_Manager (...) end
+function AI_SetMilitaryPointImportance (...) end
 
+---@undocumented
 ---@vararg any
-function View_RightArrow (...) end
+function AI_SetSquadImportance (...) end
 
+---@undocumented
 ---@vararg any
-function View_ToggleDisplay (...) end
+function AI_ToggleDebugDisplay (...) end
 
+---@undocumented
 ---@vararg any
-function View_UpArrow (...) end
+function AIDefaultGoalData_Initialize (...) end
 
+---@undocumented
 ---@vararg any
-function WinCondition_CheckAnnihilation (...) end
+function AIEvents_Initialize (...) end
 
+---@undocumented
 ---@vararg any
-function VIS_ToggleDebugDeferredPasses (...) end
+function AIObjective_FallbackGuidance_SetRetreatDelayTime (...) end
 
+---@undocumented
 ---@vararg any
-function VIS_ToggleTopDownView (...) end
+function AIObjective_MoveGuidance_EnableRelaxedPatrol (...) end
 
+---@undocumented
 ---@vararg any
-function VIS_ToggleTrackView (...) end
+function AIObjective_TargetGuidance_GetTargetAreaRadius (...) end
 
+---@undocumented
 ---@vararg any
-function WithdrawFromMap (...) end
+function AIObjective_TargetGuidance_GetTargetLeashRadius (...) end
 
+---@undocumented
 ---@vararg any
-function WM_GetCallbackData (...) end
+function AIObjective_TargetGuidance_GetTargetPos (...) end
 
+---@undocumented
 ---@vararg any
-function WM_GetHordeAttackData (...) end
+function AIPlayer_GetClumpCentreSquad (...) end
 
+---@undocumented
 ---@vararg any
-function WM_GetRallyGoalData (...) end
+function AIPlayer_GetClumpTerritoryPointEntity (...) end
 
+---@undocumented
 ---@vararg any
-function WM_GetRandomizeData (...) end
+function AISquad_ShouldFallBackOrBraceSelf (...) end
 
+---@undocumented
 ---@vararg any
-function WM_GetSpawnerData (...) end
+function Annihilate_CheckAnnihilation (...) end
 
+---@undocumented
 ---@vararg any
-function WM_GetSustainedAttackData (...) end
+function Annihilate_DelayedWin (...) end
 
+---@undocumented
 ---@vararg any
-function WM_GetWaveWarningData (...) end
+function Annihilate_GameOver (...) end
 
+---@undocumented
 ---@vararg any
-function WM_SetCallbackData (...) end
+function AttackGoal_SetupObjective_Tactics (...) end
 
+---@undocumented
 ---@vararg any
-function WM_SetHordeAttackData (...) end
+function AutoReinforce_Manager (...) end
 
+---@undocumented
 ---@vararg any
-function WM_SetRallyGoalData (...) end
+function AutoRetreat_Manager (...) end
 
+---@undocumented
 ---@vararg any
-function WM_SetRandomizeData (...) end
+function AutoRetreat_Retreat (...) end
 
+---@undocumented
 ---@vararg any
-function WM_SetSpawnerData (...) end
+function BaseGoal_SetupObjective_FallbackParams (...) end
 
+---@undocumented
 ---@vararg any
-function WM_SetSustainedAttackData (...) end
+function BaseGoal_SetupObjective_Tactics (...) end
 
+---@undocumented
 ---@vararg any
-function WM_SetWaveWarningData (...) end
+function BaseGoal_SetupObjective_Target (...) end
 
+---@undocumented
 ---@vararg any
-function WMPrint (...) end
+function BeginnerHint_AbilityCallback (...) end
 
+---@undocumented
 ---@vararg any
-function World_GetEnviroCount (...) end
+function BeginnerHint_DemoPackCallback (...) end
 
+---@undocumented
 ---@vararg any
-function World_GetEnviroName (...) end
+function BeginnerHint_FindAnOpportunity (...) end
 
+---@undocumented
 ---@vararg any
-function World_GetPossibleEntitiesBlueprint (...) end
+function BeginnerHint_GetDetailsForAbility (...) end
 
+---@undocumented
 ---@vararg any
-function World_GetPossibleEntitiesCount (...) end
+function BeginnerHint_GetIconFromAbility (...) end
 
+---@undocumented
 ---@vararg any
-function World_Intersect (...) end
+function BeginnerHint_GetLastAbilityUse (...) end
 
+---@undocumented
 ---@vararg any
-function VPAnnihilate_RemoveAllRules (...) end
+function BeginnerHint_Init (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_DelayedWin (...) end
+function BeginnerHint_Manager (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_FinalTickerWarningReminder (...) end
+function BeginnerHint_MarkAbilityUse (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_GameOver (...) end
+function BeginnerHint_MarkCommandUse (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_GameOverLose (...) end
+function BeginnerHint_MergeCallback (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_GameOverTie (...) end
+function BeginnerHint_MoveOrderCallback (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_GetTeamTickerFromPlayerID (...) end
+function BeginnerHint_OpportunityOver (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_GetTeamTickers (...) end
+function BeginnerHint_PickAnEntity (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_GetTeamVictoryPoints (...) end
+function BeginnerHint_PickASquad (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_MainRule (...) end
+function BeginnerHint_PickUpCallback (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_OnInit (...) end
+function BeginnerHint_RallyPointCallback (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_PointReminder (...) end
+function BeginnerHint_ReinforceCallback (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_PublishLoseReminder (...) end
+function BeginnerHint_TestAbilityIsFromPlayer (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_SetAllTeamTickers (...) end
+function BeginnerHint_TestCommandIsFromPlayer (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_SetTeamTickers (...) end
+function BeginnerHint_TestOpportunity (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_UpdateTickers (...) end
+function BeginnerHint_TestOpportunityOnEntity (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_VictoryBalanceReminder (...) end
+function BeginnerHint_TestOpportunityOnPosition (...) end
 
+---@undocumented
 ---@vararg any
-function VPTicker_VictorySpeechReminder (...) end
+function BeginnerHint_TestOpportunityOnSquad (...) end
 
+---@undocumented
 ---@vararg any
-function VPVictoryMessage (...) end
+function Blizzard_End (...) end
 
----@type userdata
-AII_LocalHumanTakeover = {}
-
----@type userdata
-AII_None = {}
-
----@type userdata
-AII_Normal = {}
-
----@type userdata
-AII_RemoteAITakeover = {}
-
----@type userdata
-AII_RemoteHumanTakeover = {}
-
----@type userdata
-AITacticTargetPreference_Best = {}
-
----@type userdata
-AITacticTargetPreference_HighDamage = {}
-
----@type userdata
-AITacticTargetPreference_LowHealth = {}
-
----@type userdata
-AITacticTargetPreference_Near = {}
-
----@type userdata
-AITacticTargetPreference_NearAndBest = {}
-
----@type userdata
-AITacticTargetPreference_None = {}
-
----@type userdata
-AITacticTargetPreference_Support = {}
-
----@type userdata
-BFS_Burning = {}
-
----@type userdata
-BFS_NotOnFire = {}
-
----@type userdata
-BFS_Smoking = {}
-
----@type userdata
-BIS_Icon = {}
-
----@type userdata
-BIS_IconState = {}
-
----@type userdata
-BS_Defend = {}
-
----@type userdata
-BS_FinishIncompleteStructure = {}
-
----@type userdata
-BS_ForwardDefense = {}
-
----@type userdata
-BS_Mines = {}
-
----@type userdata
-BS_NearAnchor = {}
-
----@type userdata
-BS_OuterAnchor = {}
-
----@type userdata
-BS_Secure = {}
-
----@type userdata
-BT_AttackHere = {}
-
----@type userdata
-BT_CaptureHere = {}
-
----@type userdata
-BT_Combat = {}
-
----@type userdata
-BT_DefendHere = {}
-
----@type userdata
-BT_General = {}
-
----@type userdata
-BT_ObjectiveBonus = {}
-
----@type userdata
-BT_ObjectivePrimary = {}
-
----@type userdata
-BT_ObjectiveSecondary = {}
-
----@type userdata
-BT_RallyPoint = {}
-
----@type userdata
-BT_Reveal = {}
-
----@type userdata
-BT_SectorArtillery = {}
-
----@type userdata
-CANPRODUCE_Disabled = {}
-
----@type userdata
-CANPRODUCE_Error = {}
-
----@type userdata
-CANPRODUCE_NoItem = {}
-
----@type userdata
-CANPRODUCE_NoResources = {}
-
----@type userdata
-CANPRODUCE_Ok = {}
-
----@type userdata
-CANPRODUCE_OutOfReinforceRadius = {}
-
----@type userdata
-CANPRODUCE_OutOfTerritory = {}
-
----@type userdata
-CANPRODUCE_PopulationCapFull = {}
-
----@type userdata
-CANPRODUCE_PrerequisitesItem = {}
-
----@type userdata
-CANPRODUCE_PrerequisitesProducer = {}
-
----@type userdata
-CANPRODUCE_ProductionItemFull = {}
-
----@type userdata
-CANPRODUCE_ProductionQueueFull = {}
-
----@type userdata
-CANPRODUCE_UpgradeItemFull = {}
-
----@type userdata
-CHECK_BOTH = {}
-
----@type userdata
-CHECK_IN_FOW = {}
-
----@type userdata
-CHECK_OFFCAMERA = {}
-
----@type userdata
-CMD_Ability = {}
-
----@type userdata
-CMD_Attack = {}
-
----@type userdata
-CMD_AttackForced = {}
-
----@type userdata
-CMD_AttackFromHold = {}
-
----@type userdata
-CMD_AttackMove = {}
-
----@type userdata
-CMD_AttackStop = {}
-
----@type userdata
-CMD_BuildEntity = {}
-
----@type userdata
-CMD_BuildSquad = {}
-
----@type userdata
-CMD_BuildStructure = {}
-
----@type userdata
-CMD_CancelProduction = {}
-
----@type userdata
-CMD_Capture = {}
-
----@type userdata
-CMD_Casualty = {}
-
----@type userdata
-CMD_ChooseResource = {}
-
----@type userdata
-CMD_Death = {}
-
----@type userdata
-CMD_DefaultAction = {}
-
----@type userdata
-CMD_DefuseMine = {}
-
----@type userdata
-CMD_Destroy = {}
-
----@type userdata
-CMD_Evacuate = {}
-
----@type userdata
-CMD_Face = {}
-
----@type userdata
-CMD_Fidget = {}
-
----@type userdata
-CMD_Halt = {}
-
----@type userdata
-CMD_InstantBuildSquad = {}
-
----@type userdata
-CMD_InstantDeath = {}
-
----@type userdata
-CMD_InstantUpgrade = {}
-
----@type userdata
-CMD_Load = {}
-
----@type userdata
-CMD_Move = {}
-
----@type userdata
-CMD_Paradrop = {}
-
----@type userdata
-CMD_PlaceCharge = {}
-
----@type userdata
-CMD_Projectile = {}
-
----@type userdata
-CMD_RallyPoint = {}
-
----@type userdata
-CMD_RescueCasualty = {}
-
----@type userdata
-CMD_SetHoldHeading = {}
-
----@type userdata
-CMD_Stop = {}
-
----@type userdata
-CMD_Unload = {}
+---@undocumented
+---@vararg any
+function Blizzard_End_AtmosphereFinal (...) end
 
----@type userdata
-CMD_UnloadSquads = {}
+---@undocumented
+---@vararg any
+function Blizzard_End_MidTransition (...) end
 
----@type userdata
-CMD_Upgrade = {}
+---@undocumented
+---@vararg any
+function Blizzard_End_StartTransition (...) end
 
----@type userdata
-CMD_Vault = {}
+---@undocumented
+---@vararg any
+function Blizzard_End_TransitionFinished (...) end
 
----@type userdata
-COMBAT_Attack = {}
+---@undocumented
+---@vararg any
+function Blizzard_Start (...) end
 
----@type userdata
-COMBAT_Default = {}
+---@undocumented
+---@vararg any
+function Blizzard_Start_MidTransition (...) end
 
----@type userdata
-COMBAT_Defend = {}
+---@undocumented
+---@vararg any
+function Blizzard_Start_StartTransition (...) end
 
----@type userdata
-Crush_Heavy = {}
+---@undocumented
+---@vararg any
+function Blizzard_Start_Timer (...) end
 
----@type userdata
-Crush_Light = {}
+---@undocumented
+---@vararg any
+function Blizzard_Start_TransitionFinished (...) end
 
----@type userdata
-Crush_Medium = {}
+---@undocumented
+---@vararg any
+function Blizzard_StartGameplayTransition (...) end
 
----@type userdata
-Crush_Off = {}
+---@undocumented
+---@vararg any
+function Blizzard_TransitionGameplay (...) end
 
----@type userdata
-CT_Medic = {}
+---@undocumented
+---@vararg any
+function Blizzard_TransitionGameplay_Final (...) end
 
----@type userdata
-CT_Personnel = {}
+---@undocumented
+---@vararg any
+function Blizzard_TransitionGameplay_Tick (...) end
 
----@type userdata
-CT_Vehicle = {}
+---@undocumented
+---@vararg any
+function Blizzard_WaitToEnd (...) end
 
----@type userdata
-CT_VehicleBack = {}
+---@undocumented
+---@vararg any
+function Blizzard_WaitToStart (...) end
 
----@type userdata
-CT_VehicleCrewShocked = {}
+---@undocumented
+---@vararg any
+function BlizzardCue (...) end
 
----@type userdata
-CT_VehicleDriverInjured = {}
+---@undocumented
+---@vararg any
+function BridgeTerritory_Manager (...) end
 
----@type userdata
-CT_VehicleEngineBurning = {}
+---@undocumented
+---@vararg any
+function Camera_Dump (...) end
 
----@type userdata
-CT_VehicleEngineGreen = {}
+---@undocumented
+---@vararg any
+function Campaign_InitializeConstants (...) end
 
----@type userdata
-CT_VehicleEngineRed = {}
+---@undocumented
+---@vararg any
+function CaptureIntel_DefaultBonus (...) end
 
----@type userdata
-CT_VehicleEngineYellow = {}
+---@undocumented
+---@vararg any
+function CaptureIntel_DropItem (...) end
 
----@type userdata
-CT_VehicleExhaustDamaged = {}
+---@undocumented
+---@vararg any
+function CaptureIntel_IntelSpotted (...) end
 
----@type userdata
-CT_VehicleFront = {}
+---@undocumented
+---@vararg any
+function CaptureIntel_IntroEvent (...) end
 
----@type userdata
-CT_VehicleGunnerInjured = {}
+---@undocumented
+---@vararg any
+function CaptureIntel_ItemPickedUp (...) end
 
----@type userdata
-CT_VehicleKillCommander = {}
+---@undocumented
+---@vararg any
+function CaptureIntel_OutroEvent (...) end
 
----@type userdata
-CT_VehicleLeft = {}
+---@undocumented
+---@vararg any
+function CaptureIntel_ReturnCheck (...) end
 
----@type userdata
-CT_VehicleLoseTreadsOrWheels = {}
+---@undocumented
+---@vararg any
+function CaptureIntel_ShowReward (...) end
 
----@type userdata
-CT_VehicleOpticsDamaged = {}
+---@undocumented
+---@vararg any
+function CaptureIntel_SquadKilled (...) end
 
----@type userdata
-CT_VehicleOutOfControl = {}
+---@undocumented
+---@vararg any
+function CaptureIntel_Start (...) end
 
----@type userdata
-CT_VehiclePrimaryWeapon = {}
+---@undocumented
+---@vararg any
+function CaptureIntel_VehicleRecrewed (...) end
 
----@type userdata
-CT_VehicleRight = {}
+---@undocumented
+---@vararg any
+function Ceasefire_Manager (...) end
 
----@type userdata
-CT_VehicleSecondaryWeapon = {}
+---@undocumented
+---@vararg any
+function CloneGoal (...) end
 
----@type userdata
-DB_Button1 = {}
+---@undocumented
+---@vararg any
+function CloneTable (...) end
 
----@type userdata
-DB_Button2 = {}
+---@undocumented
+---@vararg any
+function Cmd_DoPlan (...) end
 
----@type userdata
-DB_Button3 = {}
+---@undocumented
+---@vararg any
+function Command_Init (...) end
 
----@type userdata
-DB_Close = {}
+---@undocumented
+---@vararg any
+function Command_PlayerBroadcastMessage (...) end
 
----@type userdata
-DC_Default = {}
+---@undocumented
+---@vararg any
+function Command_SquadPath (...) end
 
----@type userdata
-DC_Iconographic = {}
+---@undocumented
+---@vararg any
+function ConscriptProgression_AudioInit (...) end
 
----@type userdata
-DEATHREASON_DEATH_AS_DRIVER = {}
+---@undocumented
+---@vararg any
+function ConscriptProgression_FrontovikSpeech (...) end
 
----@type userdata
-DEATHREASON_FREEZE = {}
+---@undocumented
+---@vararg any
+function ConscriptProgression_FrontovikUnlock (...) end
 

@@ -1,837 +1,999 @@
----@type userdata
-ST_NUMBER = {}
+---@undocumented
+---@vararg any
+function UI_CreateEventCueClickable (...) end
+
+---@undocumented
+---@vararg any
+function UI_CreateMinimapBlipOnEGroup (...) end
+
+---@undocumented
+---@vararg any
+function UI_CreateMinimapBlipOnEntity (...) end
+
+---@undocumented
+---@vararg any
+function UI_CreateMinimapBlipOnMarker (...) end
+
+---@undocumented
+---@vararg any
+function UI_CreateMinimapBlipOnPos (...) end
+
+---@undocumented
+---@vararg any
+function UI_CreateMinimapBlipOnSGroup (...) end
+
+---@undocumented
+---@vararg any
+function UI_CreateMinimapBlipOnSquad (...) end
+
+---@undocumented
+---@vararg any
+function UI_DeleteMinimapBlipInternal (...) end
+
+---@undocumented
+---@vararg any
+function UI_FlashMinimap (...) end
+
+---@undocumented
+---@vararg any
+function UI_FlashResourceItem (...) end
+
+---@undocumented
+---@vararg any
+function UI_ForceHudArrowOnObjective (...) end
+
+---@undocumented
+---@vararg any
+function UI_GetAllowLoadAndSave (...) end
+
+---@undocumented
+---@vararg any
+function UI_MessageBoxReset (...) end
+
+---@undocumented
+---@vararg any
+function UI_MessageBoxShow (...) end
+
+---@undocumented
+---@vararg any
+function UI_SetCompany (...) end
+
+---@undocumented
+---@vararg any
+function UnsavedEventRule_AddPlayerEvent (...) end
+
+---@undocumented
+---@vararg any
+function UnsavedEventRule_AddRuleIDEvent (...) end
+
+---@undocumented
+---@vararg any
+function UnsavedTimeRule_AddIntervalEx (...) end
+
+---@undocumented
+---@vararg any
+function UnsavedTimeRule_AddOneShot (...) end
+
+---@undocumented
+---@vararg any
+function WaveDefense_GetWave (...) end
+
+---@undocumented
+---@vararg any
+function WaveDefense_Init (...) end
+
+---@undocumented
+---@vararg any
+function WaveDefense_NextWave (...) end
+
+---@undocumented
+---@vararg any
+function WaveDefense_PreviousWave (...) end
+
+---@undocumented
+---@vararg any
+function WaveDefense_SelectSpawns (...) end
+
+---@undocumented
+---@vararg any
+function WaveDefense_SetCommandSGroup (...) end
+
+---@undocumented
+---@vararg any
+function WaveDefense_SetObjectives (...) end
+
+---@undocumented
+---@vararg any
+function WaveDefense_SetWave (...) end
+
+---@undocumented
+---@vararg any
+function WaveDefense_SpawnWave (...) end
+
+---@undocumented
+---@vararg any
+function WaveManager_DisableWaveManager (...) end
+
+---@undocumented
+---@vararg any
+function WaveManager_InitilizeData (...) end
+
+---@undocumented
+---@vararg any
+function WCNone_CheckSurrender (...) end
+
+---@undocumented
+---@vararg any
+function WCNone_DelayedWin (...) end
+
+---@undocumented
+---@vararg any
+function WCNone_GameOver (...) end
+
+---@undocumented
+---@vararg any
+function Vector_Normalize (...) end
+
+---@undocumented
+---@vararg any
+function View_DownArrow (...) end
+
+---@undocumented
+---@vararg any
+function View_DrawItem (...) end
+
+---@undocumented
+---@vararg any
+function View_Focus (...) end
+
+---@undocumented
+---@vararg any
+function View_Init (...) end
+
+---@undocumented
+---@vararg any
+function View_LeftArrow (...) end
+
+---@undocumented
+---@vararg any
+function View_Manager (...) end
+
+---@undocumented
+---@vararg any
+function View_RightArrow (...) end
+
+---@undocumented
+---@vararg any
+function View_ToggleDisplay (...) end
+
+---@undocumented
+---@vararg any
+function View_UpArrow (...) end
+
+---@undocumented
+---@vararg any
+function WinCondition_CheckAnnihilation (...) end
+
+---@undocumented
+---@vararg any
+function VIS_ToggleDebugDeferredPasses (...) end
+
+---@undocumented
+---@vararg any
+function VIS_ToggleTopDownView (...) end
+
+---@undocumented
+---@vararg any
+function VIS_ToggleTrackView (...) end
+
+---@undocumented
+---@vararg any
+function WithdrawFromMap (...) end
+
+---@undocumented
+---@vararg any
+function WM_GetCallbackData (...) end
+
+---@undocumented
+---@vararg any
+function WM_GetHordeAttackData (...) end
+
+---@undocumented
+---@vararg any
+function WM_GetRallyGoalData (...) end
+
+---@undocumented
+---@vararg any
+function WM_GetRandomizeData (...) end
+
+---@undocumented
+---@vararg any
+function WM_GetSpawnerData (...) end
+
+---@undocumented
+---@vararg any
+function WM_GetSustainedAttackData (...) end
+
+---@undocumented
+---@vararg any
+function WM_GetWaveWarningData (...) end
+
+---@undocumented
+---@vararg any
+function WM_SetCallbackData (...) end
+
+---@undocumented
+---@vararg any
+function WM_SetHordeAttackData (...) end
+
+---@undocumented
+---@vararg any
+function WM_SetRallyGoalData (...) end
+
+---@undocumented
+---@vararg any
+function WM_SetRandomizeData (...) end
+
+---@undocumented
+---@vararg any
+function WM_SetSpawnerData (...) end
+
+---@undocumented
+---@vararg any
+function WM_SetSustainedAttackData (...) end
+
+---@undocumented
+---@vararg any
+function WM_SetWaveWarningData (...) end
+
+---@undocumented
+---@vararg any
+function WMPrint (...) end
 
----@type userdata
-ST_PBG = {}
+---@undocumented
+---@vararg any
+function World_GetEnviroCount (...) end
 
----@type userdata
-ST_PLAYER = {}
+---@undocumented
+---@vararg any
+function World_GetEnviroName (...) end
 
----@type userdata
-ST_SCARPOS = {}
+---@undocumented
+---@vararg any
+function World_GetPossibleEntitiesBlueprint (...) end
 
----@type userdata
-ST_SGROUP = {}
+---@undocumented
+---@vararg any
+function World_GetPossibleEntitiesCount (...) end
 
----@type userdata
-ST_SQUAD = {}
+---@undocumented
+---@vararg any
+function World_Intersect (...) end
 
----@type userdata
-ST_STRING = {}
+---@undocumented
+---@vararg any
+function VPAnnihilate_RemoveAllRules (...) end
 
----@type userdata
-ST_TABLE = {}
+---@undocumented
+---@vararg any
+function VPTicker_DelayedWin (...) end
 
----@type userdata
-ST_UNKNOWN = {}
+---@undocumented
+---@vararg any
+function VPTicker_FinalTickerWarningReminder (...) end
 
----@type userdata
-STATEID_Capture = {}
+---@undocumented
+---@vararg any
+function VPTicker_GameOver (...) end
 
----@type userdata
-STATEID_Dead = {}
+---@undocumented
+---@vararg any
+function VPTicker_GameOverLose (...) end
 
----@type userdata
-STATEID_DefuseMine = {}
+---@undocumented
+---@vararg any
+function VPTicker_GameOverTie (...) end
 
----@type userdata
-STATEID_Evacuate = {}
+---@undocumented
+---@vararg any
+function VPTicker_GetTeamTickerFromPlayerID (...) end
 
----@type userdata
-STATEID_Idle = {}
+---@undocumented
+---@vararg any
+function VPTicker_GetTeamTickers (...) end
 
----@type userdata
-STATEID_Move = {}
+---@undocumented
+---@vararg any
+function VPTicker_GetTeamVictoryPoints (...) end
 
----@type userdata
-STATEID_RepairEngineer = {}
+---@undocumented
+---@vararg any
+function VPTicker_MainRule (...) end
 
----@type userdata
-STATEID_StructureBuilding = {}
+---@undocumented
+---@vararg any
+function VPTicker_OnInit (...) end
 
----@type userdata
-TACTIC_Ability = {}
+---@undocumented
+---@vararg any
+function VPTicker_PointReminder (...) end
 
----@type userdata
-TACTIC_Avoid = {}
+---@undocumented
+---@vararg any
+function VPTicker_PublishLoseReminder (...) end
 
----@type userdata
-TACTIC_CapturePoint = {}
+---@undocumented
+---@vararg any
+function VPTicker_SetAllTeamTickers (...) end
 
----@type userdata
-TACTIC_CaptureTeamWeapon = {}
+---@undocumented
+---@vararg any
+function VPTicker_SetTeamTickers (...) end
 
----@type userdata
-TACTIC_Cover = {}
+---@undocumented
+---@vararg any
+function VPTicker_UpdateTickers (...) end
 
----@type userdata
-TACTIC_FinishHealing = {}
+---@undocumented
+---@vararg any
+function VPTicker_VictoryBalanceReminder (...) end
 
----@type userdata
-TACTIC_ForceAttack = {}
+---@undocumented
+---@vararg any
+function VPTicker_VictorySpeechReminder (...) end
 
----@type userdata
-TACTIC_Hold = {}
+---@undocumented
+---@vararg any
+function VPVictoryMessage (...) end
 
 ---@type userdata
-TACTIC_MinRange = {}
+AII_LocalHumanTakeover = {}
 
 ---@type userdata
-TACTIC_Pickup = {}
+AII_None = {}
 
 ---@type userdata
-TACTIC_ProvideReinforcementPoint = {}
+AII_Normal = {}
 
 ---@type userdata
-TACTIC_Recrew = {}
+AII_RemoteAITakeover = {}
 
 ---@type userdata
-TACTIC_RushAtTarget = {}
+AII_RemoteHumanTakeover = {}
 
 ---@type userdata
-TACTIC_WarmUp = {}
+AITacticTargetPreference_Best = {}
 
 ---@type userdata
-TACTIC_Vehicle = {}
+AITacticTargetPreference_HighDamage = {}
 
 ---@type userdata
-TACTIC_VehicleDecrew = {}
+AITacticTargetPreference_LowHealth = {}
 
 ---@type userdata
-TASK_Ability = {}
+AITacticTargetPreference_Near = {}
 
 ---@type userdata
-TASK_Capture = {}
+AITacticTargetPreference_NearAndBest = {}
 
 ---@type userdata
-TASK_Combat = {}
+AITacticTargetPreference_None = {}
 
 ---@type userdata
-TASK_Construction = {}
+AITacticTargetPreference_Support = {}
 
 ---@type userdata
-TASK_ImmobileCombat = {}
+BFS_Burning = {}
 
 ---@type userdata
-TASK_Leader = {}
+BFS_NotOnFire = {}
 
 ---@type userdata
-TASK_PlayerAbility = {}
+BFS_Smoking = {}
 
 ---@type userdata
-TASK_Production = {}
+BIS_Icon = {}
 
 ---@type userdata
-TV_CameraMode = {}
+BIS_IconState = {}
 
 ---@type userdata
-TV_ClipFar = {}
+BS_Defend = {}
 
 ---@type userdata
-TV_ClipNear = {}
+BS_FinishIncompleteStructure = {}
 
 ---@type userdata
-TV_DeclAbove = {}
+BS_ForwardDefense = {}
 
 ---@type userdata
-TV_DeclBelow = {}
+BS_Mines = {}
 
 ---@type userdata
-TV_DeclBelowClose = {}
+BS_NearAnchor = {}
 
 ---@type userdata
-TV_DeclinationEnabled = {}
+BS_OuterAnchor = {}
 
 ---@type userdata
-TV_DeclRateMouse = {}
+BS_Secure = {}
 
 ---@type userdata
-TV_DefaultAngle = {}
+BT_AttackHere = {}
 
 ---@type userdata
-TV_DefaultDeclination = {}
+BT_CaptureHere = {}
 
 ---@type userdata
-TV_DefaultHeight = {}
+BT_Combat = {}
 
 ---@type userdata
-TV_DistExp = {}
+BT_DefendHere = {}
 
 ---@type userdata
-TV_DistExpMouse = {}
+BT_General = {}
 
 ---@type userdata
-TV_DistExpWheel = {}
+BT_ObjectiveBonus = {}
 
 ---@type userdata
-TV_DistGroundMin = {}
+BT_ObjectivePrimary = {}
 
 ---@type userdata
-TV_DistGroundTargetHeight = {}
+BT_ObjectiveSecondary = {}
 
 ---@type userdata
-TV_DistMax = {}
+BT_RallyPoint = {}
 
 ---@type userdata
-TV_DistMaxDead = {}
+BT_Reveal = {}
 
 ---@type userdata
-TV_DistMin = {}
+BT_SectorArtillery = {}
 
 ---@type userdata
-TV_DistMinDead = {}
+CANPRODUCE_Disabled = {}
 
 ---@type userdata
-TV_DistMinGround = {}
+CANPRODUCE_Error = {}
 
 ---@type userdata
-TV_DistRateMouse = {}
+CANPRODUCE_NoItem = {}
 
 ---@type userdata
-TV_DistRateWheelZoomIn = {}
+CANPRODUCE_NoResources = {}
 
 ---@type userdata
-TV_DistRateWheelZoomOut = {}
+CANPRODUCE_Ok = {}
 
 ---@type userdata
-TV_DistScale = {}
+CANPRODUCE_OutOfReinforceRadius = {}
 
 ---@type userdata
-TV_EntityMinViewAngle = {}
+CANPRODUCE_OutOfTerritory = {}
 
 ---@type userdata
-TV_FieldOfView = {}
+CANPRODUCE_PopulationCapFull = {}
 
 ---@type userdata
-TV_NearPlaneShifter = {}
+CANPRODUCE_PrerequisitesItem = {}
 
 ---@type userdata
-TV_NISletDeclAbove = {}
+CANPRODUCE_PrerequisitesProducer = {}
 
 ---@type userdata
-TV_NISletDeclBelow = {}
+CANPRODUCE_ProductionItemFull = {}
 
 ---@type userdata
-TV_NISletDistGroundMin = {}
+CANPRODUCE_ProductionQueueFull = {}
 
 ---@type userdata
-TV_NISletDistMax = {}
+CANPRODUCE_UpgradeItemFull = {}
 
 ---@type userdata
-TV_NISletDistMin = {}
+CHECK_BOTH = {}
 
 ---@type userdata
-TV_NISletDistMinGround = {}
+CHECK_IN_FOW = {}
 
 ---@type userdata
-TV_OrbitRateMouse = {}
+CHECK_OFFCAMERA = {}
 
 ---@type userdata
-TV_PanAccelerate = {}
+CMD_Ability = {}
 
 ---@type userdata
-TV_PanMaxSpeedScalar = {}
+CMD_Attack = {}
 
 ---@type userdata
-TV_PanScaleKeyboardDefZ = {}
+CMD_AttackForced = {}
 
 ---@type userdata
-TV_PanScaleKeyboardMinZ = {}
+CMD_AttackFromHold = {}
 
 ---@type userdata
-TV_PanScaleMouseDefZ = {}
+CMD_AttackMove = {}
 
 ---@type userdata
-TV_PanScaleMouseMinZ = {}
+CMD_AttackStop = {}
 
 ---@type userdata
-TV_PanScaleScreenDefZ = {}
+CMD_BuildEntity = {}
 
 ---@type userdata
-TV_PanScaleScreenMinZ = {}
+CMD_BuildSquad = {}
 
 ---@type userdata
-TV_PanStartSpeedScalar = {}
+CMD_BuildStructure = {}
 
 ---@type userdata
-TV_RotationEnabled = {}
+CMD_CancelProduction = {}
 
 ---@type userdata
-TV_SlideDeclBase = {}
+CMD_Capture = {}
 
 ---@type userdata
-TV_SlideDeclRate = {}
+CMD_Casualty = {}
 
 ---@type userdata
-TV_SlideDeclThreshold = {}
+CMD_ChooseResource = {}
 
 ---@type userdata
-TV_SlideDistBase = {}
+CMD_Death = {}
 
 ---@type userdata
-TV_SlideDistRate = {}
+CMD_DefaultAction = {}
 
 ---@type userdata
-TV_SlideDistThreshold = {}
+CMD_DefuseMine = {}
 
 ---@type userdata
-TV_SlideOrbitBase = {}
+CMD_Destroy = {}
 
 ---@type userdata
-TV_SlideOrbitRate = {}
+CMD_Evacuate = {}
 
 ---@type userdata
-TV_SlideOrbitThreshold = {}
+CMD_Face = {}
 
 ---@type userdata
-TV_SlideTargetBase = {}
+CMD_Fidget = {}
 
 ---@type userdata
-TV_SlideTargetRate = {}
+CMD_Halt = {}
 
 ---@type userdata
-TV_SlideTargetThreshold = {}
+CMD_InstantBuildSquad = {}
 
 ---@type userdata
-TV_TrackBoundScale = {}
+CMD_InstantDeath = {}
 
 ---@type userdata
-TV_TrackElastic = {}
+CMD_InstantUpgrade = {}
 
 ---@type userdata
-TV_ZoomLocked = {}
+CMD_Load = {}
 
 ---@type userdata
-UI_Cinematic = {}
+CMD_Move = {}
 
 ---@type userdata
-UI_Fullscreen = {}
+CMD_Paradrop = {}
 
 ---@type userdata
-UI_Normal = {}
+CMD_PlaceCharge = {}
 
 ---@type userdata
-UIE_AbilityExectued = {}
+CMD_Projectile = {}
 
 ---@type userdata
-UIE_AllyAttacked = {}
+CMD_RallyPoint = {}
 
 ---@type userdata
-UIE_BoobyTrap = {}
+CMD_RescueCasualty = {}
 
 ---@type userdata
-UIE_CasualtySquadSpawned = {}
+CMD_SetHoldHeading = {}
 
 ---@type userdata
-UIE_CommanderAbilityUnlocked = {}
+CMD_Stop = {}
 
 ---@type userdata
-UIE_CommandPointGained = {}
+CMD_Unload = {}
 
 ---@type userdata
-UIE_ConstructionComplete = {}
+CMD_UnloadSquads = {}
 
 ---@type userdata
-UIE_Default = {}
+CMD_Upgrade = {}
 
 ---@type userdata
-UIE_EnemyReveal = {}
+CMD_Vault = {}
 
 ---@type userdata
-UIE_EnemyTerritoryEntered = {}
+COMBAT_Attack = {}
 
 ---@type userdata
-UIE_InfantryAttacked = {}
+COMBAT_Default = {}
 
 ---@type userdata
-UIE_InfantryComplete = {}
+COMBAT_Defend = {}
 
 ---@type userdata
-UIE_InfantryReplaced = {}
+Crush_Heavy = {}
 
 ---@type userdata
-UIE_InfoPointActivated = {}
+Crush_Light = {}
 
 ---@type userdata
-UIE_MineDetected = {}
+Crush_Medium = {}
 
 ---@type userdata
-UIE_PhaseUp = {}
+Crush_Off = {}
 
 ---@type userdata
-UIE_PlayerAttacked = {}
+CT_Medic = {}
 
 ---@type userdata
-UIE_ResourceDepleted = {}
+CT_Personnel = {}
 
 ---@type userdata
-UIE_Sniped = {}
+CT_Vehicle = {}
 
 ---@type userdata
-UIE_SquadCold = {}
+CT_VehicleBack = {}
 
 ---@type userdata
-UIE_SquadFreezing = {}
+CT_VehicleCrewShocked = {}
 
 ---@type userdata
-UIE_SquadPinned = {}
+CT_VehicleDriverInjured = {}
 
 ---@type userdata
-UIE_SquadVeterancy = {}
+CT_VehicleEngineBurning = {}
 
 ---@type userdata
-UIE_StrategicPointCaptured = {}
+CT_VehicleEngineGreen = {}
 
 ---@type userdata
-UIE_StrategicPointReverting = {}
+CT_VehicleEngineRed = {}
 
 ---@type userdata
-UIE_StrategicPointSecured = {}
+CT_VehicleEngineYellow = {}
 
 ---@type userdata
-UIE_TerritoryEntered = {}
+CT_VehicleExhaustDamaged = {}
 
 ---@type userdata
-UIE_UpgradeComplete = {}
+CT_VehicleFront = {}
 
 ---@type userdata
-UIE_VehicleAttacked = {}
+CT_VehicleGunnerInjured = {}
 
 ---@type userdata
-UIE_VehicleComplete = {}
+CT_VehicleKillCommander = {}
 
 ---@type userdata
-UIE_VehicleReplaced = {}
+CT_VehicleLeft = {}
 
 ---@type userdata
-UOT_None = {}
+CT_VehicleLoseTreadsOrWheels = {}
 
 ---@type userdata
-UOT_Player = {}
+CT_VehicleOpticsDamaged = {}
 
 ---@type userdata
-UOT_Self = {}
-
----@type number
-AD_Easy = 0
-
----@type number
-AD_Hard = 2
-
----@type number
-AD_Hardest = 3
-
----@type number
-AD_Standard = 1
-
----@type number
-AIObjectiveNotification_Failure = 1
-
----@type number
-AIObjectiveNotification_Success = 0
-
----@type number
-AIObjectiveNotification_Transition = 2
-
----@type number
-AIObjectiveStage_Engaged = 2
-
----@type number
-AIObjectiveStage_Fallback = 3
-
----@type number
-AIObjectiveStage_Moving = 1
-
----@type number
-AIObjectiveType_Ability = 3
-
----@type number
-AIObjectiveType_AttackArea = 1
-
----@type number
-AIObjectiveType_DefendArea = 0
-
----@type number
-AIObjectiveType_Move = 2
-
----@type boolean
-ALL = true
-
----@type boolean
-ANY = false
+CT_VehicleOutOfControl = {}
 
----@type boolean
-beginnerhint_detect_reload = true
-
----@type number
-COUNT_DOWN = 1
-
----@type number
-COUNT_UP = 0
-
----@type number
-COUNTER_Count = 2
-
----@type number
-COUNTER_CountUpTo = 3
-
----@type number
-COUNTER_TimerDecreasing = 0
-
----@type number
-COUNTER_TimerIncreasing = 1
-
----@type number
-DM_Display2D = 2
-
----@type number
-DM_Display3D = 1
-
----@type number
-DM_DisplayEmitters = 8
-
----@type number
-DM_DisplayInvalid = 4
-
----@type number
-DM_UseShortNames = 16
-
----@type number
-DO_NOTHING = 0
-
----@type number
-ENTITY_MAXEXTENSIONS = 53
-
----@type number
-EVENT_AMBIENT = 2
-
----@type number
-EVENT_INTEL = 1
-
----@type number
-EVENT_NIS = 0
-
----@type boolean
-FADE_IN = false
-
----@type boolean
-FADE_OUT = true
-
----@type number
-FILTER_KEEP = 0
-
----@type number
-FILTER_REMOVE = 1
-
----@type boolean
-g_VPConditionsLoaded = true
+---@type userdata
+CT_VehiclePrimaryWeapon = {}
 
----@type number
-GD_EASY = 0
+---@type userdata
+CT_VehicleRight = {}
 
----@type number
-GD_EXPERT = 3
+---@type userdata
+CT_VehicleSecondaryWeapon = {}
 
----@type number
-GD_HARD = 2
+---@type userdata
+DB_Button1 = {}
 
----@type number
-GD_NORMAL = 1
+---@type userdata
+DB_Button2 = {}
 
----@type string
-GOAL_ABILITY = "Ability"
+---@type userdata
+DB_Button3 = {}
 
----@type string
-GOAL_ATTACK = "Attack"
+---@type userdata
+DB_Close = {}
 
----@type string
-GOAL_DEFEND = "Defend"
+---@type userdata
+DC_Default = {}
 
----@type string
-GOAL_MOVE = "Move"
+---@type userdata
+DC_Iconographic = {}
 
----@type number
-HINT_DEEPSNOW = 4
+---@type userdata
+DEATHREASON_DEATH_AS_DRIVER = {}
 
----@type number
-HINT_DEMOCHARGE = 6
+---@type userdata
+DEATHREASON_FREEZE = {}
 
----@type number
-HINT_FLANK = 5
+---@type userdata
+DEATHREASON_NORMAL = {}
 
----@type number
-HINT_HEAVYCOVER = 2
+---@type userdata
+DEATHREASON_SUBMERGE = {}
 
----@type number
-HINT_LIGHTCOVER = 1
+---@type userdata
+DEBUG_COMBATZONES = {}
 
----@type number
-HINT_MERGE = 8
+---@type userdata
+DEBUG_SELECTOR = {}
 
----@type number
-HINT_NEGATIVECOVER = 3
+---@type userdata
+FN_LuaTableQuery = {}
 
----@type number
-HINT_PICKUP = 10
+---@type userdata
+FN_OnActivate = {}
 
----@type number
-HINT_RALLYPOINT = 7
+---@type userdata
+FN_OnCounterDisplay = {}
 
----@type number
-HINT_REINFORCE = 9
+---@type userdata
+FN_OnSelect = {}
 
----@type number
-INVALID_AISQUADID = 10000
+---@type userdata
+FN_OnShow = {}
 
----@type string
-IT_B_Default = "Icons_objectives_objective_bonus"
+---@type userdata
+GE_AbilityComplete = {}
 
----@type string
-IT_P_Default = "Icons_objectives_objective_primary"
+---@type userdata
+GE_AbilityExecuted = {}
 
----@type string
-IT_S_Default = "Icons_objectives_objective_secondary"
+---@type userdata
+GE_AbilityRecharged = {}
 
----@type number
-MT_BATTLE = 1
+---@type userdata
+GE_AccessoryWeaponFired = {}
 
----@type number
-MT_CHALLENGE = 0
+---@type userdata
+GE_AIPlayer_Migrated = {}
 
----@type number
-MT_SCENARIO = 2
+---@type userdata
+GE_AIPlayer_ObjectiveNotification = {}
 
----@type number
-MT_XP1_BATTLE = 4
+---@type userdata
+GE_AITakeOver = {}
 
----@type number
-MT_XP1_CHALLENGE = 3
+---@type userdata
+GE_ArtilleryFired = {}
 
----@type number
-MT_XP1_MINICHALLENGE = 5
+---@type userdata
+GE_AttentionChange = {}
 
----@type number
-NIS_CLOSING = 2
+---@type userdata
+GE_BoobyTrapTriggered = {}
 
----@type number
-NIS_MID = 1
+---@type userdata
+GE_BroadcastMessage = {}
 
----@type number
-NIS_OPENING = 0
+---@type userdata
+GE_BuildItemComplete = {}
 
----@type number
-NIS_OPENING_BLACK = 3
+---@type userdata
+GE_BuildItemStart = {}
 
----@type number
-NIS_OPENING_BLEND = 5
+---@type userdata
+GE_CasualtySquadSpawned = {}
 
----@type number
-NIS_OPENING_FULLSCREEN = 4
+---@type userdata
+GE_CasualtyStatus = {}
 
----@type number
-NISLET_BLACK2GAME = 1
+---@type userdata
+GE_CompleteIntelBulletinTask = {}
 
----@type number
-NISLET_GAME2BLACK = 3
+---@type userdata
+GE_ConstructionComplete = {}
 
----@type number
-NISLET_GAME2GAME = 2
+---@type userdata
+GE_ConstructionFenceComplete = {}
 
----@type number
-NISLET_GAME2LETTER = 4
+---@type userdata
+GE_ConstructionFieldComplete = {}
 
----@type number
-NISLET_TIME = 1
+---@type userdata
+GE_ConstructionPlanComplete = {}
 
----@type number
-NISLET_VO = 2
+---@type userdata
+GE_ConstructionStart = {}
 
----@type boolean
-NO_ATTACK = false
+---@type userdata
+GE_CriticalDamage = {}
 
----@type boolean
-NO_QUEUE = false
+---@type userdata
+GE_CriticalRepaired = {}
 
----@type number
-OFFSET_BACK = 4
+---@type userdata
+GE_CustomUIEvent = {}
 
----@type number
-OFFSET_BACK_LEFT = 5
+---@type userdata
+GE_DamageArea = {}
 
----@type number
-OFFSET_BACK_RIGHT = 3
+---@type userdata
+GE_DefaultCommandIssued = {}
 
----@type number
-OFFSET_FRONT = 0
+---@type userdata
+GE_DriverDecrewed = {}
 
----@type number
-OFFSET_FRONT_LEFT = 7
+---@type userdata
+GE_DriverRecrewed = {}
 
----@type number
-OFFSET_FRONT_RIGHT = 1
+---@type userdata
+GE_EnemyTerritoryEntered = {}
 
----@type number
-OFFSET_LEFT = 6
+---@type userdata
+GE_EntityAbandoned = {}
 
----@type number
-OFFSET_RIGHT = 2
+---@type userdata
+GE_EntityCommandIssued = {}
 
----@type number
-PBGTYPE_Entity = 0
+---@type userdata
+GE_EntityCrushed = {}
 
----@type number
-PBGTYPE_Squad = 1
+---@type userdata
+GE_EntityKilled = {}
 
----@type number
-PBGTYPE_Upgrade = 6
+---@type userdata
+GE_EntityParadropComplete = {}
 
----@type number
-PROX_CENTER = 2
+---@type userdata
+GE_EntityParadropStart = {}
 
----@type number
-PROX_LONGEST = 1
+---@type userdata
+GE_EntityRecrewed = {}
 
----@type number
-PROX_SHORTEST = 0
+---@type userdata
+GE_FieldSupportChange = {}
 
----@type number
-SCARMODTYPE_MODIFIER = 1836016754
+---@type userdata
+GE_FlankKilled = {}
 
----@type number
-SCARMODTYPE_RESOURCEAMOUNT = 1919251297
+---@type userdata
+GE_GameOver = {}
 
----@type number
-SCARTYPE_AIOBJECTIVE = 1634299746
+---@type userdata
+GE_GameStart = {}
 
----@type number
-SCARTYPE_AIPLAYER = 1634300012
+---@type userdata
+GE_Garrison = {}
 
----@type number
-SCARTYPE_AISQUAD = 1634300785
+---@type userdata
+GE_GarrisonSquad = {}
 
----@type number
-SCARTYPE_CONSTPLAYER = 1668312178
+---@type userdata
+GE_ImportantUnitSighted = {}
 
----@type number
-SCARTYPE_EGROUP = 1701257248
+---@type userdata
+GE_InfoPointActivated = {}
 
----@type number
-SCARTYPE_ENTITY = 1701737504
+---@type userdata
+GE_ItemAvailabilityChanged = {}
 
----@type number
-SCARTYPE_LOCSTRING = 1970562616
+---@type userdata
+GE_LOSMove = {}
 
----@type number
-SCARTYPE_MARKER = 1835758112
+---@type userdata
+GE_MineDefused = {}
 
----@type number
-SCARTYPE_PBG = 1885497120
+---@type userdata
+GE_MoveFailed = {}
 
----@type number
-SCARTYPE_PLAYER = 1886157170
+---@type userdata
+GE_NonGlobalCamoDetected = {}
 
----@type number
-SCARTYPE_SCARPOS = 1936748403
+---@type userdata
+GE_OccupiedBuildingChangedOwner = {}
 
----@type number
-SCARTYPE_SGROUP = 1936138272
+---@type userdata
+GE_PathFound = {}
 
----@type number
-SCARTYPE_SQUAD = 1936811040
+---@type userdata
+GE_Ping = {}
 
----@type number
-SLOW_CAMERA_PANNING = 0.5
+---@type userdata
+GE_PlannedStructureCancelled = {}
 
----@type string
-SOUND_MEDAL_OP = "ui/stingers/medal_opportunity"
+---@type userdata
+GE_PlannedStructurePlaced = {}
 
----@type number
-SPAWN_ATMARKER = 1
+---@type userdata
+GE_PlayerBeingAttacked = {}
 
----@type number
-SPAWN_ATSQUAD = 2
+---@type userdata
+GE_PlayerCheat = {}
 
----@type number
-SQUAD_MAXEXTENSIONS = 18
+---@type userdata
+GE_PlayerCommanderSelected = {}
 
----@type number
-TASK_COUNT = 23
+---@type userdata
+GE_PlayerCommandIssued = {}
 
----@type number
-TEAM_NEUTRAL = 10000
+---@type userdata
+GE_PlayerDonation = {}
 
----@type number
-TFF_All = 0
+---@type userdata
+GE_PlayerDropped = {}
 
----@type number
-TFF_CausingSuppression = 8
+---@type userdata
+GE_PlayerHostMigrated = {}
 
----@type number
-TFF_FriendlyTargets = 512
+---@type userdata
+GE_PlayerKicked = {}
 
----@type number
-TFF_InEnemySectors = 64
+---@type userdata
+GE_PlayerKilled = {}
 
----@type number
-TFF_Infantry = 2
+---@type userdata
+GE_PlayerLagComplaint = {}
 
----@type number
-TFF_InFriendlySectors = 32
+---@type userdata
+GE_PlayerLose = {}
 
----@type number
-TFF_InFuelMunitionSectors = 2048
+---@type userdata
+GE_PlayerNameChanged = {}
 
----@type number
-TFF_InjuredInfantry = 1024
+---@type userdata
+GE_PlayerObjectiveChanged = {}
 
----@type number
-TFF_InMostClumpedSector = 128
+---@type userdata
+GE_PlayerObjectiveCreated = {}
 
----@type number
-TFF_NotHQSectors = 256
+---@type userdata
+GE_PlayerObjectiveDeleted = {}
 
----@type number
-TFF_NotVisible = 16
+---@type userdata
+GE_PlayerPhaseUp = {}
 
----@type number
-TFF_Vehicle = 4
+---@type userdata
+GE_PlayerPingOfShame = {}
 
----@type number
-TFF_Visible = 1
+---@type userdata
+GE_PlayerPingOfShameLocal = {}
 
----@type number
-Threshold_PercentageCombatRating = 2
+---@type userdata
+GE_PlayerResourcesAwarded = {}
 
----@type number
-Threshold_PercentageEntitiesRemaining = 3
+---@type userdata
+GE_PlayerSkipNIS = {}
 
----@type number
-Threshold_PercentageHealth = 1
+---@type userdata
+GE_PlayerSurrendered = {}
 
----@type string
-TRACE_GERMAN = "german"
+---@type userdata
+GE_PlayerWin = {}
 
----@type string
-TRACE_SOVIET = "soviet"
+---@type userdata
+GE_ProjectileFired = {}
 
----@type string
-WM_ACCURACY = "modifiers\\accuracy_weapon_modifier.lua"
+---@type userdata
+GE_ProjectileLanded = {}
 
----@type string
-WM_BURST = "modifiers\\burst_weapon_modifier.lua"
+---@type userdata
+GE_RebuiltEntityCreated = {}
 
----@type string
-WM_COOLDOWN = "modifiers\\cooldown_weapon_modifier.lua"
+---@type userdata
+GE_ReinforcementCreated = {}
 
----@type string
-WM_DAMAGE = "modifiers\\damage_weapon_modifier.lua"
+---@type userdata
+GE_ResourceDepleted = {}
 
----@type string
-WM_PENETRATION = "modifiers\\weapon_penetration_modifier.lua"
+---@type userdata
+GE_SectorLinkProviderChanged = {}
 
----@type string
-WM_RANGE = "modifiers\\range_weapon_modifier.lua"
+---@type userdata
+GE_SectorOutOfLink = {}
 
----@type string
-WM_RELOAD = "modifiers\\reload_weapon_modifier.lua"
+---@type userdata
+GE_SpawnActionComplete = {}
 

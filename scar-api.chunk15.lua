@@ -1,935 +1,999 @@
+---@type userdata
+GE_SpeechAction = {}
 
-local FatalOnWritesAndNilAccess =
-{
-	__index = function(t, k)
-		fatal("Trying to read a value " .. k .. " that does not exist")
-	end,
+---@type userdata
+GE_SquadBuildCommandIssued = {}
 
-	__newindex = function(t, k, v)
-		fatal("Trying to add new index " .. k .. " to a read-only table")
-	end,
-}
+---@type userdata
+GE_SquadCalledIn = {}
 
-EBP = {}
-SBP = {}
-UPG = {}
-ABILITY = {}
+---@type userdata
+GE_SquadCold = {}
 
-EBP.WRECKED_VEHICLES = {
-	FROZEN_PANZER_IV = BP_GetEntityBlueprint("frozen_panzer_iv"),
-	FROZEN_STUG_III = BP_GetEntityBlueprint("frozen_stug_iii"),
-	MAP_OBJECT_M4SHERMAN_105MM = BP_GetEntityBlueprint("map_object_m4sherman_105mm"),
-	MAP_OBJECT_M4SHERMAN_76MM = BP_GetEntityBlueprint("map_object_m4sherman_76mm"),
-	MAP_OBJECT_M4SHERMAN_DOZER = BP_GetEntityBlueprint("map_object_m4sherman_dozer"),
-	MAP_OBJECT_OPELBLITZ = BP_GetEntityBlueprint("map_object_opelblitz"),
-	MAP_OBJECT_PAK38 = BP_GetEntityBlueprint("map_object_pak38"),
-	MAP_OBJECT_PANZERIV = BP_GetEntityBlueprint("map_object_panzeriv"),
-	MAP_OBJECT_STUGIII_LONG = BP_GetEntityBlueprint("map_object_stugiii_long"),
-	MAP_OBJECT_STUGIII_SHORT = BP_GetEntityBlueprint("map_object_stugiii_short"),
-	WRECKED_50MM_PAK38_MAP_OBJECT = BP_GetEntityBlueprint("wrecked_50mm_pak38_map_object"),
-	WRECKED_ARMORED_CAR_PUMA_MP = BP_GetEntityBlueprint("wrecked_armored_car_puma_mp"),
-	WRECKED_ARMORED_CAR_SDKFZ_222 = BP_GetEntityBlueprint("wrecked_armored_car_sdkfz_222"),
-	WRECKED_ARMORED_CAR_SDKFZ_222_MP = BP_GetEntityBlueprint("wrecked_armored_car_sdkfz_222_mp"),
-	WRECKED_ARMORED_CAR_SDKFZ_234 = BP_GetEntityBlueprint("wrecked_armored_car_sdkfz_234"),
-	WRECKED_ARMORED_CAR_SDKFZ_234_BREW_UP = BP_GetEntityBlueprint("wrecked_armored_car_sdkfz_234_brew_up"),
-	WRECKED_ARMORED_CAR_SDKFZ_234_PUMA_MP = BP_GetEntityBlueprint("wrecked_armored_car_sdkfz_234_puma_mp"),
-	WRECKED_ATGUN_17_POUNDER = BP_GetEntityBlueprint("wrecked_atgun_17_pounder"),
-	WRECKED_ATGUN_45MM = BP_GetEntityBlueprint("wrecked_atgun_45mm"),
-	WRECKED_ATGUN_75MM_PAK = BP_GetEntityBlueprint("wrecked_atgun_75mm_pak"),
-	WRECKED_ATGUN_B4_200MM = BP_GetEntityBlueprint("wrecked_atgun_b4-200mm"),
-	WRECKED_ATGUN_M1_57MM = BP_GetEntityBlueprint("wrecked_atgun_m1_57mm"),
-	WRECKED_ATGUN_ML20 = BP_GetEntityBlueprint("wrecked_atgun_ml20"),
-	WRECKED_ATGUN_PAK43 = BP_GetEntityBlueprint("wrecked_atgun_pak43"),
-	WRECKED_ATGUN_ZIS3 = BP_GetEntityBlueprint("wrecked_atgun_zis3"),
-	WRECKED_BASE_BUILDING01 = BP_GetEntityBlueprint("wrecked_base_building01"),
-	WRECKED_BASE_BUILDING01_SELF_DESTRUCT = BP_GetEntityBlueprint("wrecked_base_building01_self_destruct"),
-	WRECKED_BASE_BUILDING02 = BP_GetEntityBlueprint("wrecked_base_building02"),
-	WRECKED_BASE_BUILDING02_SELF_DESTRUCT = BP_GetEntityBlueprint("wrecked_base_building02_self_destruct"),
-	WRECKED_BASE_BUILDING03 = BP_GetEntityBlueprint("wrecked_base_building03"),
-	WRECKED_BASE_BUILDING03_SELF_DESTRUCT = BP_GetEntityBlueprint("wrecked_base_building03_self_destruct"),
-	WRECKED_BRITISH_AEC = BP_GetEntityBlueprint("wrecked_british_aec"),
-	WRECKED_BRITISH_AEC_ARMOURED_CAR_BREW_UP = BP_GetEntityBlueprint("wrecked_british_aec_armoured_car_brew_up"),
-	WRECKED_BRITISH_ATGUN_6_POUNDER = BP_GetEntityBlueprint("wrecked_british_atgun_6_pounder"),
-	WRECKED_BRITISH_BOFORS = BP_GetEntityBlueprint("wrecked_british_bofors"),
-	WRECKED_BRITISH_CENTAUR = BP_GetEntityBlueprint("wrecked_british_centaur"),
-	WRECKED_BRITISH_CHURCHILL = BP_GetEntityBlueprint("wrecked_british_churchill"),
-	WRECKED_BRITISH_CHURCHILL_AVRE = BP_GetEntityBlueprint("wrecked_british_churchill_avre"),
-	WRECKED_BRITISH_CHURCHILL_AVRE_BREW_UP = BP_GetEntityBlueprint("wrecked_british_churchill_avre_brew_up"),
-	WRECKED_BRITISH_CHURCHILL_BREW_UP = BP_GetEntityBlueprint("wrecked_british_churchill_brew_up"),
-	WRECKED_BRITISH_CHURCHILL_CROCODILE = BP_GetEntityBlueprint("wrecked_british_churchill_crocodile"),
-	WRECKED_BRITISH_CHURCHILL_CROCODILE_BREW_UP = BP_GetEntityBlueprint("wrecked_british_churchill_crocodile_brew_up"),
-	WRECKED_BRITISH_COMET = BP_GetEntityBlueprint("wrecked_british_comet"),
-	WRECKED_BRITISH_COMET_BREW_UP = BP_GetEntityBlueprint("wrecked_british_comet_brew_up"),
-	WRECKED_BRITISH_CROMWELL = BP_GetEntityBlueprint("wrecked_british_cromwell"),
-	WRECKED_BRITISH_CROMWELL_BREW_UP = BP_GetEntityBlueprint("wrecked_british_cromwell_brew_up"),
-	WRECKED_BRITISH_GLIDER_HQ_MP = BP_GetEntityBlueprint("wrecked_british_glider_hq_mp"),
-	WRECKED_BRITISH_GLIDER_MP = BP_GetEntityBlueprint("wrecked_british_glider_mp"),
-	WRECKED_BRITISH_SEXTON = BP_GetEntityBlueprint("wrecked_british_sexton"),
-	WRECKED_BRITISH_SHERMAN_FIREFLY = BP_GetEntityBlueprint("wrecked_british_sherman_firefly"),
-	WRECKED_BRITISH_SHERMAN_FIREFLY_BREW_UP = BP_GetEntityBlueprint("wrecked_british_sherman_firefly_brew_up"),
-	WRECKED_BRITISH_UNIVERSAL_CARRIER = BP_GetEntityBlueprint("wrecked_british_universal_carrier"),
-	WRECKED_BRITISH_VALENTINE_COMMAND = BP_GetEntityBlueprint("wrecked_british_valentine_command"),
-	WRECKED_BRITISH_VALENTINE_COMMAND_BREW_UP = BP_GetEntityBlueprint("wrecked_british_valentine_command_brew_up"),
-	WRECKED_BRUMMBAR_02 = BP_GetEntityBlueprint("wrecked_brummbar_02"),
-	WRECKED_BRUMMBAR_STURMPANZER_IV_SDKFZ_166 = BP_GetEntityBlueprint("wrecked_brummbar_sturmpanzer_iv_sdkfz_166"),
-	WRECKED_EARLY_WAR_TANK_01 = BP_GetEntityBlueprint("wrecked_early_war_tank_01"),
-	WRECKED_ELEFANT_SDKFZ_184 = BP_GetEntityBlueprint("wrecked_elefant_sdkfz_184"),
-	WRECKED_FN63_4RM = BP_GetEntityBlueprint("wrecked_fn63_4rm"),
-	WRECKED_HALFTRACK_SDKFZ_250 = BP_GetEntityBlueprint("wrecked_halftrack_sdkfz_250"),
-	WRECKED_HALFTRACK_SDKFZ_250_MORTAR = BP_GetEntityBlueprint("wrecked_halftrack_sdkfz_250_mortar"),
-	WRECKED_HALFTRACK_SDKFZ_251 = BP_GetEntityBlueprint("wrecked_halftrack_sdkfz_251"),
-	WRECKED_HALFTRACK_SDKFZ_251_17_FLAK = BP_GetEntityBlueprint("wrecked_halftrack_sdkfz_251_17_flak"),
-	WRECKED_HALFTRACK_SDKFZ_251_INFRARED = BP_GetEntityBlueprint("wrecked_halftrack_sdkfz_251_infrared"),
-	WRECKED_HALFTRACK_SDKFZ_251_MP = BP_GetEntityBlueprint("wrecked_halftrack_sdkfz_251_mp"),
-	WRECKED_HALFTRACK_SDKFZ_251_WALKING_STUKA = BP_GetEntityBlueprint("wrecked_halftrack_sdkfz_251_walking_stuka"),
-	WRECKED_HALFTRACK_SWS = BP_GetEntityBlueprint("wrecked_halftrack_sws"),
-	WRECKED_HETZER = BP_GetEntityBlueprint("wrecked_hetzer"),
-	WRECKED_HETZER_BREWUP = BP_GetEntityBlueprint("wrecked_hetzer_brewup"),
-	WRECKED_HOWITZER_105MM_MAP_OBJECT = BP_GetEntityBlueprint("wrecked_howitzer_105mm_map_object"),
-	WRECKED_IG18_SUPPORT_GUN = BP_GetEntityBlueprint("wrecked_ig18_support_gun"),
-	WRECKED_IS_2_HEAVY_TANK = BP_GetEntityBlueprint("wrecked_is-2_heavy_tank"),
-	WRECKED_ISU_152_SPG = BP_GetEntityBlueprint("wrecked_isu_152_spg"),
-	WRECKED_JAGDPANZER_IV = BP_GetEntityBlueprint("wrecked_jagdpanzer_iv"),
-	WRECKED_JAGDPANZER_IV_BREW_UP = BP_GetEntityBlueprint("wrecked_jagdpanzer_iv_brew_up"),
-	WRECKED_JAGDTIGER_TD = BP_GetEntityBlueprint("wrecked_jagdtiger_td"),
-	WRECKED_JAGDTIGER_TD_BREW_UP = BP_GetEntityBlueprint("wrecked_jagdtiger_td_brew_up"),
-	WRECKED_KATYUSHA_BM_13N = BP_GetEntityBlueprint("wrecked_katyusha_bm-13n"),
-	WRECKED_KATYUSHA_BM_13N_MP = BP_GetEntityBlueprint("wrecked_katyusha_bm-13n_mp"),
-	WRECKED_KING_TIGER = BP_GetEntityBlueprint("wrecked_king_tiger"),
-	WRECKED_KING_TIGER_BREW_UP = BP_GetEntityBlueprint("wrecked_king_tiger_brew_up"),
-	WRECKED_KUBELWAGEN = BP_GetEntityBlueprint("wrecked_kubelwagen"),
-	WRECKED_KV_1 = BP_GetEntityBlueprint("wrecked_kv-1"),
-	WRECKED_KV_1_MP = BP_GetEntityBlueprint("wrecked_kv-1_mp"),
-	WRECKED_KV_2 = BP_GetEntityBlueprint("wrecked_kv-2"),
-	WRECKED_KV_8 = BP_GetEntityBlueprint("wrecked_kv-8"),
-	WRECKED_LAND_MATTRESS = BP_GetEntityBlueprint("wrecked_land_mattress"),
-	WRECKED_M10 = BP_GetEntityBlueprint("wrecked_m10"),
-	WRECKED_M10_BREW_UP = BP_GetEntityBlueprint("wrecked_m10_brew_up"),
-	WRECKED_M15A1_AA_HALFTRACK = BP_GetEntityBlueprint("wrecked_m15a1_aa_halftrack"),
-	WRECKED_M15A1_AA_HALFTRACK_MAP_OBJECT = BP_GetEntityBlueprint("wrecked_m15a1_aa_halftrack_map_object"),
-	WRECKED_M20_UTILITY_CAR = BP_GetEntityBlueprint("wrecked_m20_utility_car"),
-	WRECKED_M21_MORTAR_HALFTRACK = BP_GetEntityBlueprint("wrecked_m21_mortar_halftrack"),
-	WRECKED_M26_PERSHING = BP_GetEntityBlueprint("wrecked_m26_pershing"),
-	WRECKED_M36 = BP_GetEntityBlueprint("wrecked_m36"),
-	WRECKED_M36_BREW_UP = BP_GetEntityBlueprint("wrecked_m36_brew_up"),
-	WRECKED_M3A1_SCOUT_CAR = BP_GetEntityBlueprint("wrecked_m3a1_scout_car"),
-	WRECKED_M3A1_SCOUT_CAR_MP = BP_GetEntityBlueprint("wrecked_m3a1_scout_car_mp"),
-	WRECKED_M3_HALFTRACK = BP_GetEntityBlueprint("wrecked_m3_halftrack"),
-	WRECKED_M4A3_SHERMAN = BP_GetEntityBlueprint("wrecked_m4a3_sherman"),
-	WRECKED_M4A3_SHERMAN_BREW_UP = BP_GetEntityBlueprint("wrecked_m4a3_sherman_brew_up"),
-	WRECKED_M4A3_SHERMAN_BULLDOZER = BP_GetEntityBlueprint("wrecked_m4a3_sherman_bulldozer"),
-	WRECKED_M4A3_SHERMAN_BULLDOZER_BREW_UP = BP_GetEntityBlueprint("wrecked_m4a3_sherman_bulldozer_brew_up"),
-	WRECKED_M4A3_SHERMAN_EASY_EIGHT = BP_GetEntityBlueprint("wrecked_m4a3_sherman_easy_eight"),
-	WRECKED_M4A3_SHERMAN_EASY_EIGHT_BREW_UP = BP_GetEntityBlueprint("wrecked_m4a3_sherman_easy_eight_brew_up"),
-	WRECKED_M4A3_SHERMAN_MAP_OBJECT = BP_GetEntityBlueprint("wrecked_m4a3_sherman_map_object"),
-	WRECKED_M5A1_STUART = BP_GetEntityBlueprint("wrecked_m5a1_stuart"),
-	WRECKED_M5_HALFTRACK = BP_GetEntityBlueprint("wrecked_m5_halftrack"),
-	WRECKED_M5_HALFTRACK_MP = BP_GetEntityBlueprint("wrecked_m5_halftrack_mp"),
-	WRECKED_M8_ARMORED_CAR = BP_GetEntityBlueprint("wrecked_m8_armored_car"),
-	WRECKED_M8_HMC = BP_GetEntityBlueprint("wrecked_m8_hmc"),
-	WRECKED_OPEL_BLITZ_TRUCK = BP_GetEntityBlueprint("wrecked_opel_blitz_truck"),
-	WRECKED_OSTWIND_FLAK_PANZER = BP_GetEntityBlueprint("wrecked_ostwind_flak_panzer"),
-	WRECKED_PACK_HOWITZER = BP_GetEntityBlueprint("wrecked_pack_howitzer"),
-	WRECKED_PANTHER_MAP_OBJECT = BP_GetEntityBlueprint("wrecked_panther_map_object"),
-	WRECKED_PANTHER_SDKFZ_171 = BP_GetEntityBlueprint("wrecked_panther_sdkfz_171"),
-	WRECKED_PANTHER_SDKFZ_171_BREWUP = BP_GetEntityBlueprint("wrecked_panther_sdkfz_171_brewup"),
-	WRECKED_PANZERIV_MAP_OBJECT = BP_GetEntityBlueprint("wrecked_panzeriv_map_object"),
-	WRECKED_PANZERWERFER_SDKFZ_4_1 = BP_GetEntityBlueprint("wrecked_panzerwerfer_sdkfz_4_1"),
-	WRECKED_PANZER_III = BP_GetEntityBlueprint("wrecked_panzer_iii"),
-	WRECKED_PANZER_II_LUCHS = BP_GetEntityBlueprint("wrecked_panzer_ii_luchs"),
-	WRECKED_PANZER_II_LUCHS_BREW_UP = BP_GetEntityBlueprint("wrecked_panzer_ii_luchs_brew_up"),
-	WRECKED_PANZER_IV_FROZEN = BP_GetEntityBlueprint("wrecked_panzer_iv_frozen"),
-	WRECKED_PANZER_IV_SDKFZ_161 = BP_GetEntityBlueprint("wrecked_panzer_iv_sdkfz_161"),
-	WRECKED_PANZER_IV_SDKFZ_161_COMMAND = BP_GetEntityBlueprint("wrecked_panzer_iv_sdkfz_161_command"),
-	WRECKED_PANZER_IV_SDKFZ_161_GAMEPLAY = BP_GetEntityBlueprint("wrecked_panzer_iv_sdkfz_161_gameplay"),
-	WRECKED_PANZER_IV_SDKFZ_161_WEST_GERMAN = BP_GetEntityBlueprint("wrecked_panzer_iv_sdkfz_161_west_german"),
-	WRECKED_PANZER_IV_SDKFZ_161_WEST_GERMAN_BREW_UP = BP_GetEntityBlueprint("wrecked_panzer_iv_sdkfz_161_west_german_brew_up"),
-	WRECKED_PRIEST = BP_GetEntityBlueprint("wrecked_priest"),
-	WRECKED_RAKETENWERFER = BP_GetEntityBlueprint("wrecked_raketenwerfer"),
-	WRECKED_SOVIET_76MM_SHERMAN = BP_GetEntityBlueprint("wrecked_soviet_76mm_sherman"),
-	WRECKED_STUG_III_E_SDKFZ_141_1 = BP_GetEntityBlueprint("wrecked_stug_iii_e_sdkfz_141_1"),
-	WRECKED_STUG_III_FROZEN = BP_GetEntityBlueprint("wrecked_stug_iii_frozen"),
-	WRECKED_STUG_III_G_SDKFZ_141_1 = BP_GetEntityBlueprint("wrecked_stug_iii_g_sdkfz_141_1"),
-	WRECKED_STUG_III_G_SDKFZ_141_1_GAMEPLAY = BP_GetEntityBlueprint("wrecked_stug_iii_g_sdkfz_141_1_gameplay"),
-	WRECKED_STURMTIGER = BP_GetEntityBlueprint("wrecked_sturmtiger"),
-	WRECKED_SU_76M = BP_GetEntityBlueprint("wrecked_su_76m"),
-	WRECKED_SU_85 = BP_GetEntityBlueprint("wrecked_su_85"),
-	WRECKED_T34_CALLIOPE = BP_GetEntityBlueprint("wrecked_t34_calliope"),
-	WRECKED_T70 = BP_GetEntityBlueprint("wrecked_t70"),
-	WRECKED_T70_MP = BP_GetEntityBlueprint("wrecked_t70_mp"),
-	WRECKED_TIGER_SDKFZ_181 = BP_GetEntityBlueprint("wrecked_tiger_sdkfz_181"),
-	WRECKED_TIGER_SDKFZ_181_SINGLEPLAYER_MISSION = BP_GetEntityBlueprint("wrecked_tiger_sdkfz_181_singleplayer_mission"),
-	WRECKED_T_34_76 = BP_GetEntityBlueprint("wrecked_t_34_76"),
-	WRECKED_T_34_76_02 = BP_GetEntityBlueprint("wrecked_t_34_76_02"),
-	WRECKED_T_34_76_MP = BP_GetEntityBlueprint("wrecked_t_34_76_mp"),
-	WRECKED_T_34_85_RED_BANNER = BP_GetEntityBlueprint("wrecked_t_34_85_red_banner"),
-	WRECKED_T_34_85_RED_BANNER_MP = BP_GetEntityBlueprint("wrecked_t_34_85_red_banner_mp"),
-	WRECKED_T_34_85_RED_BANNER_TOW = BP_GetEntityBlueprint("wrecked_t_34_85_red_banner_tow"),
-	WRECKED_WC51 = BP_GetEntityBlueprint("wrecked_wc51"),
-	WRECKED_WC54_AMBULANCE = BP_GetEntityBlueprint("wrecked_wc54_ambulance"),
-	FRONT_HULL01 = BP_GetEntityBlueprint("front_hull01"),
-	LEFT_WING = BP_GetEntityBlueprint("left_wing"),
-	PROPELLER = BP_GetEntityBlueprint("propeller"),
-	RIGHT_WING = BP_GetEntityBlueprint("right_wing"),
-	TAIL = BP_GetEntityBlueprint("tail"),
-	TAIL_SECTION_01 = BP_GetEntityBlueprint("tail_section_01"),
-	HORSA_COCKPIT = BP_GetEntityBlueprint("horsa_cockpit"),
-	HORSA_FRONT_HULL = BP_GetEntityBlueprint("horsa_front_hull"),
-	HORSA_LEFT_WING = BP_GetEntityBlueprint("horsa_left_wing"),
-	HORSA_LEFT_WING_TIP = BP_GetEntityBlueprint("horsa_left_wing_tip"),
-	HORSA_MID_HULL = BP_GetEntityBlueprint("horsa_mid_hull"),
-	HORSA_REAR_HULL = BP_GetEntityBlueprint("horsa_rear_hull"),
-	HORSA_RIGHT_WING = BP_GetEntityBlueprint("horsa_right_wing"),
-	HORSA_RIGHT_WING_TIP = BP_GetEntityBlueprint("horsa_right_wing_tip"),
-	HORSA_TAIL = BP_GetEntityBlueprint("horsa_tail"),
-	STUKA_BODY = BP_GetEntityBlueprint("stuka_body"),
-	STUKA_DEBRIS = BP_GetEntityBlueprint("stuka_debris"),
-	STUKA_TAIL = BP_GetEntityBlueprint("stuka_tail"),
-	STUKA_WING_LEFT = BP_GetEntityBlueprint("stuka_wing_left"),
-	STUKA_WING_RIGHT = BP_GetEntityBlueprint("stuka_wing_right"),
-}
+---@type userdata
+GE_SquadCommandIssued = {}
 
+---@type userdata
+GE_SquadElementMoveOrder = {}
 
+---@type userdata
+GE_SquadElementWaitOrder = {}
 
+---@type userdata
+GE_SquadFreezing = {}
 
+---@type userdata
+GE_SquadIdle = {}
 
+---@type userdata
+GE_SquadItemPickup = {}
 
-EBP.AEF = {
-	AEF_BASE_STAMPER = BP_GetEntityBlueprint("aef_base_stamper"),
-	ARMORED_RIFLE_COMMAND_MP = BP_GetEntityBlueprint("armored_rifle_command_mp"),
-	ARMORED_RIFLE_COMMAND_SP = BP_GetEntityBlueprint("armored_rifle_command_sp"),
-	ARMOR_COMMAND_MP = BP_GetEntityBlueprint("armor_command_mp"),
-	ARMOR_COMMAND_SP = BP_GetEntityBlueprint("armor_command_sp"),
-	COMPANY_WEAPONS_POOL_MP = BP_GetEntityBlueprint("company_weapons_pool_mp"),
-	COMPANY_WEAPONS_POOL_SP = BP_GetEntityBlueprint("company_weapons_pool_sp"),
-	RIFLE_COMMAND_MP = BP_GetEntityBlueprint("rifle_command_mp"),
-	RIFLE_COMMAND_SP = BP_GetEntityBlueprint("rifle_command_sp"),
-	TEMP_ACTIVE_STRUCTURE_SEARCHLIGHT = BP_GetEntityBlueprint("temp_active_structure_searchlight"),
-	REPLACEMENT_ARMORED_RIFLE_COMMAND_MP = BP_GetEntityBlueprint("replacement_armored_rifle_command_mp"),
-	REPLACEMENT_ARMOR_COMMAND_MP = BP_GetEntityBlueprint("replacement_armor_command_mp"),
-	REPLACEMENT_COMPANY_WEAPONS_POOL_MP = BP_GetEntityBlueprint("replacement_company_weapons_pool_mp"),
-	ARMORED_RIFLE_COMMAND_WRECK_MP = BP_GetEntityBlueprint("armored_rifle_command_wreck_mp"),
-	ARMOR_COMMAND_WRECK_MP = BP_GetEntityBlueprint("armor_command_wreck_mp"),
-	COMPANY_WEAPONS_POOL_WRECK_MP = BP_GetEntityBlueprint("company_weapons_pool_wreck_mp"),
-	RIFLE_COMMAND_WRECK_MP = BP_GetEntityBlueprint("rifle_command_wreck_mp"),
-	AEF_AIRDROPPED_MINE_COMMANDER_MP = BP_GetEntityBlueprint("aef_airdropped_mine_commander_mp"),
-	AEF_ALLIEDSUPPLY_STACK_L_01_MP = BP_GetEntityBlueprint("aef_alliedsupply_stack_l_01_mp"),
-	AEF_BARBED_WIRE_FENCE_MP = BP_GetEntityBlueprint("aef_barbed_wire_fence_mp"),
-	AEF_BARBED_WIRE_FENCE__CONSTRUCTION__MP = BP_GetEntityBlueprint("aef_barbed_wire_fence__construction__mp"),
-	AEF_BARRACKS = BP_GetEntityBlueprint("aef_barracks"),
-	AEF_GARRISON = BP_GetEntityBlueprint("aef_garrison"),
-	AEF_MG_NEST = BP_GetEntityBlueprint("aef_mg_nest"),
-	AEF_MG_NEST_AEF_BASE = BP_GetEntityBlueprint("aef_mg_nest_aef_base"),
-	AEF_MG_NEST_PERIMETER_MP = BP_GetEntityBlueprint("aef_mg_nest_perimeter_mp"),
-	AEF_MINE_MP = BP_GetEntityBlueprint("aef_mine_mp"),
-	AEF_MINE_RIFLEMEN_MP = BP_GetEntityBlueprint("aef_mine_riflemen_mp"),
-	AEF_SANDBAGS = BP_GetEntityBlueprint("aef_sandbags"),
-	AEF_SANDBAGWALL = BP_GetEntityBlueprint("aef_sandbagwall"),
-	AEF_SANDBAG_DIRTWALL_01 = BP_GetEntityBlueprint("aef_sandbag_dirtwall_01"),
-	AEF_SANDBAG_FENCE = BP_GetEntityBlueprint("aef_sandbag_fence"),
-	AEF_STORAGEBUNKER = BP_GetEntityBlueprint("aef_storagebunker"),
-	AEF_SUPPLYTENT = BP_GetEntityBlueprint("aef_supplytent"),
-	AEF_TANK_TRAP_IMPASSABLE_MP = BP_GetEntityBlueprint("aef_tank_trap_impassable_mp"),
-	AEF_TANK_TRAP_MP = BP_GetEntityBlueprint("aef_tank_trap_mp"),
-	AEF_TANK_TRAP__CONSTRUCTION__MP = BP_GetEntityBlueprint("aef_tank_trap__construction__mp"),
-	AEF_WEAPON_RACK_DEFAULT_MP = BP_GetEntityBlueprint("aef_weapon_rack_default_mp"),
-	AEF_WEAPON_RACK_M9_BAZOOKA_MP = BP_GetEntityBlueprint("aef_weapon_rack_m9_bazooka_mp"),
-	AIRBORNE_BEACON_MP = BP_GetEntityBlueprint("airborne_beacon_mp"),
-	INVISI_HEAL_STATION_MP = BP_GetEntityBlueprint("invisi_heal_station_mp"),
-	INVISI_REPAIR_STATION_MP = BP_GetEntityBlueprint("invisi_repair_station_mp"),
-	M20_M6_AT_MINE_MP = BP_GetEntityBlueprint("m20_m6_at_mine_mp"),
-	M20_M6_AT_MINE_VET_3_MP = BP_GetEntityBlueprint("m20_m6_at_mine_vet_3_mp"),
-	M7_MINES_MP = BP_GetEntityBlueprint("m7_mines_mp"),
-	MAJOR_RETREAT_POINT_MP = BP_GetEntityBlueprint("major_retreat_point_mp"),
-	RETREAT_POINT_ACTUAL_MP = BP_GetEntityBlueprint("retreat_point_actual_mp"),
-	RETREAT_POINT_DECORATION_MP = BP_GetEntityBlueprint("retreat_point_decoration_mp"),
-	SHERMAN_BARRIER_DEFORM_MP = BP_GetEntityBlueprint("sherman_barrier_deform_mp"),
-	SHERMAN_BARRIER_DIRT_MP = BP_GetEntityBlueprint("sherman_barrier_dirt_mp"),
-	SHERMAN_BARRIER_MUD_MP = BP_GetEntityBlueprint("sherman_barrier_mud_mp"),
-	SHERMAN_BARRIER_RUBBLE_MP = BP_GetEntityBlueprint("sherman_barrier_rubble_mp"),
-	SHERMAN_BARRIER_SNOW_MP = BP_GetEntityBlueprint("sherman_barrier_snow_mp"),
-	FIGHTING_POSITION_MP = BP_GetEntityBlueprint("fighting_position_mp"),
-	FIGHTING_POSITION_RIFLEMEN_MP = BP_GetEntityBlueprint("fighting_position_riflemen_mp"),
-	FIGHTING_POSITION_RIFLEMEN__CONSTRUCTION__MP = BP_GetEntityBlueprint("fighting_position_riflemen__construction__mp"),
-	FIGHTING_POSITION__CONSTRUCTION__MP = BP_GetEntityBlueprint("fighting_position__construction__mp"),
-	OBSERVATION_POST_FUEL_AEF_MP = BP_GetEntityBlueprint("observation_post_fuel_aef_mp"),
-	OBSERVATION_POST_MUNITION_AEF_MP = BP_GetEntityBlueprint("observation_post_munition_aef_mp"),
-	AEF_WEAPON_RACK_BAZOOKA_MP = BP_GetEntityBlueprint("aef_weapon_rack_bazooka_mp"),
-	AEF_WEAPON_RACK_BROWNING_AUTOMATIC_RIFLE_MP = BP_GetEntityBlueprint("aef_weapon_rack_browning_automatic_rifle_mp"),
-	AEF_WEAPON_RACK_M1919_LMG = BP_GetEntityBlueprint("aef_weapon_rack_m1919_lmg"),
-	AEF_WEAPON_RACK_M1C_GARAND = BP_GetEntityBlueprint("aef_weapon_rack_m1c_garand"),
-	PM_ARMOR_COMMAND_BAZOOKA_RACK = BP_GetEntityBlueprint("pm_armor_command_bazooka_rack"),
-	PM_ARMOR_COMMAND_LMG_RACK = BP_GetEntityBlueprint("pm_armor_command_lmg_rack"),
-	M4A3_SHERMAN_DEMO_BURNOUT = BP_GetEntityBlueprint("m4a3_sherman_demo_burnout"),
-	AEF_AIRDROPPED_MINE_CONTACT_MP = BP_GetEntityBlueprint("aef_airdropped_mine_contact_mp"),
-	AEF_AIRDROPPED_MINE_MP = BP_GetEntityBlueprint("aef_airdropped_mine_mp"),
-	AEF_SANDBAGWALL_COVER_SPECIALIZATION = BP_GetEntityBlueprint("aef_sandbagwall_cover_specialization"),
-	AEF_SANDBAGWALL_COVER_SPECIALIZATION__CONSTRUCTION__ = BP_GetEntityBlueprint("aef_sandbagwall_cover_specialization__construction__"),
-	PM_AEF_FIGHTING_POSITION_TEAMWEAPONS = BP_GetEntityBlueprint("pm_aef_fighting_position_teamweapons"),
-	PM_AEF_PINPOINT_ARTY_MARKER_MP = BP_GetEntityBlueprint("pm_aef_pinpoint_arty_marker_mp"),
-	PM_AEF_PINPOINT_ARTY_THREE_MARKER_MP = BP_GetEntityBlueprint("pm_aef_pinpoint_arty_three_marker_mp"),
-	JACKSON = BP_GetEntityBlueprint("jackson"),
-	RIFLEMAN_SOLDIER_GROUP_MP = BP_GetEntityBlueprint("rifleman_soldier_group_mp"),
-	PM_ATTACHED_SEARGENT = BP_GetEntityBlueprint("pm_attached_seargent"),
-	PM_ATTACHED_MEDIC = BP_GetEntityBlueprint("pm_attached_medic"),
-	AEF_ATTACK_PLANE = BP_GetEntityBlueprint("aef_attack_plane"),
-	DODGE_WC51_50CAL_PARADROP = BP_GetEntityBlueprint("dodge_wc51_50cal_paradrop"),
-	PM_AEF_AIRBORNE_PARATROOPERS_PLANE_PARAS = BP_GetEntityBlueprint("pm_aef_airborne_paratroopers_plane_paras"),
-	PM_AEF_AIRBORNE_PARATROOPERS_PLANE_STRAFE = BP_GetEntityBlueprint("pm_aef_airborne_paratroopers_plane_strafe"),
-	PM_AEF_AIRBORNE_PARATROOPERS_SPAWNER = BP_GetEntityBlueprint("pm_aef_airborne_paratroopers_spawner"),
-	PM_AEF_AIR_SUPPORT_RECON = BP_GetEntityBlueprint("pm_aef_air_support_recon"),
-	PM_AEF_AIR_SUPPORT_ROCKET = BP_GetEntityBlueprint("pm_aef_air_support_rocket"),
-	PM_AEF_AIR_SUPPORT_ROCKET_ELITE = BP_GetEntityBlueprint("pm_aef_air_support_rocket_elite"),
-	PM_AEF_AIR_SUPPORT_STRAFE = BP_GetEntityBlueprint("pm_aef_air_support_strafe"),
-	PM_AEF_AIR_SUPPORT_STRAFE_ELITE = BP_GetEntityBlueprint("pm_aef_air_support_strafe_elite"),
-	PM_P47_FLYBY = BP_GetEntityBlueprint("pm_p47_flyby"),
-	PM_P47_MG_STRAFE = BP_GetEntityBlueprint("pm_p47_mg_strafe"),
-	PM_P47_ROCKET_STRAFE = BP_GetEntityBlueprint("pm_p47_rocket_strafe"),
-	PM_AEF_AIRBORNE_SUPPLY_DROP_PLANE = BP_GetEntityBlueprint("pm_aef_airborne_supply_drop_plane"),
-	ASSAULT_ENGINEER_MP = BP_GetEntityBlueprint("assault_engineer_mp"),
-	ASSAULT_ENGINEER_VEHICLE_CREW_MP = BP_GetEntityBlueprint("assault_engineer_vehicle_crew_mp"),
-	CAPTAIN_MP = BP_GetEntityBlueprint("captain_mp"),
-	CAPTAIN_UNLOCK_MP = BP_GetEntityBlueprint("captain_unlock_mp"),
-	LIEUTENANT_MP = BP_GetEntityBlueprint("lieutenant_mp"),
-	LIEUTENANT_UNLOCK_MP = BP_GetEntityBlueprint("lieutenant_unlock_mp"),
-	MAJOR_MP = BP_GetEntityBlueprint("major_mp"),
-	MAJOR_UNLOCK_MP = BP_GetEntityBlueprint("major_unlock_mp"),
-	PARATROOPER_MP = BP_GetEntityBlueprint("paratrooper_mp"),
-	PATHFINDER_IR_MP = BP_GetEntityBlueprint("pathfinder_ir_mp"),
-	PATHFINDER_RECON_MP = BP_GetEntityBlueprint("pathfinder_recon_mp"),
-	RANGER_COMMANDER_MP = BP_GetEntityBlueprint("ranger_commander_mp"),
-	RANGER_MP = BP_GetEntityBlueprint("ranger_mp"),
-	REAR_ECHELON_RADIOMAN_MP = BP_GetEntityBlueprint("rear_echelon_radioman_mp"),
-	REAR_ECHELON_RESERVE_TROOP_MP = BP_GetEntityBlueprint("rear_echelon_reserve_troop_mp"),
-	REAR_ECHELON_TROOP_CAPT_MP = BP_GetEntityBlueprint("rear_echelon_troop_capt_mp"),
-	REAR_ECHELON_TROOP_MP = BP_GetEntityBlueprint("rear_echelon_troop_mp"),
-	RIFLEMAN_CAVALRY_SOLDIER_MP = BP_GetEntityBlueprint("rifleman_cavalry_soldier_mp"),
-	RIFLEMAN_SOLDIER_CAPTAIN_MP = BP_GetEntityBlueprint("rifleman_soldier_captain_mp"),
-	RIFLEMAN_SOLDIER_LIEUTENANT_MP = BP_GetEntityBlueprint("rifleman_soldier_lieutenant_mp"),
-	RIFLEMAN_SOLDIER_MP = BP_GetEntityBlueprint("rifleman_soldier_mp"),
-	USF_MEDIC_MP = BP_GetEntityBlueprint("usf_medic_mp"),
-	VEHICLE_CREW_BAZOOKA_MP = BP_GetEntityBlueprint("vehicle_crew_bazooka_mp"),
-	VEHICLE_CREW_TROOP_MP = BP_GetEntityBlueprint("vehicle_crew_troop_mp"),
-	VEHICLE_CREW_TROOP_REPAIR_STATION_MP = BP_GetEntityBlueprint("vehicle_crew_troop_repair_station_mp"),
-	AT_TEAM_WEAPON_CREW_MP = BP_GetEntityBlueprint("at_team_weapon_crew_mp"),
-	HMG_TEAM_WEAPON_CREW_MP = BP_GetEntityBlueprint("hmg_team_weapon_crew_mp"),
-	HOWITZER_TEAM_WEAPON_CREW_MP = BP_GetEntityBlueprint("howitzer_team_weapon_crew_mp"),
-	M1919A4_TEAM_WEAPON_CREW_MP = BP_GetEntityBlueprint("m1919a4_team_weapon_crew_mp"),
-	MORTAR_TEAM_WEAPON_CREW_MP = BP_GetEntityBlueprint("mortar_team_weapon_crew_mp"),
-	M1919A4_30CAL_MACHINE_GUN_MP = BP_GetEntityBlueprint("m1919a4_30cal_machine_gun_mp"),
-	M1_81MM_MORTAR_MP = BP_GetEntityBlueprint("m1_81mm_mortar_mp"),
-	M2HB_50CAL_MACHINE_GUN_MP = BP_GetEntityBlueprint("m2hb_50cal_machine_gun_mp"),
-	M2_60MM_MORTAR_MP = BP_GetEntityBlueprint("m2_60mm_mortar_mp"),
-	M1_57MM_ANTITANK_GUN_MP = BP_GetEntityBlueprint("m1_57mm_antitank_gun_mp"),
-	M1_75MM_PACK_HOWITZER_MP = BP_GetEntityBlueprint("m1_75mm_pack_howitzer_mp"),
-	DODGE_WC51_50CAL_MP = BP_GetEntityBlueprint("dodge_wc51_50cal_mp"),
-	DODGE_WC51_AMBULANCE_MP = BP_GetEntityBlueprint("dodge_wc51_ambulance_mp"),
-	DODGE_WC51_MP = BP_GetEntityBlueprint("dodge_wc51_mp"),
-	DODGE_WC51_MP_PATHFINDERS = BP_GetEntityBlueprint("dodge_wc51_mp_pathfinders"),
-	M10_TANK_DESTROYER_BRITISH_MP = BP_GetEntityBlueprint("m10_tank_destroyer_british_mp"),
-	M10_TANK_DESTROYER_MP = BP_GetEntityBlueprint("m10_tank_destroyer_mp"),
-	M20_UTILITY_CAR_MP = BP_GetEntityBlueprint("m20_utility_car_mp"),
-	M26_PERSHING_MP = BP_GetEntityBlueprint("m26_pershing_mp"),
-	M36_TANK_DESTROYER_MP = BP_GetEntityBlueprint("m36_tank_destroyer_mp"),
-	M15A1_AA_HALFTRACK_MP = BP_GetEntityBlueprint("m15a1_aa_halftrack_mp"),
-	M21_MORTAR_HALFTRACK_MP = BP_GetEntityBlueprint("m21_mortar_halftrack_mp"),
-	M3_HALFTRACK_ASSAULT_MP = BP_GetEntityBlueprint("m3_halftrack_assault_mp"),
-	M3_HALFTRACK_MECHANIZED_ASSAULT_MP = BP_GetEntityBlueprint("m3_halftrack_mechanized_assault_mp"),
-	M3_HALFTRACK_MP = BP_GetEntityBlueprint("m3_halftrack_mp"),
-	M4A3E8_SHERMAN_EASY_8_MP = BP_GetEntityBlueprint("m4a3e8_sherman_easy_8_mp"),
-	M4A3_76MM_COMMANDER_MP = BP_GetEntityBlueprint("m4a3_76mm_commander_mp"),
-	M4A3_76MM_SHERMAN_MP = BP_GetEntityBlueprint("m4a3_76mm_sherman_mp"),
-	M4A3_SHERMAN_BULLDOZER_MP = BP_GetEntityBlueprint("m4a3_sherman_bulldozer_mp"),
-	M4A3_SHERMAN_MP = BP_GetEntityBlueprint("m4a3_sherman_mp"),
-	M5A1_STUART_MP = BP_GetEntityBlueprint("m5a1_stuart_mp"),
-	M5_HALFTRACK_USF_MP = BP_GetEntityBlueprint("m5_halftrack_usf_mp"),
-	M7B1_PRIEST_MP = BP_GetEntityBlueprint("m7b1_priest_mp"),
-	M8A1_HMC_MP = BP_GetEntityBlueprint("m8a1_hmc_mp"),
-	M8_GREYHOUND_MP = BP_GetEntityBlueprint("m8_greyhound_mp"),
-	PARATROOPERS_COMBAT_GROUP_PLANE = BP_GetEntityBlueprint("paratroopers_combat_group_plane"),
-	PARATROOPERS_PLANE = BP_GetEntityBlueprint("paratroopers_plane"),
-	PARATROOPERS_PLANE_ATGUN = BP_GetEntityBlueprint("paratroopers_plane_atgun"),
-	PARATROOPERS_PLANE_HMG = BP_GetEntityBlueprint("paratroopers_plane_hmg"),
-	PARATROOPERS_PLANE_MINES = BP_GetEntityBlueprint("paratroopers_plane_mines"),
-	PARATROOPERS_PLANE_MINES_MATT_TEST_MP = BP_GetEntityBlueprint("paratroopers_plane_mines_matt_test_mp"),
-	PARATROOPERS_PLANE_PARAS = BP_GetEntityBlueprint("paratroopers_plane_paras"),
-	P47_MARK_VEHICLE_MP = BP_GetEntityBlueprint("p47_mark_vehicle_mp"),
-	P47_RECON = BP_GetEntityBlueprint("p47_recon"),
-	P47_RECON_PLANE_SWEEP = BP_GetEntityBlueprint("p47_recon_plane_sweep"),
-	P47_RECON_TRACKING = BP_GetEntityBlueprint("p47_recon_tracking"),
-	P47_ROCKETS = BP_GetEntityBlueprint("p47_rockets"),
-	P47_STRAFE = BP_GetEntityBlueprint("p47_strafe"),
-	T34_CALLIOPE_MP = BP_GetEntityBlueprint("t34_calliope_mp"),
-}
+---@type userdata
+GE_SquadKilled = {}
 
+---@type userdata
+GE_SquadMerge = {}
 
+---@type userdata
+GE_SquadParadropComplete = {}
 
+---@type userdata
+GE_SquadPinned = {}
 
+---@type userdata
+GE_SquadProductionQueue = {}
 
+---@type userdata
+GE_SquadReplaced = {}
 
-SBP.AEF = {
-	M4A3_SHERMAN_SQUAD_DEMO_BURNOUT = BP_GetSquadBlueprint("m4a3_sherman_squad_demo_burnout"),
-	PM_RIFLEMEN_SQUAD_OMCG = BP_GetSquadBlueprint("pm_riflemen_squad_omcg"),
-	AEF_ATTACK_PLANE_SQUAD = BP_GetSquadBlueprint("aef_attack_plane_squad"),
-	PM_M3_HALFTRACK_SQUAD_OMCG = BP_GetSquadBlueprint("pm_m3_halftrack_squad_omcg"),
-	PM_AEF_AIRBORNE_PARATROOPERS_PLANE_PARAS = BP_GetSquadBlueprint("pm_aef_airborne_paratroopers_plane_paras"),
-	PM_AEF_AIRBORNE_PARATROOPERS_PLANE_STRAFE = BP_GetSquadBlueprint("pm_aef_airborne_paratroopers_plane_strafe"),
-	AEF_AIR_SUPPORT_RECON = BP_GetSquadBlueprint("aef_air_support_recon"),
-	AEF_AIR_SUPPORT_ROCKET = BP_GetSquadBlueprint("aef_air_support_rocket"),
-	AEF_AIR_SUPPORT_ROCKET_ELITE = BP_GetSquadBlueprint("aef_air_support_rocket_elite"),
-	AEF_AIR_SUPPORT_STRAFE = BP_GetSquadBlueprint("aef_air_support_strafe"),
-	AEF_AIR_SUPPORT_STRAFE_ELITE = BP_GetSquadBlueprint("aef_air_support_strafe_elite"),
-	P47_FLYBY = BP_GetSquadBlueprint("p47_flyby"),
-	P47_MG_STRAFE = BP_GetSquadBlueprint("p47_mg_strafe"),
-	P47_ROCKETS_STRAFE = BP_GetSquadBlueprint("p47_rockets_strafe"),
-	PM_AEF_AIRBORNE_SUPPLY_DROP_PLANE = BP_GetSquadBlueprint("pm_aef_airborne_supply_drop_plane"),
-	JACKSON_SQUAD = BP_GetSquadBlueprint("jackson_squad"),
-	ASSAULT_ENGINEER_SQUAD_5_MAN_MP = BP_GetSquadBlueprint("assault_engineer_squad_5_man_mp"),
-	ASSAULT_ENGINEER_SQUAD_MP = BP_GetSquadBlueprint("assault_engineer_squad_mp"),
-	CAPTAIN_SQUAD_MP = BP_GetSquadBlueprint("captain_squad_mp"),
-	LIEUTENANT_SQUAD_MP = BP_GetSquadBlueprint("lieutenant_squad_mp"),
-	MAJOR_SQUAD_MP = BP_GetSquadBlueprint("major_squad_mp"),
-	PARATROOPER_COMBAT_GROUP_SQUAD_MP = BP_GetSquadBlueprint("paratrooper_combat_group_squad_mp"),
-	PARATROOPER_SQUAD_MP = BP_GetSquadBlueprint("paratrooper_squad_mp"),
-	PARATROOPER_SQUAD_SUPPORT_MP = BP_GetSquadBlueprint("paratrooper_squad_support_mp"),
-	PATHFINDER_SQUAD_MP = BP_GetSquadBlueprint("pathfinder_squad_mp"),
-	PATHFINDER_SQUAD_RECON_MP = BP_GetSquadBlueprint("pathfinder_squad_recon_mp"),
-	RANGER_SQUAD_COMMANDER_MP = BP_GetSquadBlueprint("ranger_squad_commander_mp"),
-	RANGER_SQUAD_MP = BP_GetSquadBlueprint("ranger_squad_mp"),
-	REAR_ECHELON_SQUAD_MP = BP_GetSquadBlueprint("rear_echelon_squad_mp"),
-	RIFLEMEN_CAVALRY_SQUAD_MP = BP_GetSquadBlueprint("riflemen_cavalry_squad_mp"),
-	RIFLEMEN_SQUAD_MP = BP_GetSquadBlueprint("riflemen_squad_mp"),
-	RIFLEMEN_SQUAD_VETERAN_MP = BP_GetSquadBlueprint("riflemen_squad_veteran_mp"),
-	USF_MEDIC_SQUAD_MP = BP_GetSquadBlueprint("usf_medic_squad_mp"),
-	M20_ASSAULT_ENGY_ANTITANK_SQUAD_MP = BP_GetSquadBlueprint("m20_assault_engy_antitank_squad_mp"),
-	VEHICLE_CREW_BAZOOKA_SQUAD_MP = BP_GetSquadBlueprint("vehicle_crew_bazooka_squad_mp"),
-	VEHICLE_CREW_SQUAD_MP = BP_GetSquadBlueprint("vehicle_crew_squad_mp"),
-	M1919A4_HMG_SQUAD_MP = BP_GetSquadBlueprint("m1919a4_hmg_squad_mp"),
-	M1_57MM_AT_GUN_SQUAD_BOB = BP_GetSquadBlueprint("m1_57mm_at_gun_squad_bob"),
-	M1_57MM_AT_GUN_SQUAD_MP = BP_GetSquadBlueprint("m1_57mm_at_gun_squad_mp"),
-	M1_75MM_PACK_HOWITZER_SQUAD_MP = BP_GetSquadBlueprint("m1_75mm_pack_howitzer_squad_mp"),
-	M1_81MM_MORTAR_SQUAD_MP = BP_GetSquadBlueprint("m1_81mm_mortar_squad_mp"),
-	M2HB_50CAL_HMG_SQUAD_MP = BP_GetSquadBlueprint("m2hb_50cal_hmg_squad_mp"),
-	M2_60MM_MORTAR_CORE_SQUAD_MP = BP_GetSquadBlueprint("m2_60mm_mortar_core_squad_mp"),
-	M2_60MM_MORTAR_SQUAD_MP = BP_GetSquadBlueprint("m2_60mm_mortar_squad_mp"),
-	M2_60MM_MORTAR_SQUAD_MP_CLONE = BP_GetSquadBlueprint("m2_60mm_mortar_squad_mp_clone"),
-	DODGE_WC51_50CAL_SQUAD_MP = BP_GetSquadBlueprint("dodge_wc51_50cal_squad_mp"),
-	DODGE_WC51_AMBULANCE_SQUAD_MP = BP_GetSquadBlueprint("dodge_wc51_ambulance_squad_mp"),
-	DODGE_WC51_PATHFINDER_SQUAD_MP = BP_GetSquadBlueprint("dodge_wc51_pathfinder_squad_mp"),
-	DODGE_WC51_SQUAD_MP = BP_GetSquadBlueprint("dodge_wc51_squad_mp"),
-	M10_TANK_DESTROYER_SQUAD_MP = BP_GetSquadBlueprint("m10_tank_destroyer_squad_mp"),
-	M20_UTILITY_CAR_SQUAD_MP = BP_GetSquadBlueprint("m20_utility_car_squad_mp"),
-	M26_PERSHING_MP = BP_GetSquadBlueprint("m26_pershing_mp"),
-	M36_TANK_DESTROYER_SQUAD_MP = BP_GetSquadBlueprint("m36_tank_destroyer_squad_mp"),
-	M15A1_AA_HALFTRACK_SQUAD_MP = BP_GetSquadBlueprint("m15a1_aa_halftrack_squad_mp"),
-	M21_MORTAR_HALFTRACK_SQUAD_MP = BP_GetSquadBlueprint("m21_mortar_halftrack_squad_mp"),
-	M3_HALFTRACK_ASSAULT_MP = BP_GetSquadBlueprint("m3_halftrack_assault_mp"),
-	M3_HALFTRACK_SQUAD_ASSAULT_MP = BP_GetSquadBlueprint("m3_halftrack_squad_assault_mp"),
-	M3_HALFTRACK_SQUAD_MP = BP_GetSquadBlueprint("m3_halftrack_squad_mp"),
-	M4A3E8_SHERMAN_EASY_8_SQUAD_MP = BP_GetSquadBlueprint("m4a3e8_sherman_easy_8_squad_mp"),
-	M4A3_76MM_SHERMAN_BULLDOZER_SQUAD_MP = BP_GetSquadBlueprint("m4a3_76mm_sherman_bulldozer_squad_mp"),
-	M4A3_76MM_SHERMAN_SQUAD_COMMANDER_MP = BP_GetSquadBlueprint("m4a3_76mm_sherman_squad_commander_mp"),
-	M4A3_76MM_SHERMAN_SQUAD_MP = BP_GetSquadBlueprint("m4a3_76mm_sherman_squad_mp"),
-	M4A3_SHERMAN_SQUAD_MP = BP_GetSquadBlueprint("m4a3_sherman_squad_mp"),
-	M5A1_STUART_SQUAD_MP = BP_GetSquadBlueprint("m5a1_stuart_squad_mp"),
-	AEF_HALFTRACK_SQUAD_MP = BP_GetSquadBlueprint("aef_halftrack_squad_mp"),
-	M7B1_PRIEST_SQUAD_MP = BP_GetSquadBlueprint("m7b1_priest_squad_mp"),
-	M8A1_HMC_SQUAD_MP = BP_GetSquadBlueprint("m8a1_hmc_squad_mp"),
-	M8_GREYHOUND_SQUAD_MP = BP_GetSquadBlueprint("m8_greyhound_squad_mp"),
-	PARATROOPERS_COMBAT_GROUP_PLANE = BP_GetSquadBlueprint("paratroopers_combat_group_plane"),
-	PARATROOPERS_PLANE = BP_GetSquadBlueprint("paratroopers_plane"),
-	PARATROOPERS_PLANE_ATGUN = BP_GetSquadBlueprint("paratroopers_plane_atgun"),
-	PARATROOPERS_PLANE_HMG = BP_GetSquadBlueprint("paratroopers_plane_hmg"),
-	PARATROOPERS_PLANE_MINES = BP_GetSquadBlueprint("paratroopers_plane_mines"),
-	PARATROOPERS_PLANE_MINES_MATT_TEST_MP = BP_GetSquadBlueprint("paratroopers_plane_mines_matt_test_mp"),
-	PARATROOPERS_PLANE_PARAS = BP_GetSquadBlueprint("paratroopers_plane_paras"),
-	P47_RECON = BP_GetSquadBlueprint("p47_recon"),
-	P47_RECON_PLANE_SWEEP = BP_GetSquadBlueprint("p47_recon_plane_sweep"),
-	P47_RECON_TRACKING = BP_GetSquadBlueprint("p47_recon_tracking"),
-	P47_ROCKETS = BP_GetSquadBlueprint("p47_rockets"),
-	P47_STRAFES = BP_GetSquadBlueprint("p47_strafes"),
-	P_47_MARK_MP = BP_GetSquadBlueprint("p_47_mark_mp"),
-	T34_CALLIOPE_SQUAD_MP = BP_GetSquadBlueprint("t34_calliope_squad_mp"),
-}
+---@type userdata
+GE_SquadRetreat = {}
 
+---@type userdata
+GE_SquadRetreatMsgReceived = {}
 
+---@type userdata
+GE_SquadSizeChanged = {}
 
+---@type userdata
+GE_SquadSplit = {}
 
+---@type userdata
+GE_SquadSuppressedStateChange = {}
 
+---@type userdata
+GE_SquadVeterancyRank = {}
 
-ABILITY.AEF = {
-	MEDIC_AUTO_HEAL = BP_GetAbilityBlueprint("medic_auto_heal"),
-	PARATROOPER_STATIONARY_CAMOUFLAGE_MP = BP_GetAbilityBlueprint("paratrooper_stationary_camouflage_mp"),
-	PATHFINDER_IN_COVER_STATIONARY_CAMOUFLAGE_IMPROVED_MP = BP_GetAbilityBlueprint("pathfinder_in_cover_stationary_camouflage_improved_mp"),
-	PATHFINDER_IN_COVER_STATIONARY_CAMOUFLAGE_MP = BP_GetAbilityBlueprint("pathfinder_in_cover_stationary_camouflage_mp"),
-	TANK_RIDERS_AUTO_UNLOAD_MP = BP_GetAbilityBlueprint("tank_riders_auto_unload_mp"),
-	VEHICLE_CREW_AUTO_REPAIR = BP_GetAbilityBlueprint("vehicle_crew_auto_repair"),
-	WC51_M3_MOVING_ACCURACY_MP = BP_GetAbilityBlueprint("wc51_m3_moving_accuracy_mp"),
-	FATALITY_P47_ROCKET_ATTACK = BP_GetAbilityBlueprint("fatality_p47_rocket_attack"),
-	FATALITY_PARATROOPERS_PARADROP = BP_GetAbilityBlueprint("fatality_paratroopers_paradrop"),
-	FATALITY_SMOKE_FLARES = BP_GetAbilityBlueprint("fatality_smoke_flares"),
-	FATALITY_WHITE_PHOSPHOROUS_BARRAGE = BP_GetAbilityBlueprint("fatality_white_phosphorous_barrage"),
-	AEF_BARBED_WIRE_CUTTING_ABILITY_ASSUALT_ENGINEERS_MP = BP_GetAbilityBlueprint("aef_barbed_wire_cutting_ability_assualt_engineers_mp"),
-	AEF_BARBED_WIRE_CUTTING_ABILITY_MP = BP_GetAbilityBlueprint("aef_barbed_wire_cutting_ability_mp"),
-	AEF_BARBED_WIRE_CUTTING_ABILITY_NO_REQUIREMENT_MP = BP_GetAbilityBlueprint("aef_barbed_wire_cutting_ability_no_requirement_mp"),
-	CAPTAIN_SUPERVISE = BP_GetAbilityBlueprint("captain_supervise"),
-	COMBAT_ENGINEER_TIMED_DEMO_MP = BP_GetAbilityBlueprint("combat_engineer_timed_demo_mp"),
-	DROP_MEDPACK_ABILITY_HALF_TRACK_MP = BP_GetAbilityBlueprint("drop_medpack_ability_half_track_mp"),
-	ELITE_BAZOOKAS = BP_GetAbilityBlueprint("elite_bazookas"),
-	ENGINEER_DESTROY_COVER_MP = BP_GetAbilityBlueprint("engineer_destroy_cover_mp"),
-	M36_M8_CONCEALING_SMOKE_VET = BP_GetAbilityBlueprint("m36_m8_concealing_smoke_vet"),
-	M5_STUART_DAMAGE_ENGINE = BP_GetAbilityBlueprint("m5_stuart_damage_engine"),
-	M5_STUART_SHELL_SHOCK = BP_GetAbilityBlueprint("m5_stuart_shell_shock"),
-	M8_CANISTER_SHOT = BP_GetAbilityBlueprint("m8_canister_shot"),
-	M8_LAY_HEAVY_MINE = BP_GetAbilityBlueprint("m8_lay_heavy_mine"),
-	M8_LAY_HEAVY_MINE_VET_3 = BP_GetAbilityBlueprint("m8_lay_heavy_mine_vet_3"),
-	MAJOR_QUICK_RECON_RUN = BP_GetAbilityBlueprint("major_quick_recon_run"),
-	MAJOR_QUICK_RECON_RUN_IMPROVED = BP_GetAbilityBlueprint("major_quick_recon_run_improved"),
-	PARATROOPER_ASSAULT_MOVE_TEST_MP = BP_GetAbilityBlueprint("paratrooper_assault_move_test_mp"),
-	PARATROOPER_SUPPRESSING_FIRE_ABILITY_MP = BP_GetAbilityBlueprint("paratrooper_suppressing_fire_ability_mp"),
-	PARATROOPER_TIMED_DEMO_MP = BP_GetAbilityBlueprint("paratrooper_timed_demo_mp"),
-	PATHFINDER_PLANT_BEACON = BP_GetAbilityBlueprint("pathfinder_plant_beacon"),
-	RANGER_LIMITED_DEMO_MP = BP_GetAbilityBlueprint("ranger_limited_demo_mp"),
-	RIFLEMEN_CAVALRY_COVERING_FIRE_MP = BP_GetAbilityBlueprint("riflemen_cavalry_covering_fire_mp"),
-	RIFLEMEN_FIRE_FLARES_ABILITY_MP = BP_GetAbilityBlueprint("riflemen_fire_flares_ability_mp"),
-	SHERMAN_BULLDOZER_CONSTRUCT_BARRIER_MP = BP_GetAbilityBlueprint("sherman_bulldozer_construct_barrier_mp"),
-	SHERMAN_BULLDOZER_DESTROY_BARRIER_MP = BP_GetAbilityBlueprint("sherman_bulldozer_destroy_barrier_mp"),
-	USF_MEDIC_HEAL_MP = BP_GetAbilityBlueprint("usf_medic_heal_mp"),
-	PERSHING_HVAP_PIERCING_SHOT_ABILITY = BP_GetAbilityBlueprint("pershing_hvap_piercing_shot_ability"),
-	RIFLEMAN_AT_RIFLE_GRENADE_VET = BP_GetAbilityBlueprint("rifleman_at_rifle_grenade_vet"),
-	SHERMAN_SMOKE_SHELL_SHOT_WP_MP = BP_GetAbilityBlueprint("sherman_smoke_shell_shot_wp_mp"),
-	CALLIOPE_ROCKET_BARRAGE_MP = BP_GetAbilityBlueprint("calliope_rocket_barrage_mp"),
-	M1_81MM_MORTAR_WHITE_PHOSPHOROUS_BARRAGE_ABILITY_MP = BP_GetAbilityBlueprint("m1_81mm_mortar_white_phosphorous_barrage_ability_mp"),
-	M7B1_PRIEST_105MM_BARRAGE_ABILITY_MP = BP_GetAbilityBlueprint("m7b1_priest_105mm_barrage_ability_mp"),
-	M7B1_PRIEST_105MM_BARRAGE_ABILITY_VICTOR_TARGET_MP = BP_GetAbilityBlueprint("m7b1_priest_105mm_barrage_ability_victor_target_mp"),
-	M7B1_PRIEST_105MM_SMOKE_BARRAGE_ABILITY_MP = BP_GetAbilityBlueprint("m7b1_priest_105mm_smoke_barrage_ability_mp"),
-	M8A1_HMC_75MM_BARRAGE_ABILITY_MP = BP_GetAbilityBlueprint("m8a1_hmc_75mm_barrage_ability_mp"),
-	M8A1_HMC_75MM_BARRAGE_ABILITY_VICTOR_TARGET_MP = BP_GetAbilityBlueprint("m8a1_hmc_75mm_barrage_ability_victor_target_mp"),
-	M8A1_HMC_SMOKE_BARRAGE_MP = BP_GetAbilityBlueprint("m8a1_hmc_smoke_barrage_mp"),
-	MAJOR_ARTILLERY = BP_GetAbilityBlueprint("major_artillery"),
-	MAJOR_ARTILLERY_FAKE = BP_GetAbilityBlueprint("major_artillery_fake"),
-	PACK_HOWITZER_75MM_BARRAGE_ABILITY_HEAT_MP = BP_GetAbilityBlueprint("pack_howitzer_75mm_barrage_ability_heat_mp"),
-	PACK_HOWITZER_75MM_BARRAGE_ABILITY_MP = BP_GetAbilityBlueprint("pack_howitzer_75mm_barrage_ability_mp"),
-	PACK_HOWITZER_75MM_BARRAGE_ABILITY_VET3_MP = BP_GetAbilityBlueprint("pack_howitzer_75mm_barrage_ability_vet3_mp"),
-	PACK_HOWITZER_75MM_BARRAGE_ABILITY_VICTOR_TARGET_MP = BP_GetAbilityBlueprint("pack_howitzer_75mm_barrage_ability_victor_target_mp"),
-	PACK_HOWITZER_WHITE_PHOSPHOROUS_BARRAGE_ABILITY_MP = BP_GetAbilityBlueprint("pack_howitzer_white_phosphorous_barrage_ability_mp"),
-	PRIEST_ARTILLERY_BARRAGE_CREEPING_MP = BP_GetAbilityBlueprint("priest_artillery_barrage_creeping_mp"),
-	M1_81MM_MORTAR_TEAM_MORTAR_BARRAGE_MP = BP_GetAbilityBlueprint("m1_81mm_mortar_team_mortar_barrage_mp"),
-	M1_81MM_MORTAR_TEAM_SMOKE_BARRAGE_MP = BP_GetAbilityBlueprint("m1_81mm_mortar_team_smoke_barrage_mp"),
-	M21_HEAVY_HE_SHORT_DELAY_MORTAR_BARRAGE_MP = BP_GetAbilityBlueprint("m21_heavy_he_short_delay_mortar_barrage_mp"),
-	M21_MORTAR_BARRAGE_MP = BP_GetAbilityBlueprint("m21_mortar_barrage_mp"),
-	M21_MORTAR_BARRAGE_VICTOR_TARGET_MP = BP_GetAbilityBlueprint("m21_mortar_barrage_victor_target_mp"),
-	M21_MORTAR_SMOKE_BARRAGE_MP = BP_GetAbilityBlueprint("m21_mortar_smoke_barrage_mp"),
-	M21_MORTAR_WHITE_PHOSPHOROUS_BARRAGE_MP = BP_GetAbilityBlueprint("m21_mortar_white_phosphorous_barrage_mp"),
-	M2_60MM_MORTAR_TEAM_MORTAR_BARRAGE_MP = BP_GetAbilityBlueprint("m2_60mm_mortar_team_mortar_barrage_mp"),
-	M2_60MM_MORTAR_TEAM_SMOKE_BARRAGE_MP = BP_GetAbilityBlueprint("m2_60mm_mortar_team_smoke_barrage_mp"),
-	SMOKE_SHERMAN_76_MM_MORTAR_BARRAGE_MP = BP_GetAbilityBlueprint("smoke_sherman_76_mm_mortar_barrage_mp"),
-	SMOKE_SHERMAN_MORTAR_BARRAGE_BULLDOZER_MP = BP_GetAbilityBlueprint("smoke_sherman_mortar_barrage_bulldozer_mp"),
-	SMOKE_SHERMAN_MORTAR_BARRAGE_MP = BP_GetAbilityBlueprint("smoke_sherman_mortar_barrage_mp"),
-	AIRDROPPED_MINES_MP = BP_GetAbilityBlueprint("airdropped_mines_mp"),
-	ARTILLERY_155MM = BP_GetAbilityBlueprint("artillery_155mm"),
-	ARTILLERY_SMOKE_BARRAGE = BP_GetAbilityBlueprint("artillery_smoke_barrage"),
-	COVER_TO_COVER = BP_GetAbilityBlueprint("cover_to_cover"),
-	M26_PERSHING_DISPATCH = BP_GetAbilityBlueprint("m26_pershing_dispatch"),
-	OFF_MAP_SMOKE_ARTILLERY = BP_GetAbilityBlueprint("off_map_smoke_artillery"),
-	P47_RECON_MP = BP_GetAbilityBlueprint("p47_recon_mp"),
-	P47_ROCKET_ATTACK = BP_GetAbilityBlueprint("p47_rocket_attack"),
-	RECON_SWEEP = BP_GetAbilityBlueprint("recon_sweep"),
-	SIEGE_240MM_BARRAGE = BP_GetAbilityBlueprint("siege_240mm_barrage"),
-	SUPPORT_ARTILLERY = BP_GetAbilityBlueprint("support_artillery"),
-	SUPPORT_ARTILLERY_DECOY = BP_GetAbilityBlueprint("support_artillery_decoy"),
-	TIME_ON_TARGET_ARTILLERY = BP_GetAbilityBlueprint("time_on_target_artillery"),
-	USF_STRAFING_RUN = BP_GetAbilityBlueprint("usf_strafing_run"),
-	WC51_ARTILLERY_155MM_MP = BP_GetAbilityBlueprint("wc51_artillery_155mm_mp"),
-	ASSAULT_PACKAGE_UI = BP_GetAbilityBlueprint("assault_package_ui"),
-	ELITE_RIFLEMEN = BP_GetAbilityBlueprint("elite_riflemen"),
-	ELITE_VEHICLE_CREWS = BP_GetAbilityBlueprint("elite_vehicle_crews"),
-	FORWARD_OBSERVERS_ALWAYS_ON = BP_GetAbilityBlueprint("forward_observers_always_on"),
-	FORWARD_OBSERVERS_UNLOCK_2 = BP_GetAbilityBlueprint("forward_observers_unlock_2"),
-	MECHANIZED_GROUP_MP = BP_GetAbilityBlueprint("mechanized_group_mp"),
-	PATHFINDER_ARTILLERY_UNLOCK = BP_GetAbilityBlueprint("pathfinder_artillery_unlock"),
-	RIFLEMAN_FIRE_UP = BP_GetAbilityBlueprint("rifleman_fire_up"),
-	RIFLEMEN_30_CALIBER_LMG = BP_GetAbilityBlueprint("riflemen_30_caliber_lmg"),
-	RIFLEMEN_DEFENSIVE_BUILDINGS = BP_GetAbilityBlueprint("riflemen_defensive_buildings"),
-	RIFLEMEN_FLAMETHROWERS = BP_GetAbilityBlueprint("riflemen_flamethrowers"),
-	RIFLEMEN_FLARES = BP_GetAbilityBlueprint("riflemen_flares"),
-	SHERMAN_URBAN_ASSAULT_PACKAGE = BP_GetAbilityBlueprint("sherman_urban_assault_package"),
-	URBAN_ASSAULT_KIT = BP_GetAbilityBlueprint("urban_assault_kit"),
-	WITHDRAW_AND_REFIT = BP_GetAbilityBlueprint("withdraw_and_refit"),
-	AEF_HQ_ENGINEER_CALL_IN = BP_GetAbilityBlueprint("aef_hq_engineer_call_in"),
-	AIR_DROP_COMBAT_GROUP = BP_GetAbilityBlueprint("air_drop_combat_group"),
-	ASSAULT_ENGINEER_DISPATCH = BP_GetAbilityBlueprint("assault_engineer_dispatch"),
-	CAVALRY_RIFLEMEN_DISPATCH = BP_GetAbilityBlueprint("cavalry_riflemen_dispatch"),
-	DODGE_WC51_DISPATCH = BP_GetAbilityBlueprint("dodge_wc51_dispatch"),
-	GREYHOUND_RECON_DISPATCH = BP_GetAbilityBlueprint("greyhound_recon_dispatch"),
-	M10_DEPLOY = BP_GetAbilityBlueprint("m10_deploy"),
-	M10_DEPLOY_BRITISH = BP_GetAbilityBlueprint("m10_deploy_british"),
-	M21_MORTAR_HALFTRACK_DISPATCH = BP_GetAbilityBlueprint("m21_mortar_halftrack_dispatch"),
-	M3_HALFTRACK_GROUP = BP_GetAbilityBlueprint("m3_halftrack_group"),
-	M5_QUAD_HALFTRACK_DISPATCH = BP_GetAbilityBlueprint("m5_quad_halftrack_dispatch"),
-	PARADROPS_ANTI_TANK_GUN = BP_GetAbilityBlueprint("paradrops_anti_tank_gun"),
-	PARADROP_MACHINE_GUN = BP_GetAbilityBlueprint("paradrop_machine_gun"),
-	PARATROOPERS_PARADROP = BP_GetAbilityBlueprint("paratroopers_paradrop"),
-	PARATROOPERS_PARADROP_MP = BP_GetAbilityBlueprint("paratroopers_paradrop_mp"),
-	PATHFINDERS_DISPATCH = BP_GetAbilityBlueprint("pathfinders_dispatch"),
-	PATHFINDERS_RECON_DISPATCH = BP_GetAbilityBlueprint("pathfinders_recon_dispatch"),
-	PRIEST_DISPATCH = BP_GetAbilityBlueprint("priest_dispatch"),
-	RANGERS_DISPATCH = BP_GetAbilityBlueprint("rangers_dispatch"),
-	SHERMAN_BULLDOZER_DISPATCH = BP_GetAbilityBlueprint("sherman_bulldozer_dispatch"),
-	SHERMAN_CALLIOPE_DISPATCH = BP_GetAbilityBlueprint("sherman_calliope_dispatch"),
-	SHERMAN_EASY8_DISPATCH = BP_GetAbilityBlueprint("sherman_easy8_dispatch"),
-	SHERMAN_MODIFICATIONS = BP_GetAbilityBlueprint("sherman_modifications"),
-	CAVALRY_AT_SATCHEL_CHARGE_HOMING_MP = BP_GetAbilityBlueprint("cavalry_at_satchel_charge_homing_mp"),
-	M23_SMOKE_STREAM_ECHELON_GRENADE_VET_MP = BP_GetAbilityBlueprint("m23_smoke_stream_echelon_grenade_vet_mp"),
-	M23_SMOKE_STREAM_RIFLE_CAVALRY_GRENADE_MP = BP_GetAbilityBlueprint("m23_smoke_stream_rifle_cavalry_grenade_mp"),
-	M23_SMOKE_STREAM_RIFLE_GRENADE_MP = BP_GetAbilityBlueprint("m23_smoke_stream_rifle_grenade_mp"),
-	M23_SMOKE_STREAM_RIFLE_GRENADE_VET_MP = BP_GetAbilityBlueprint("m23_smoke_stream_rifle_grenade_vet_mp"),
-	MK2_FRAGMENTATION_GRENADE_MP = BP_GetAbilityBlueprint("mk2_fragmentation_grenade_mp"),
-	MOLOTOV_GRENADE_MP = BP_GetAbilityBlueprint("molotov_grenade_mp"),
-	PARATROOPER_MK2_FRAGMENTATION_GRENADE_MP = BP_GetAbilityBlueprint("paratrooper_mk2_fragmentation_grenade_mp"),
-	RANGER_BUNDLED_GRENADE_MP = BP_GetAbilityBlueprint("ranger_bundled_grenade_mp"),
-	RANGER_MK2_FRAGMENTATION_GRENADE_MP = BP_GetAbilityBlueprint("ranger_mk2_fragmentation_grenade_mp"),
-	AEF_REPAIR_ABILITY_REAR_ECHELON_MP = BP_GetAbilityBlueprint("aef_repair_ability_rear_echelon_mp"),
-	AEF_REPAIR_ABILITY_VEHICLE_CREW_MP = BP_GetAbilityBlueprint("aef_repair_ability_vehicle_crew_mp"),
-	AEF_REPAIR_CRITICAL_MP = BP_GetAbilityBlueprint("aef_repair_critical_mp"),
-	OUT_OF_FUEL_SP = BP_GetAbilityBlueprint("out_of_fuel_sp"),
-	REFUEL_TANK_SP = BP_GetAbilityBlueprint("refuel_tank_sp"),
-	SP_240MM_OFF_MAP_BARRAGE = BP_GetAbilityBlueprint("sp_240mm_off_map_barrage"),
-	SP_QUICK_RECON_RUN = BP_GetAbilityBlueprint("sp_quick_recon_run"),
-	AMBULANCE_HEAL_AREA = BP_GetAbilityBlueprint("ambulance_heal_area"),
-	BAR_SUPPRESSION_ABILITY = BP_GetAbilityBlueprint("bar_suppression_ability"),
-	BEACON_DISABLE = BP_GetAbilityBlueprint("beacon_disable"),
-	FLANKING_SPEED = BP_GetAbilityBlueprint("flanking_speed"),
-	LIEUTENANT_CAPTAIN_ON_ME_AURA_MP = BP_GetAbilityBlueprint("lieutenant_captain_on_me_aura_mp"),
-	M10_APCPC_SHELLS = BP_GetAbilityBlueprint("m10_apcpc_shells"),
-	M10_APCPC_SHELLS_VET = BP_GetAbilityBlueprint("m10_apcpc_shells_vet"),
-	M1_ATGUN_PIERCING_ABILITY = BP_GetAbilityBlueprint("m1_atgun_piercing_ability"),
-	M1_ATGUN_TAKE_AIM_ABILITY = BP_GetAbilityBlueprint("m1_atgun_take_aim_ability"),
-	M20_MARK_VEHICLE = BP_GetAbilityBlueprint("m20_mark_vehicle"),
-	M20_SMOKE = BP_GetAbilityBlueprint("m20_smoke"),
-	M2HB_50CAL_AP_ROUNDS_MP = BP_GetAbilityBlueprint("m2hb_50cal_ap_rounds_mp"),
-	M2HB_HMG_SPRINT_MP = BP_GetAbilityBlueprint("m2hb_hmg_sprint_mp"),
-	M3_HALFTRACK_SPEED_BOOST_MP = BP_GetAbilityBlueprint("m3_halftrack_speed_boost_mp"),
-	OFFICER_STOP_RETREAT_MP = BP_GetAbilityBlueprint("officer_stop_retreat_mp"),
-	RANGER_SPRINT_MP = BP_GetAbilityBlueprint("ranger_sprint_mp"),
-	REAR_ECHELON_VOLLEY_FIRE_ABILITY_MP = BP_GetAbilityBlueprint("rear_echelon_volley_fire_ability_mp"),
-	RIFLEMAN_FIRE_UP_MP = BP_GetAbilityBlueprint("rifleman_fire_up_mp"),
-	SHERMAN_76MM_AMMO_SWITCH_AP_SHELL_MP = BP_GetAbilityBlueprint("sherman_76mm_ammo_switch_ap_shell_mp"),
-	SHERMAN_76MM_AMMO_SWITCH_HVAP_SHELL_MP = BP_GetAbilityBlueprint("sherman_76mm_ammo_switch_hvap_shell_mp"),
-	SHERMAN_AMMO_SWITCH_AP_SHELL_MP = BP_GetAbilityBlueprint("sherman_ammo_switch_ap_shell_mp"),
-	SHERMAN_AMMO_SWITCH_HE_SHELL_MP = BP_GetAbilityBlueprint("sherman_ammo_switch_he_shell_mp"),
-	VEHICLE_DECREW_GENERIC_MP = BP_GetAbilityBlueprint("vehicle_decrew_generic_mp"),
-	VEHICLE_DECREW_M20_CREW_MP = BP_GetAbilityBlueprint("vehicle_decrew_m20_crew_mp"),
-	VEHICLE_DECREW_MEDICS_MP = BP_GetAbilityBlueprint("vehicle_decrew_medics_mp"),
-	VEHICLE_DECREW_VEHICLE_CREW_MP = BP_GetAbilityBlueprint("vehicle_decrew_vehicle_crew_mp"),
-	WC51_MARK_TARGET = BP_GetAbilityBlueprint("wc51_mark_target"),
-	WC51_SPEED_BOOST_MP = BP_GetAbilityBlueprint("wc51_speed_boost_mp"),
-	CMD_PARATROOPERS_FROM_PATHFINDERS = BP_GetAbilityBlueprint("cmd_paratroopers_from_pathfinders"),
-	COMBINED_ARMS = BP_GetAbilityBlueprint("combined_arms"),
-	ENCIRCLEMENT_DELETE_ME_MP = BP_GetAbilityBlueprint("encirclement_delete_me_mp"),
-	FIRESTORM_DELETE_ME_MP = BP_GetAbilityBlueprint("firestorm_delete_me_mp"),
-	JAEGER_DELETE_ME_MP = BP_GetAbilityBlueprint("jaeger_delete_me_mp"),
-	KV1_DELETE_ME_MP = BP_GetAbilityBlueprint("kv1_delete_me_mp"),
-	MECHA_DELETE_ME_MP = BP_GetAbilityBlueprint("mecha_delete_me_mp"),
-	OSTRUPPEN_DELETE_ME_MP = BP_GetAbilityBlueprint("ostruppen_delete_me_mp"),
-	RAID_TACTICS = BP_GetAbilityBlueprint("raid_tactics"),
-	RECON_DELETE_ME_MP = BP_GetAbilityBlueprint("recon_delete_me_mp"),
-	STORM_DELETE_ME_MP = BP_GetAbilityBlueprint("storm_delete_me_mp"),
-	TANK_HUNTERS_DELETE_ME_MP = BP_GetAbilityBlueprint("tank_hunters_delete_me_mp"),
-	ACTIVATE_REPAIR_STATION_MP = BP_GetAbilityBlueprint("activate_repair_station_mp"),
-	AUTO_HEAL_DISABLE_MP = BP_GetAbilityBlueprint("auto_heal_disable_mp"),
-	BAZOOKA_DEPLOY_MP = BP_GetAbilityBlueprint("bazooka_deploy_mp"),
-	M15A1_AA_MODE_MP = BP_GetAbilityBlueprint("m15a1_aa_mode_mp"),
-	OFFICER_RETREAT_POINT_MP = BP_GetAbilityBlueprint("officer_retreat_point_mp"),
-	USF_HOLD_FIRE_HARDPOINT2_MP = BP_GetAbilityBlueprint("usf_hold_fire_hardpoint2_mp"),
-	USF_HOLD_FIRE_MP = BP_GetAbilityBlueprint("usf_hold_fire_mp"),
-	USF_HOLD_FIRE_PACK_HOWITZER_MP = BP_GetAbilityBlueprint("usf_hold_fire_pack_howitzer_mp"),
-	USF_SHERMAN_BULLDOZER_HOLD_FIRE_MP = BP_GetAbilityBlueprint("usf_sherman_bulldozer_hold_fire_mp"),
-	USF_VEHICLE_HOLD_FIRE_MP = BP_GetAbilityBlueprint("usf_vehicle_hold_fire_mp"),
-	RIFLEMEN_DEFENSIVE = BP_GetAbilityBlueprint("riflemen_defensive"),
-}
+---@type userdata
+GE_StrategicPointChanged = {}
 
+---@type userdata
+GE_SuperAbility = {}
 
+---@type userdata
+GE_TerritoryEntered = {}
 
+---@type userdata
+GE_UpgradeCancelled = {}
 
+---@type userdata
+GE_UpgradeComplete = {}
 
+---@type userdata
+GE_UpgradeRemoved = {}
 
-UPG.AEF = {
-	ABILITY_LOCK_OUT_CAPTAIN_ABILITIES = BP_GetUpgradeBlueprint("ability_lock_out_captain_abilities"),
-	ABILITY_LOCK_OUT_LIEUTENANT_ABILITIES = BP_GetUpgradeBlueprint("ability_lock_out_lieutenant_abilities"),
-	ABILITY_LOCK_OUT_PARATROOPERS_LANDED = BP_GetUpgradeBlueprint("ability_lock_out_paratroopers_landed"),
-	ABILITY_REFUEL_LOCKOUT = BP_GetUpgradeBlueprint("ability_refuel_lockout"),
-	ABILITY_TRANSFER_ORDERS_LOCK_OUT = BP_GetUpgradeBlueprint("ability_transfer_orders_lock_out"),
-	DOZER_UPGRADE_ITEM_MP = BP_GetUpgradeBlueprint("dozer_upgrade_item_mp"),
-	HANDBRAKE_AVAILABLE_UPGRADE_MP = BP_GetUpgradeBlueprint("handbrake_available_upgrade_mp"),
-	MEDIC_AUTO_HEAL_REFRESH = BP_GetUpgradeBlueprint("medic_auto_heal_refresh"),
-	PARATROOPERS_ALL_LANDED = BP_GetUpgradeBlueprint("paratroopers_all_landed"),
-	REAR_ECHELON_HACK_WITHDRAWING = BP_GetUpgradeBlueprint("rear_echelon_hack_withdrawing"),
-	SHERMAN_HE_ROUNDS = BP_GetUpgradeBlueprint("sherman_he_rounds"),
-	TOP_GUNNER_UPGRADED = BP_GetUpgradeBlueprint("top_gunner_upgraded"),
-	ARTILLERY_155MM = BP_GetUpgradeBlueprint("artillery_155mm"),
-	ARTILLERY_155MM_BLIND = BP_GetUpgradeBlueprint("artillery_155mm_blind"),
-	ARTILLERY_WHITE_PHOSPHOROUS = BP_GetUpgradeBlueprint("artillery_white_phosphorous"),
-	ASSAULT_ENGINEER_DISPATCH = BP_GetUpgradeBlueprint("assault_engineer_dispatch"),
-	CAVALRY_RIFLEMEN_DISPATCH = BP_GetUpgradeBlueprint("cavalry_riflemen_dispatch"),
-	COMBINED_ARMS_MP = BP_GetUpgradeBlueprint("combined_arms_mp"),
-	COVER_TO_COVER = BP_GetUpgradeBlueprint("cover_to_cover"),
-	DODGE_WC51_DISPATCH = BP_GetUpgradeBlueprint("dodge_wc51_dispatch"),
-	GREYHOUND_RECON_DISPATCH = BP_GetUpgradeBlueprint("greyhound_recon_dispatch"),
-	M10_BRITISH_DEPLOY = BP_GetUpgradeBlueprint("m10_british_deploy"),
-	M10_DEPLOY = BP_GetUpgradeBlueprint("m10_deploy"),
-	M10_DEPLOY_CLONE = BP_GetUpgradeBlueprint("m10_deploy_clone"),
-	M21_MORTAR_HALFTRACK_DISPATCH = BP_GetUpgradeBlueprint("m21_mortar_halftrack_dispatch"),
-	M26_PERSHING_DISPATCH = BP_GetUpgradeBlueprint("m26_pershing_dispatch"),
-	M3_HALFTRACK_GROUP = BP_GetUpgradeBlueprint("m3_halftrack_group"),
-	M5_HALFTRACK_DISPATCH = BP_GetUpgradeBlueprint("m5_halftrack_dispatch"),
-	M83_CLUSTER_MINES = BP_GetUpgradeBlueprint("m83_cluster_mines"),
-	MECHANIZED_ASSAULT_GROUP = BP_GetUpgradeBlueprint("mechanized_assault_group"),
-	OFF_SMOKE_BARRAGE = BP_GetUpgradeBlueprint("off_smoke_barrage"),
-	P47_RECON = BP_GetUpgradeBlueprint("p47_recon"),
-	P47_ROCKET_ATTACK = BP_GetUpgradeBlueprint("p47_rocket_attack"),
-	PARADROPPED_SUPPORT_DROP = BP_GetUpgradeBlueprint("paradropped_support_drop"),
-	PARADROP_ANTI_TANK_GUN = BP_GetUpgradeBlueprint("paradrop_anti_tank_gun"),
-	PARADROP_MACHINE_GUN = BP_GetUpgradeBlueprint("paradrop_machine_gun"),
-	PARATROOPERS = BP_GetUpgradeBlueprint("paratroopers"),
-	PARATROOPERS_MP = BP_GetUpgradeBlueprint("paratroopers_mp"),
-	PATHFINDERS = BP_GetUpgradeBlueprint("pathfinders"),
-	PATHFINDERS_RECON = BP_GetUpgradeBlueprint("pathfinders_recon"),
-	PRIEST_DISPATCH = BP_GetUpgradeBlueprint("priest_dispatch"),
-	RAID_TACTICS = BP_GetUpgradeBlueprint("raid_tactics"),
-	RANGER_DISPATCH = BP_GetUpgradeBlueprint("ranger_dispatch"),
-	RECON_SWEEP = BP_GetUpgradeBlueprint("recon_sweep"),
-	SHERMAN_ASSAULT_KIT = BP_GetUpgradeBlueprint("sherman_assault_kit"),
-	SHERMAN_BULLDOZER_DISPATCH = BP_GetUpgradeBlueprint("sherman_bulldozer_dispatch"),
-	SHERMAN_EASY8_DISPATCH = BP_GetUpgradeBlueprint("sherman_easy8_dispatch"),
-	SHERMAN_MODIFICATION = BP_GetUpgradeBlueprint("sherman_modification"),
-	SIEGE_240MM_ARTILLERY = BP_GetUpgradeBlueprint("siege_240mm_artillery"),
-	SMOKE_BARRAGE = BP_GetUpgradeBlueprint("smoke_barrage"),
-	T34_SHERMAN_CALLIOPE_DISPATCH = BP_GetUpgradeBlueprint("t34_sherman_calliope_dispatch"),
-	TIME_ON_TARGET_ARTILLERY = BP_GetUpgradeBlueprint("time_on_target_artillery"),
-	USF_STRAFING_RUN = BP_GetUpgradeBlueprint("usf_strafing_run"),
-	TECH_TREE_V1 = BP_GetUpgradeBlueprint("tech_tree_v1"),
-	ELITE_RIFLEMEN = BP_GetUpgradeBlueprint("elite_riflemen"),
-	ELITE_VEHICLE_CREWS = BP_GetUpgradeBlueprint("elite_vehicle_crews"),
-	FIRE_UP_RIFLEMEN = BP_GetUpgradeBlueprint("fire_up_riflemen"),
-	FORWARD_OBSERVERS_UNLOCK = BP_GetUpgradeBlueprint("forward_observers_unlock"),
-	RIFLEMEN_30_CALIBER_LMG = BP_GetUpgradeBlueprint("riflemen_30_caliber_lmg"),
-	RIFLEMEN_DEFENSIVE_BUILDINGS = BP_GetUpgradeBlueprint("riflemen_defensive_buildings"),
-	RIFLEMEN_FLAMETHROWER_UNLOCK = BP_GetUpgradeBlueprint("riflemen_flamethrower_unlock"),
-	RIFLEMEN_FLARES = BP_GetUpgradeBlueprint("riflemen_flares"),
-	URBAN_ASSAULT_KITS = BP_GetUpgradeBlueprint("urban_assault_kits"),
-	WITHDRAW_AND_REFIT = BP_GetUpgradeBlueprint("withdraw_and_refit"),
-	ASSAULT_ENGINEER_FLAMETHROWER = BP_GetUpgradeBlueprint("assault_engineer_flamethrower"),
-	CAPTAIN_BAZOOKA_UPGRADE_MP = BP_GetUpgradeBlueprint("captain_bazooka_upgrade_mp"),
-	CAVALRY_THOMPSON_SUB_MACHINE_GUN_UPGRADE_MP = BP_GetUpgradeBlueprint("cavalry_thompson_sub_machine_gun_upgrade_mp"),
-	FIGHTING_POSITION_MG_ADDITION_MP = BP_GetUpgradeBlueprint("fighting_position_mg_addition_mp"),
-	LIEUTENANT_BAR_MP = BP_GetUpgradeBlueprint("lieutenant_bar_mp"),
-	M1919A6_LMG_GOVERNOR_UPGRADE_MP = BP_GetUpgradeBlueprint("m1919a6_lmg_governor_upgrade_mp"),
-	M20_SIDE_SKIRTS_MP = BP_GetUpgradeBlueprint("m20_side_skirts_mp"),
-	M3_REPAIR_STATION_MP = BP_GetUpgradeBlueprint("m3_repair_station_mp"),
-	M8_GREYHOUND_SIDE_SKIRTS_MP = BP_GetUpgradeBlueprint("m8_greyhound_side_skirts_mp"),
-	M8_TOP_GUNNER_MP = BP_GetUpgradeBlueprint("m8_top_gunner_mp"),
-	MINESWEEPER_UPGRADE_MP = BP_GetUpgradeBlueprint("minesweeper_upgrade_mp"),
-	PARATROOPER_BAZOOKA_UPGRADE_MP = BP_GetUpgradeBlueprint("paratrooper_bazooka_upgrade_mp"),
-	PARATROOPER_M1919A6_LMG_1_MP = BP_GetUpgradeBlueprint("paratrooper_m1919a6_lmg_1_mp"),
-	PARATROOPER_M1919A6_LMG_MP = BP_GetUpgradeBlueprint("paratrooper_m1919a6_lmg_mp"),
-	PARATROOPER_THOMPSON_SUB_MACHINE_GUN_UPGRADE_MP = BP_GetUpgradeBlueprint("paratrooper_thompson_sub_machine_gun_upgrade_mp"),
-	RANGER_THOMPSON_SUB_MACHINE_GUN_UPGRADE_MP = BP_GetUpgradeBlueprint("ranger_thompson_sub_machine_gun_upgrade_mp"),
-	REAR_ECHELON_GRENADE_LAUNCHER_COMMANDER_MP = BP_GetUpgradeBlueprint("rear_echelon_grenade_launcher_commander_mp"),
-	RE_MINESWEEPER_UPGRADE_MP = BP_GetUpgradeBlueprint("re_minesweeper_upgrade_mp"),
-	RIFLEMEN_FLAMETHROWER = BP_GetUpgradeBlueprint("riflemen_flamethrower"),
-	SHERMAN_DOZER_BLADE_MP = BP_GetUpgradeBlueprint("sherman_dozer_blade_mp"),
-	SHERMAN_TOP_GUNNER_MP = BP_GetUpgradeBlueprint("sherman_top_gunner_mp"),
-	USF_M5_HALFTRACK_72K_AA_GUN_PACKAGE_MP = BP_GetUpgradeBlueprint("usf_m5_halftrack_72k_aa_gun_package_mp"),
-	VEHICLE_CREW_THOMPSON_SUB_MACHINE_GUN_UPGRADE_MP = BP_GetUpgradeBlueprint("vehicle_crew_thompson_sub_machine_gun_upgrade_mp"),
-	WC51_TOP_GUNNER_MP = BP_GetUpgradeBlueprint("wc51_top_gunner_mp"),
-	BAR_UPGRADE_MP = BP_GetUpgradeBlueprint("bar_upgrade_mp"),
-	BAZOOKA_UPGRADE_MP = BP_GetUpgradeBlueprint("bazooka_upgrade_mp"),
-	CAPTAIN_DISPATCHED_UPGRADE_MP = BP_GetUpgradeBlueprint("captain_dispatched_upgrade_mp"),
-	CAPTAIN_DISPATCHED_UPGRADE_SP = BP_GetUpgradeBlueprint("captain_dispatched_upgrade_sp"),
-	COMPANY_COMMAND_UNLOCK_MP = BP_GetUpgradeBlueprint("company_command_unlock_mp"),
-	LIEUTENANT_DISPATCHED_UPGRADE_MP = BP_GetUpgradeBlueprint("lieutenant_dispatched_upgrade_mp"),
-	LIEUTENANT_DISPATCHED_UPGRADE_SP = BP_GetUpgradeBlueprint("lieutenant_dispatched_upgrade_sp"),
-	MAJOR_DISPATCHED_UPGRADE_MP = BP_GetUpgradeBlueprint("major_dispatched_upgrade_mp"),
-	MAJOR_DISPATCHED_UPGRADE_SP = BP_GetUpgradeBlueprint("major_dispatched_upgrade_sp"),
-	NO_OFFICER_SPAWN_MP = BP_GetUpgradeBlueprint("no_officer_spawn_mp"),
-	PLATOON_COMMAND_UNLOCK_MP = BP_GetUpgradeBlueprint("platoon_command_unlock_mp"),
-	RIFLE_COMMAND_GRENADE_MP = BP_GetUpgradeBlueprint("rifle_command_grenade_mp"),
-	TEMP_SPAWN_BASE_STAMP_MP = BP_GetUpgradeBlueprint("temp_spawn_base_stamp_mp"),
-	WEAPON_RACK_UPGRADE_MP = BP_GetUpgradeBlueprint("weapon_rack_upgrade_mp"),
-}
+---@type userdata
+GE_UpgradeStart = {}
 
+---@type userdata
+GE_WeaponFire = {}
 
+---@type userdata
+HPAT_Artillery = {}
 
+---@type userdata
+HPAT_Attack = {}
 
+---@type userdata
+HPAT_AttackLooping = {}
 
+---@type userdata
+HPAT_Bonus = {}
 
-EBP.BRITISH = {
-	BRITISH_BASE_STAMPER = BP_GetEntityBlueprint("british_base_stamper"),
-	BRITISH_BUILDING_1_MP = BP_GetEntityBlueprint("british_building_1_mp"),
-	BRITISH_BUILDING_1_UNBUILT_MP = BP_GetEntityBlueprint("british_building_1_unbuilt_mp"),
-	BRITISH_BUILDING_1_WRECK_MP = BP_GetEntityBlueprint("british_building_1_wreck_mp"),
-	BRITISH_BUILDING_2_MP = BP_GetEntityBlueprint("british_building_2_mp"),
-	BRITISH_BUILDING_2_UNBUILT_MP = BP_GetEntityBlueprint("british_building_2_unbuilt_mp"),
-	BRITISH_BUILDING_2_WRECK_MP = BP_GetEntityBlueprint("british_building_2_wreck_mp"),
-	BRITISH_HQ_TRUCK_MP = BP_GetEntityBlueprint("british_hq_truck_mp"),
-	BRITISH_HQ_TRUCK_WRECK_MP = BP_GetEntityBlueprint("british_hq_truck_wreck_mp"),
-	HQ_FIELD_ARTILLERY_MP = BP_GetEntityBlueprint("hq_field_artillery_mp"),
-	BRITISH_3INCH_POPCAP_ADDER_MP = BP_GetEntityBlueprint("british_3inch_popcap_adder_mp"),
-	BRITISH_3INCH_POPCAP_DISPLAY_MP = BP_GetEntityBlueprint("british_3inch_popcap_display_mp"),
-	BRITISH_BUNKER_STARTING_POSITION_MP = BP_GetEntityBlueprint("british_bunker_starting_position_mp"),
-	BRITISH_HQ_SANDBAGS_01_MP = BP_GetEntityBlueprint("british_hq_sandbags_01_mp"),
-	BRITISH_RADIO_BEACON = BP_GetEntityBlueprint("british_radio_beacon"),
-	BRITISH_SANDBAG_FENCE_MP = BP_GetEntityBlueprint("british_sandbag_fence_mp"),
-	BRIT_BARBED_WIRE_FENCE_MP = BP_GetEntityBlueprint("brit_barbed_wire_fence_mp"),
-	BRIT_EMPLACEMENT_SMALL = BP_GetEntityBlueprint("brit_emplacement_small"),
-	BRIT_FORWARD_HQ_COMMANDER_MP = BP_GetEntityBlueprint("brit_forward_hq_commander_mp"),
-	BRIT_FORWARD_HQ_MP = BP_GetEntityBlueprint("brit_forward_hq_mp"),
-	BRIT_FORWARD_HQ_REPAIR_MP = BP_GetEntityBlueprint("brit_forward_hq_repair_mp"),
-	BRIT_FWD_HQ_WEAPON_RACK_BREN_LMG_MP = BP_GetEntityBlueprint("brit_fwd_hq_weapon_rack_bren_lmg_mp"),
-	BRIT_FWD_HQ_WEAPON_RACK_PIAT_LAUNCHER_MP = BP_GetEntityBlueprint("brit_fwd_hq_weapon_rack_piat_launcher_mp"),
-	BRIT_MINE_COMMANDER_MP = BP_GetEntityBlueprint("brit_mine_commander_mp"),
-	BRIT_MINE_MP = BP_GetEntityBlueprint("brit_mine_mp"),
-	BRIT_RETREAT_POINT_MP = BP_GetEntityBlueprint("brit_retreat_point_mp"),
-	BRIT_SANDBAG_FENCE = BP_GetEntityBlueprint("brit_sandbag_fence"),
-	BRIT_SANDBAG_FENCE__CONSTRUCTION__ = BP_GetEntityBlueprint("brit_sandbag_fence__construction__"),
-	BRIT_WEAPON_RACK_BREN_LMG_MP = BP_GetEntityBlueprint("brit_weapon_rack_bren_lmg_mp"),
-	BRIT_WEAPON_RACK_PIAT_LAUNCHER_MP = BP_GetEntityBlueprint("brit_weapon_rack_piat_launcher_mp"),
-	SLIT_TRENCH_MP = BP_GetEntityBlueprint("slit_trench_mp"),
-	BRIT_17_POUNDER_GUN_MP = BP_GetEntityBlueprint("brit_17_pounder_gun_mp"),
-	BRIT_17_POUNDER_PIT_COMMANDER_MP = BP_GetEntityBlueprint("brit_17_pounder_pit_commander_mp"),
-	BRIT_17_POUNDER_PIT_MP = BP_GetEntityBlueprint("brit_17_pounder_pit_mp"),
-	BRIT_25_POUNDER_HOWITZER_MP = BP_GetEntityBlueprint("brit_25_pounder_howitzer_mp"),
-	BRIT_3_INCH_MORTAR_EMPLACEMENT = BP_GetEntityBlueprint("brit_3_inch_mortar_emplacement"),
-	BRIT_3_INCH_MORTAR_EMPLACEMENT_COMMANDER_MP = BP_GetEntityBlueprint("brit_3_inch_mortar_emplacement_commander_mp"),
-	BRIT_BOFORS_40MM_AUTOCANNON_COMMANDER_MP = BP_GetEntityBlueprint("brit_bofors_40mm_autocannon_commander_mp"),
-	BRIT_BOFORS_40MM_AUTOCANNON_MP = BP_GetEntityBlueprint("brit_bofors_40mm_autocannon_mp"),
-	INVISIBLE_FLAME_MORTAR_ICON = BP_GetEntityBlueprint("invisible_flame_mortar_icon"),
-	BRIT_MEDIC_EXTRA_ENTITY_MP = BP_GetEntityBlueprint("brit_medic_extra_entity_mp"),
-	BRIT_MEDIC_WITH_PISTOL_MP = BP_GetEntityBlueprint("brit_medic_with_pistol_mp"),
-	FIELD_HOSPITAL_MEDIC_MP = BP_GetEntityBlueprint("field_hospital_medic_mp"),
-	AIR_SUPPORT_OFFICER_MP = BP_GetEntityBlueprint("air_support_officer_mp"),
-	FORWARD_OBSERVATION_OFFICER_MP = BP_GetEntityBlueprint("forward_observation_officer_mp"),
-	COMMANDO_AIR_LANDING_MP = BP_GetEntityBlueprint("commando_air_landing_mp"),
-	COMMANDO_MP = BP_GetEntityBlueprint("commando_mp"),
-	COMMANDO_PIAT_MP = BP_GetEntityBlueprint("commando_piat_mp"),
-	BRIT_MEDIC_MP = BP_GetEntityBlueprint("brit_medic_mp"),
-	REPAIR_SAPPER_MP = BP_GetEntityBlueprint("repair_sapper_mp"),
-	SAPPER_MP = BP_GetEntityBlueprint("sapper_mp"),
-	SAPPER_RECOVERY_MP = BP_GetEntityBlueprint("sapper_recovery_mp"),
-	SNIPER_BRITISH_MP = BP_GetEntityBlueprint("sniper_british_mp"),
-	TOMMY_ASSAULT_MP = BP_GetEntityBlueprint("tommy_assault_mp"),
-	TOMMY_MP = BP_GetEntityBlueprint("tommy_mp"),
-	TOMMY_OFFICER_GUARD_MP = BP_GetEntityBlueprint("tommy_officer_guard_mp"),
-	TOMMY_RECON_MP = BP_GetEntityBlueprint("tommy_recon_mp"),
-	AVRE_VEHICLE_CREW_MP = BP_GetEntityBlueprint("avre_vehicle_crew_mp"),
-	VEHICLE_CREW_MP = BP_GetEntityBlueprint("vehicle_crew_mp"),
-	BRITISH_25LB_HOWITZER_GUN_CREW_MP = BP_GetEntityBlueprint("british_25lb_howitzer_gun_crew_mp"),
-	BRITISH_6LB_AT_GUN_CREW_MP = BP_GetEntityBlueprint("british_6lb_at_gun_crew_mp"),
-	BRITISH_HMG_TEAM_CREW_MP = BP_GetEntityBlueprint("british_hmg_team_crew_mp"),
-	BRITISH_LAND_MATTRESS_TEAM_CREW_MP = BP_GetEntityBlueprint("british_land_mattress_team_crew_mp"),
-	BRITISH_MORTAR_TEAM_CREW_MP = BP_GetEntityBlueprint("british_mortar_team_crew_mp"),
-	BRIT_6_POUNDER_AT_GUN_MP = BP_GetEntityBlueprint("brit_6_pounder_at_gun_mp"),
-	BRIT_25_POUNDER_HOWITZER_TEMP_MP = BP_GetEntityBlueprint("brit_25_pounder_howitzer_temp_mp"),
-	BRIT_LAND_MATTRESS_LAUNCHER_MP = BP_GetEntityBlueprint("brit_land_mattress_launcher_mp"),
-	BRITISH_MACHINE_GUN_MP = BP_GetEntityBlueprint("british_machine_gun_mp"),
-	AEC_ARMOURED_CAR_MP = BP_GetEntityBlueprint("aec_armoured_car_mp"),
-	CENTAUR_AA_MK2_MP = BP_GetEntityBlueprint("centaur_aa_mk2_mp"),
-	CHURCHILL_AVRE_MP = BP_GetEntityBlueprint("churchill_avre_mp"),
-	CHURCHILL_CROCODILE_MP = BP_GetEntityBlueprint("churchill_crocodile_mp"),
-	CHURCHILL_DEFAULT_MP = BP_GetEntityBlueprint("churchill_default_mp"),
-	COMET_MP = BP_GetEntityBlueprint("comet_mp"),
-	CROMWELL_MK4_75MM_MP = BP_GetEntityBlueprint("cromwell_mk4_75mm_mp"),
-	GLIDER_COMMANDOS_ONLY = BP_GetEntityBlueprint("glider_commandos_only"),
-	GLIDER_HEADQUARTERS = BP_GetEntityBlueprint("glider_headquarters"),
-	RECON_HAWKER_TYPHOON_ASSAULT_MP = BP_GetEntityBlueprint("recon_hawker_typhoon_assault_mp"),
-	RECON_HAWKER_TYPHOON_MP = BP_GetEntityBlueprint("recon_hawker_typhoon_mp"),
-	ROCKET_HAWKER_TYPHOON_MP = BP_GetEntityBlueprint("rocket_hawker_typhoon_mp"),
-	STRAFE_HAWKER_TYPHOON_AIR_SUPERIORITY_MP = BP_GetEntityBlueprint("strafe_hawker_typhoon_air_superiority_mp"),
-	STRAFE_HAWKER_TYPHOON_MP = BP_GetEntityBlueprint("strafe_hawker_typhoon_mp"),
-	M3_HALFTRACK_RESUPPLY_MP = BP_GetEntityBlueprint("m3_halftrack_resupply_mp"),
-	M5_HALFTRACK_BRITISH_MP = BP_GetEntityBlueprint("m5_halftrack_british_mp"),
-	BRITISH_HMG_PLANE = BP_GetEntityBlueprint("british_hmg_plane"),
-	BRITISH_MORTAR_PLANE = BP_GetEntityBlueprint("british_mortar_plane"),
-	PARATROOPERS_PLANE_ATGUN_MATT_TEST_MP = BP_GetEntityBlueprint("paratroopers_plane_atgun_matt_test_mp"),
-	PARATROOPERS_PLANE_VICKERS_MATT_TEST_MP = BP_GetEntityBlueprint("paratroopers_plane_vickers_matt_test_mp"),
-	SPITFIRE_RECON_PLANE = BP_GetEntityBlueprint("spitfire_recon_plane"),
-	SEXTON_SPG_MP = BP_GetEntityBlueprint("sexton_spg_mp"),
-	SHERMAN_FIREFLY_M4A2_MP = BP_GetEntityBlueprint("sherman_firefly_m4a2_mp"),
-	UNIVERSAL_CARRIER_MP = BP_GetEntityBlueprint("universal_carrier_mp"),
-	UNIVERSAL_CARRIER_RESUPPLY_MP = BP_GetEntityBlueprint("universal_carrier_resupply_mp"),
-	VALENTINE_MORTAR = BP_GetEntityBlueprint("valentine_mortar"),
-	VALENTINE_OBSERVATION_MP = BP_GetEntityBlueprint("valentine_observation_mp"),
-}
+---@type userdata
+HPAT_CoverGreen = {}
 
+---@type userdata
+HPAT_CoverRed = {}
 
+---@type userdata
+HPAT_CoverYellow = {}
 
+---@type userdata
+HPAT_Critical = {}
 
+---@type userdata
+HPAT_DeepSnow = {}
 
+---@type userdata
+HPAT_Detonation = {}
 
-SBP.BRITISH = {
-	BRIT_FORWARD_HQ_MP = BP_GetSquadBlueprint("brit_forward_hq_mp"),
-	BRIT_FORWARD_HQ_COMMANDER_MP = BP_GetSquadBlueprint("brit_forward_hq_commander_mp"),
-	BRIT_MEDIC_SQUAD_MP = BP_GetSquadBlueprint("brit_medic_squad_mp"),
-	AIR_SUPPORT_OFFICER_SQUAD_MP = BP_GetSquadBlueprint("air_support_officer_squad_mp"),
-	FORWARD_OBSERVATION_SQUAD_MP = BP_GetSquadBlueprint("forward_observation_squad_mp"),
-	COMMANDO_SQUAD_MP = BP_GetSquadBlueprint("commando_squad_mp"),
-	COMMANDO_SQUAD_PIAT_MP = BP_GetSquadBlueprint("commando_squad_piat_mp"),
-	INFILTRATION_COMMANDO_SQUAD_MP = BP_GetSquadBlueprint("infiltration_commando_squad_mp"),
-	SAPPER_SQUAD_DEMOLITION_MP = BP_GetSquadBlueprint("sapper_squad_demolition_mp"),
-	SAPPER_SQUAD_MP = BP_GetSquadBlueprint("sapper_squad_mp"),
-	SAPPER_SQUAD_RECOVERY_MP = BP_GetSquadBlueprint("sapper_squad_recovery_mp"),
-	SNIPER_BRITISH_SQUAD_MP = BP_GetSquadBlueprint("sniper_british_squad_mp"),
-	TOMMY_SQUAD_ASSAULT_MP = BP_GetSquadBlueprint("tommy_squad_assault_mp"),
-	TOMMY_SQUAD_FLAME_MP = BP_GetSquadBlueprint("tommy_squad_flame_mp"),
-	TOMMY_SQUAD_MP = BP_GetSquadBlueprint("tommy_squad_mp"),
-	TOMMY_SQUAD_RECON_MP = BP_GetSquadBlueprint("tommy_squad_recon_mp"),
-	TOMMY_SQUAD_TANK_HUNTER_MP = BP_GetSquadBlueprint("tommy_squad_tank_hunter_mp"),
-	AVRE_VEHICLE_CREW_SQUAD_MP = BP_GetSquadBlueprint("avre_vehicle_crew_squad_mp"),
-	VEHICLE_CREW_STANDARD_SQUAD_MP = BP_GetSquadBlueprint("vehicle_crew_standard_squad_mp"),
-	BRIT_17_POUNDER_AT_GUN_SQUAD_COMMANDER_MP = BP_GetSquadBlueprint("brit_17_pounder_at_gun_squad_commander_mp"),
-	BRIT_17_POUNDER_AT_GUN_SQUAD_MP = BP_GetSquadBlueprint("brit_17_pounder_at_gun_squad_mp"),
-	BRIT_6_POUNDER_AT_GUN_SQUAD_MP = BP_GetSquadBlueprint("brit_6_pounder_at_gun_squad_mp"),
-	BRIT_BOFORS_40MM_AUTOCANNON_SQUAD_COMMANDER_MP = BP_GetSquadBlueprint("brit_bofors_40mm_autocannon_squad_commander_mp"),
-	BRIT_BOFORS_40MM_AUTOCANNON_SQUAD_MP = BP_GetSquadBlueprint("brit_bofors_40mm_autocannon_squad_mp"),
-	BRITISH_MACHINE_GUN_SQUAD_MP = BP_GetSquadBlueprint("british_machine_gun_squad_mp"),
-	FORWARD_HQ_MP = BP_GetSquadBlueprint("forward_hq_mp"),
-	BRIT_25_POUNDER_HOWITZER_SQUAD_MP = BP_GetSquadBlueprint("brit_25_pounder_howitzer_squad_mp"),
-	BRIT_25_POUNDER_HOWITZER_SQUAD_TEMP_MP = BP_GetSquadBlueprint("brit_25_pounder_howitzer_squad_temp_mp"),
-	BRIT_LAND_MATTRESS_LAUNCHER_SQUAD_MP = BP_GetSquadBlueprint("brit_land_mattress_launcher_squad_mp"),
-	M1_81MM_MORTAR_BRITISH_SQUAD_MP = BP_GetSquadBlueprint("m1_81mm_mortar_british_squad_mp"),
-	BRIT_3_INCH_MORTAR_TEAM_COMMANDER_MP = BP_GetSquadBlueprint("brit_3_inch_mortar_team_commander_mp"),
-	BRIT_3_INCH_MORTAR_TEAM_MP = BP_GetSquadBlueprint("brit_3_inch_mortar_team_mp"),
-	AEC_ARMOURED_CAR_SQUAD_MP = BP_GetSquadBlueprint("aec_armoured_car_squad_mp"),
-	CENTAUR_AA_MK2_SQUAD_MP = BP_GetSquadBlueprint("centaur_aa_mk2_squad_mp"),
-	CHURCHILL_AVRE_SQUAD_MP = BP_GetSquadBlueprint("churchill_avre_squad_mp"),
-	CHURCHILL_CROCODILE_MP = BP_GetSquadBlueprint("churchill_crocodile_mp"),
-	CHURCHILL_DEFAULT_SQUAD_MP = BP_GetSquadBlueprint("churchill_default_squad_mp"),
-	COMET_TANK_SQUAD_MP = BP_GetSquadBlueprint("comet_tank_squad_mp"),
-	CROMWELL_MK4_75MM_SQUAD_MP = BP_GetSquadBlueprint("cromwell_mk4_75mm_squad_mp"),
-	GLIDER_COMMANDOS_ONLY_MP = BP_GetSquadBlueprint("glider_commandos_only_mp"),
-	GLIDER_HEADQUARTERS_MP = BP_GetSquadBlueprint("glider_headquarters_mp"),
-	HAWKER_TYPHOON_AIR_SUPERIORITY_MP = BP_GetSquadBlueprint("hawker_typhoon_air_superiority_mp"),
-	RECON_HAWKER_TYPHOON_ASSAULT_MP = BP_GetSquadBlueprint("recon_hawker_typhoon_assault_mp"),
-	RECON_HAWKER_TYPHOON_MP = BP_GetSquadBlueprint("recon_hawker_typhoon_mp"),
-	ROCKET_HAWKER_TYPHOON_MP = BP_GetSquadBlueprint("rocket_hawker_typhoon_mp"),
-	STRAFE_HAWKER_TYPHOON_MP = BP_GetSquadBlueprint("strafe_hawker_typhoon_mp"),
-	M10_TANK_DESTROYER_SQUAD_BRITISH_MP = BP_GetSquadBlueprint("m10_tank_destroyer_squad_british_mp"),
-	M3_HALFTRACK_SQUAD__RESUPPLY_MP = BP_GetSquadBlueprint("m3_halftrack_squad__resupply_mp"),
-	PARATROOPERS_PLANE_ATGUN_BRITISH_MATT_TEST_MP = BP_GetSquadBlueprint("paratroopers_plane_atgun_british_matt_test_mp"),
-	PARATROOPERS_PLANE_VICKERS_BRITISH_MATT_TEST_MP = BP_GetSquadBlueprint("paratroopers_plane_vickers_british_matt_test_mp"),
-	BRITISH_CARGO_PLANE = BP_GetSquadBlueprint("british_cargo_plane"),
-	BRITISH_HMG_PLANE = BP_GetSquadBlueprint("british_hmg_plane"),
-	BRITISH_MORTAR_PLANE = BP_GetSquadBlueprint("british_mortar_plane"),
-	SPITFIRE_RECON_PLANE = BP_GetSquadBlueprint("spitfire_recon_plane"),
-	SEXTON_SPG_SQUAD_MP = BP_GetSquadBlueprint("sexton_spg_squad_mp"),
-	SHERMAN_FIREFLY_SQUAD_MP = BP_GetSquadBlueprint("sherman_firefly_squad_mp"),
-	UNIVERSAL_CARRIER_RESUPPLY = BP_GetSquadBlueprint("universal_carrier_resupply"),
-	UNIVERSAL_CARRIER_SQUAD_MP = BP_GetSquadBlueprint("universal_carrier_squad_mp"),
-	VALENTINE_MORTAR = BP_GetSquadBlueprint("valentine_mortar"),
-	VALENTINE_OBSERVATION_MP = BP_GetSquadBlueprint("valentine_observation_mp"),
-	BRIT_BREN_LMG_WEAPON_RACK_UI_FAKE_MP = BP_GetSquadBlueprint("brit_bren_lmg_weapon_rack_ui_fake_mp"),
-	BRIT_PIAT_LAUNCHER_WEAPON_RACK_UI_FAKE_MP = BP_GetSquadBlueprint("brit_piat_launcher_weapon_rack_ui_fake_mp"),
-}
+---@type userdata
+HPAT_FormationSetup = {}
 
+---@type userdata
+HPAT_Hint = {}
+
+---@type userdata
+HPAT_Movement = {}
+
+---@type userdata
+HPAT_MovementLooping = {}
+
+---@type userdata
+HPAT_Objective = {}
+
+---@type userdata
+HPAT_RallyPoint = {}
+
+---@type userdata
+HPAT_Vaulting = {}
+
+---@type userdata
+HUDF_AbilityCard = {}
+
+---@type userdata
+HUDF_CommandCard = {}
+
+---@type userdata
+HUDF_MiniMap = {}
+
+---@type userdata
+HUDF_None = {}
+
+---@type userdata
+HUDF_Upgrades = {}
+
+---@type userdata
+ITEM_DEFAULT = {}
+
+---@type userdata
+ITEM_LOCKED = {}
+
+---@type userdata
+ITEM_REMOVED = {}
+
+---@type userdata
+ITEM_UNLOCKED = {}
+
+---@type userdata
+LAH_Center = {}
+
+---@type userdata
+LAH_Justify = {}
+
+---@type userdata
+LAH_Left = {}
+
+---@type userdata
+LAH_Right = {}
+
+---@type userdata
+LAV_Bottom = {}
+
+---@type userdata
+LAV_Center = {}
+
+---@type userdata
+LAV_None = {}
+
+---@type userdata
+LAV_Top = {}
+
+---@type userdata
+LOOP_NONE = {}
+
+---@type userdata
+LOOP_NORMAL = {}
+
+---@type userdata
+LOOP_TOGGLE_DIRECTION = {}
+
+---@type userdata
+MAP_Confirmed = {}
+
+---@type userdata
+MAP_Facing = {}
+
+---@type userdata
+MAP_Placing = {}
+
+---@type userdata
+MAT_Ability = {}
+
+---@type userdata
+MAT_Entity = {}
+
+---@type userdata
+MAT_EntityType = {}
+
+---@type userdata
+MAT_Player = {}
+
+---@type userdata
+MAT_Squad = {}
+
+---@type userdata
+MAT_SquadType = {}
+
+---@type userdata
+MAT_Upgrade = {}
+
+---@type userdata
+MAT_Weapon = {}
+
+---@type userdata
+MAT_WeaponType = {}
+
+---@type userdata
+MM_Auto = {}
+
+---@type userdata
+MM_ForceCalm = {}
+
+---@type userdata
+MM_ForceTense = {}
+
+---@type userdata
+MTARGET_Attack = {}
+
+---@type userdata
+MTARGET_Defend = {}
+
+---@type userdata
+MUT_Addition = {}
+
+---@type userdata
+MUT_Enable = {}
+
+---@type userdata
+MUT_Multiplication = {}
+
+---@type userdata
+MUT_MultiplicationAddition = {}
+
+---@type userdata
+MUT_MultiplyAdd = {}
+
+---@type userdata
+OS_Complete = {}
+
+---@type userdata
+OS_Failed = {}
+
+---@type userdata
+OS_Incomplete = {}
+
+---@type userdata
+OS_Off = {}
+
+---@type userdata
+OT_Ally = {}
+
+---@type userdata
+OT_Bonus = {}
+
+---@type userdata
+OT_Enemy = {}
+
+---@type userdata
+OT_Information = {}
+
+---@type userdata
+OT_Neutral = {}
+
+---@type userdata
+OT_Player = {}
+
+---@type userdata
+OT_Primary = {}
+
+---@type userdata
+OT_Secondary = {}
+
+---@type userdata
+PBG_Ability = {}
+
+---@type userdata
+PBG_CamouflageStance = {}
+
+---@type userdata
+PBG_Critical = {}
+
+---@type userdata
+PBG_EntityProperties = {}
+
+---@type userdata
+PBG_Formation = {}
+
+---@type userdata
+PBG_HitMaterial = {}
+
+---@type userdata
+PBG_Material = {}
+
+---@type userdata
+PBG_MoveType = {}
+
+---@type userdata
+PBG_PassType = {}
+
+---@type userdata
+PBG_Posture = {}
+
+---@type userdata
+PBG_Race = {}
+
+---@type userdata
+PBG_SlotItem = {}
+
+---@type userdata
+PBG_SquadFormation = {}
+
+---@type userdata
+PBG_SquadProperties = {}
+
+---@type userdata
+PBG_Tuning = {}
+
+---@type userdata
+PBG_TurnPlan = {}
+
+---@type userdata
+PBG_UISelection = {}
+
+---@type userdata
+PBG_UITacticalMap = {}
+
+---@type userdata
+PBG_UITerritory = {}
+
+---@type userdata
+PBG_Upgrade = {}
+
+---@type userdata
+PBG_Weapon = {}
+
+---@type userdata
+PCMD_Ability = {}
+
+---@type userdata
+PCMD_AIPlayer = {}
+
+---@type userdata
+PCMD_AIPlayer_ObjectiveNotification = {}
+
+---@type userdata
+PCMD_CancelProduction = {}
+
+---@type userdata
+PCMD_CheatBuildTime = {}
+
+---@type userdata
+PCMD_CheatKillSelf = {}
+
+---@type userdata
+PCMD_CheatResources = {}
+
+---@type userdata
+PCMD_CheatRevealAll = {}
+
+---@type userdata
+PCMD_ConstructFence = {}
+
+---@type userdata
+PCMD_ConstructField = {}
+
+---@type userdata
+PCMD_ConstructStructure = {}
+
+---@type userdata
+PCMD_CriticalHit = {}
+
+---@type userdata
+PCMD_DetonateCharges = {}
+
+---@type userdata
+PCMD_FuelDonation = {}
+
+---@type userdata
+PCMD_InstantUpgrade = {}
+
+---@type userdata
+PCMD_ManpowerDonation = {}
+
+---@type userdata
+PCMD_MunitionDonation = {}
+
+---@type userdata
+PCMD_SetCommander = {}
+
+---@type userdata
+PCMD_SlotItemRemove = {}
+
+---@type userdata
+PCMD_Surrender = {}
+
+---@type userdata
+PCMD_Upgrade = {}
+
+---@type userdata
+PCMD_UpgradeRemove = {}
+
+---@type userdata
+PITEM_Spawn = {}
+
+---@type userdata
+PITEM_SquadReinforce = {}
+
+---@type userdata
+PITEM_SquadUpgrade = {}
+
+---@type userdata
+PITEM_Upgrade = {}
+
+---@type userdata
+PT_Circle = {}
+
+---@type userdata
+PT_Rectangle = {}
+
+---@type userdata
+R_ALLY = {}
+
+---@type userdata
+R_ENEMY = {}
+
+---@type userdata
+R_NEUTRAL = {}
+
+---@type userdata
+R_UNDEFINED = {}
+
+---@type userdata
+RT_Action = {}
+
+---@type userdata
+RT_Command = {}
+
+---@type userdata
+RT_Fuel = {}
+
+---@type userdata
+RT_Manpower = {}
+
+---@type userdata
+RT_Munition = {}
+
+---@type userdata
+RT_Popcap = {}
+
+---@type userdata
+RT_SovietOrder227 = {}
+
+---@type userdata
+RT_SovietProgression = {}
+
+---@type userdata
+RUIITEM_Fuel = {}
+
+---@type userdata
+RUIITEM_Manpower = {}
+
+---@type userdata
+RUIITEM_Munitions = {}
+
+---@type userdata
+RUIITEM_Population = {}
+
+---@type userdata
+RUIITEM_ResourceBar = {}
+
+---@type userdata
+SCMD_AbandonTeamWeapon = {}
+
+---@type userdata
+SCMD_Ability = {}
+
+---@type userdata
+SCMD_Attack = {}
+
+---@type userdata
+SCMD_AttackMove = {}
+
+---@type userdata
+SCMD_BuildSquad = {}
+
+---@type userdata
+SCMD_BuildStructure = {}
+
+---@type userdata
+SCMD_CancelProduction = {}
+
+---@type userdata
+SCMD_Capture = {}
+
+---@type userdata
+SCMD_CaptureTeamWeapon = {}
+
+---@type userdata
+SCMD_DefaultAction = {}
+
+---@type userdata
+SCMD_DefuseCharge = {}
+
+---@type userdata
+SCMD_DefuseMine = {}
+
+---@type userdata
+SCMD_Destroy = {}
+
+---@type userdata
+SCMD_DoPlan = {}
+
+---@type userdata
+SCMD_Face = {}
+
+---@type userdata
+SCMD_InstantLoad = {}
+
+---@type userdata
+SCMD_InstantReinforceUnit = {}
+
+---@type userdata
+SCMD_InstantSetupTeamWeapon = {}
+
+---@type userdata
+SCMD_InstantUpgrade = {}
+
+---@type userdata
+SCMD_Load = {}
+
+---@type userdata
+SCMD_Merge = {}
+
+---@type userdata
+SCMD_Move = {}
+
+---@type userdata
+SCMD_Patrol = {}
+
+---@type userdata
+SCMD_PickUpSlotItem = {}
+
+---@type userdata
+SCMD_Pilfer = {}
+
+---@type userdata
+SCMD_PlaceCharge = {}
+
+---@type userdata
+SCMD_RallyPoint = {}
+
+---@type userdata
+SCMD_Recrew = {}
+
+---@type userdata
+SCMD_ReinforceUnit = {}
+
+---@type userdata
+SCMD_RescueCasualty = {}
+
+---@type userdata
+SCMD_Retreat = {}
+
+---@type userdata
+SCMD_RevertFieldSupport = {}
+
+---@type userdata
+SCMD_SetCamouflageStance = {}
+
+---@type userdata
+SCMD_SetMoveType = {}
+
+---@type userdata
+SCMD_SlotItemRemove = {}
+
+---@type userdata
+SCMD_StationaryAttack = {}
+
+---@type userdata
+SCMD_Stop = {}
+
+---@type userdata
+SCMD_Surprise = {}
+
+---@type userdata
+SCMD_Unload = {}
+
+---@type userdata
+SCMD_UnloadSquads = {}
+
+---@type userdata
+SCMD_Upgrade = {}
+
+---@type userdata
+SQUADSTATEID_Ability = {}
+
+---@type userdata
+SQUADSTATEID_AttackMove = {}
+
+---@type userdata
+SQUADSTATEID_Capture = {}
+
+---@type userdata
+SQUADSTATEID_CaptureTeamWeapon = {}
+
+---@type userdata
+SQUADSTATEID_Combat = {}
+
+---@type userdata
+SQUADSTATEID_CombatStance = {}
+
+---@type userdata
+SQUADSTATEID_Construction = {}
+
+---@type userdata
+SQUADSTATEID_Defuse = {}
+
+---@type userdata
+SQUADSTATEID_DefuseMine = {}
+
+---@type userdata
+SQUADSTATEID_HoldUnload = {}
+
+---@type userdata
+SQUADSTATEID_Idle = {}
+
+---@type userdata
+SQUADSTATEID_Load = {}
+
+---@type userdata
+SQUADSTATEID_Move = {}
+
+---@type userdata
+SQUADSTATEID_Patrol = {}
+
+---@type userdata
+SQUADSTATEID_PickUpSlotItem = {}
+
+---@type userdata
+SQUADSTATEID_PlaceCharges = {}
+
+---@type userdata
+SQUADSTATEID_Plan = {}
+
+---@type userdata
+SQUADSTATEID_Recrew = {}
+
+---@type userdata
+SQUADSTATEID_Retreat = {}
+
+---@type userdata
+SQUADSTATEID_RevertFieldSupport = {}
+
+---@type userdata
+SQUADSTATEID_Stop = {}
+
+---@type userdata
+SQUADSTATEID_Unload = {}
+
+---@type userdata
+SQUADSTATEID_WeaponTransition = {}
+
+---@type userdata
+ST_AIPLAYER = {}
+
+---@type userdata
+ST_AISQUAD = {}
+
+---@type userdata
+ST_BOOLEAN = {}
+
+---@type userdata
+ST_CONSTPLAYER = {}
+
+---@type userdata
+ST_EGROUP = {}
+
+---@type userdata
+ST_ENTITY = {}
+
+---@type userdata
+ST_FUNCTION = {}
+
+---@type userdata
+ST_MARKER = {}
+
+---@type userdata
+ST_NIL = {}
+
+---@type userdata
+ST_NUMBER = {}
+
+---@type userdata
+ST_PBG = {}
+
+---@type userdata
+ST_PLAYER = {}
+
+---@type userdata
+ST_SCARPOS = {}
+
+---@type userdata
+ST_SGROUP = {}
+
+---@type userdata
+ST_SQUAD = {}
+
+---@type userdata
+ST_STRING = {}
+
+---@type userdata
+ST_TABLE = {}
+
+---@type userdata
+ST_UNKNOWN = {}
+
+---@type userdata
+STATEID_Capture = {}
+
+---@type userdata
+STATEID_Dead = {}
+
+---@type userdata
+STATEID_DefuseMine = {}
+
+---@type userdata
+STATEID_Evacuate = {}
+
+---@type userdata
+STATEID_Idle = {}
+
+---@type userdata
+STATEID_Move = {}
+
+---@type userdata
+STATEID_RepairEngineer = {}
+
+---@type userdata
+STATEID_StructureBuilding = {}
+
+---@type userdata
+TACTIC_Ability = {}
+
+---@type userdata
+TACTIC_Avoid = {}
+
+---@type userdata
+TACTIC_CapturePoint = {}
+
+---@type userdata
+TACTIC_CaptureTeamWeapon = {}
+
+---@type userdata
+TACTIC_Cover = {}
+
+---@type userdata
+TACTIC_FinishHealing = {}
+
+---@type userdata
+TACTIC_ForceAttack = {}
+
+---@type userdata
+TACTIC_Hold = {}
+
+---@type userdata
+TACTIC_MinRange = {}
+
+---@type userdata
+TACTIC_Pickup = {}
+
+---@type userdata
+TACTIC_ProvideReinforcementPoint = {}
+
+---@type userdata
+TACTIC_Recrew = {}
+
+---@type userdata
+TACTIC_RushAtTarget = {}
+
+---@type userdata
+TACTIC_WarmUp = {}
+
+---@type userdata
+TACTIC_Vehicle = {}
+
+---@type userdata
+TACTIC_VehicleDecrew = {}
+
+---@type userdata
+TASK_Ability = {}
+
+---@type userdata
+TASK_Capture = {}
+
+---@type userdata
+TASK_Combat = {}
+
+---@type userdata
+TASK_Construction = {}
+
+---@type userdata
+TASK_ImmobileCombat = {}
+
+---@type userdata
+TASK_Leader = {}
+
+---@type userdata
+TASK_PlayerAbility = {}
+
+---@type userdata
+TASK_Production = {}
+
+---@type userdata
+TV_CameraMode = {}
+
+---@type userdata
+TV_ClipFar = {}
+
+---@type userdata
+TV_ClipNear = {}
+
+---@type userdata
+TV_DeclAbove = {}
+
+---@type userdata
+TV_DeclBelow = {}
+
+---@type userdata
+TV_DeclBelowClose = {}
+
+---@type userdata
+TV_DeclinationEnabled = {}
+
+---@type userdata
+TV_DeclRateMouse = {}
+
+---@type userdata
+TV_DefaultAngle = {}
+
+---@type userdata
+TV_DefaultDeclination = {}
+
+---@type userdata
+TV_DefaultHeight = {}
+
+---@type userdata
+TV_DistExp = {}
+
+---@type userdata
+TV_DistExpMouse = {}
+
+---@type userdata
+TV_DistExpWheel = {}
+
+---@type userdata
+TV_DistGroundMin = {}
+
+---@type userdata
+TV_DistGroundTargetHeight = {}
+
+---@type userdata
+TV_DistMax = {}
+
+---@type userdata
+TV_DistMaxDead = {}
+
+---@type userdata
+TV_DistMin = {}
+
+---@type userdata
+TV_DistMinDead = {}
+
+---@type userdata
+TV_DistMinGround = {}
+
+---@type userdata
+TV_DistRateMouse = {}
+
+---@type userdata
+TV_DistRateWheelZoomIn = {}
+
+---@type userdata
+TV_DistRateWheelZoomOut = {}
+
+---@type userdata
+TV_DistScale = {}
+
+---@type userdata
+TV_EntityMinViewAngle = {}
+
+---@type userdata
+TV_FieldOfView = {}
+
+---@type userdata
+TV_NearPlaneShifter = {}
+
+---@type userdata
+TV_NISletDeclAbove = {}
+
+---@type userdata
+TV_NISletDeclBelow = {}
+
+---@type userdata
+TV_NISletDistGroundMin = {}
+
+---@type userdata
+TV_NISletDistMax = {}
+
+---@type userdata
+TV_NISletDistMin = {}
+
+---@type userdata
+TV_NISletDistMinGround = {}
+
+---@type userdata
+TV_OrbitRateMouse = {}
+
+---@type userdata
+TV_PanAccelerate = {}
+
+---@type userdata
+TV_PanMaxSpeedScalar = {}
+
+---@type userdata
+TV_PanScaleKeyboardDefZ = {}
+
+---@type userdata
+TV_PanScaleKeyboardMinZ = {}
+
+---@type userdata
+TV_PanScaleMouseDefZ = {}
+
+---@type userdata
+TV_PanScaleMouseMinZ = {}
+
+---@type userdata
+TV_PanScaleScreenDefZ = {}
+
+---@type userdata
+TV_PanScaleScreenMinZ = {}
+
+---@type userdata
+TV_PanStartSpeedScalar = {}
+
+---@type userdata
+TV_RotationEnabled = {}
+
+---@type userdata
+TV_SlideDeclBase = {}
+
+---@type userdata
+TV_SlideDeclRate = {}
+
+---@type userdata
+TV_SlideDeclThreshold = {}
+
+---@type userdata
+TV_SlideDistBase = {}
+
+---@type userdata
+TV_SlideDistRate = {}
+
+---@type userdata
+TV_SlideDistThreshold = {}
+
+---@type userdata
+TV_SlideOrbitBase = {}
 
