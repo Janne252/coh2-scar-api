@@ -15,7 +15,7 @@ If a version of this API documentation should be made available without undersco
 
 1. Install the [`sumneko.lua`](https://marketplace.visualstudio.com/items?itemName=sumneko.lua) Visual Studio Code extension if you haven't already
 1. Download this repository and extract it somewhere (or use `git` to clone it), and copy and paste the path for the next step.
-    - _Repeat this step for updating your local copy of the API documentation._
+    - _Repeat this step for updating your local copy of the API documentation. Make sure to delete the previous version first._
 1. Open Visual Studio code and open User Settings
     1. Search for the "File associations" setting and add `*.scar` (key field) `lua` (value field)
     1. Search for "Lua workspace library", click "Edit in settings.json" and add the following setting: 
