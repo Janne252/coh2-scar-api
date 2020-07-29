@@ -14,13 +14,13 @@ If a version of this API documentation should be made available without undersco
 > These instructions assume that you're at least somewhat familiar with Visual Studio Code.
 
 1. Install the [`sumneko.lua`](https://marketplace.visualstudio.com/items?itemName=sumneko.lua) Visual Studio Code extension if you haven't already
-1. Download this repository and extract it somewhere (or use `git` to clone it), and copy and paste the path for the next step.
+1. Download and extract the latest release from [releases](https://github.com/Janne252/coh2-scar-api/releases) or use `git` to clone this repository.
     - _Repeat this step for updating your local copy of the API documentation. Make sure to delete the previous version first._
 1. Open Visual Studio code and open User Settings
     1. Search for the "File associations" setting and add `*.scar` (key field) `lua` (value field)
     1. Search for "Lua workspace library", click "Edit in settings.json" and add the following setting: 
     ```json
-    "<path to the extracted coh2-scar-api directory>/": true
+    "<path to the coh2-scar-api directory>/": true
     ```
     1. Search for "Lua workspace ignoredir" and add `Intermediate Cache`
         - This prevents loading SCAR symbols from the Mod Builder's build cache.
